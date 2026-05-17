@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZVF6K9DJ5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-RZVF6K9DJ5');
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Humanoid Cohort 01 — Genboo Robotics × ToddlerBot</title>
+    <meta name="description" content="An elite 20-week cohort for high school students to construct, simulate, and train ToddlerBot — the open-source ML-compatible humanoid platform. Mentored by Genboo engineers with technical consultation from the paper's original authors." />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="../genboo_favicon_padded.ico" />
+    <link rel="apple-touch-icon" href="favicon.svg" />
+    <meta name="theme-color" content="#34d399" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@500;700;900&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Inter', system-ui, sans-serif; }
+      .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+      .font-cjk { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
+
+      /* 进步 logo mark */
+      .logo-mark {
+        position: relative;
+        background-image: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
+        box-shadow: 0 0 24px -4px rgba(52, 211, 153, 0.6), inset 0 1px 0 0 rgba(255,255,255,0.25);
+      }
+      .logo-mark::after {
+        content: "";
+        position: absolute; inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0) 55%);
+        pointer-events: none;
+      }
+      .logo-cjk {
+        font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+        font-weight: 900;
+        color: #0b1220;
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+        text-align: center;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+      }
+
+      /* Accordion smooth open/close via grid-rows trick */
+      .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms ease, opacity 300ms ease; opacity: 0; }
+      .acc-panel > div { min-height: 0; }
+      .acc-item.open .acc-panel { grid-template-rows: 1fr; opacity: 1; }
+      .acc-item.open .acc-chevron { transform: rotate(180deg); color: #6ee7b7; }
+      .acc-item.open .acc-icon-wrap { background-color: rgba(52, 211, 153, 0.10); box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.40); color: #6ee7b7; }
+
+      /* Pulsing dot */
+      @keyframes pulse-ring { 0% { transform: scale(.85); opacity: .75; } 80%, 100% { transform: scale(1.6); opacity: 0; } }
+      .pulse-dot::before { content: ""; position: absolute; inset: 0; border-radius: 9999px; background: #34d399; animation: pulse-ring 1.6s cubic-bezier(0,0,.2,1) infinite; }
+
+      /* Glow CTA */
+      .glow-cta::before {
+        content: ""; position: absolute; inset: 0; border-radius: 0.75rem;
+        background: linear-gradient(to right, #34d399, #6ee7b7, #38bdf8);
+        opacity: .7; filter: blur(22px); transition: opacity .3s ease;
+        z-index: 0;
+      }
+      .glow-cta:hover::before { opacity: 1; }
+      .glow-cta > .glow-cta-bg { position: absolute; inset: 0; border-radius: 0.75rem; background: linear-gradient(to right, #34d399, #6ee7b7, #38bdf8); z-index: 0; }
+      .glow-cta > .glow-cta-inner { position: relative; z-index: 1; }
+
+      /* Selection color */
+      ::selection { background: rgba(52, 211, 153, 0.35); color: #fff; }
+
+      /* Phase tab active pill */
+      .phase-btn.active { color: #020617; }
+      .phase-btn.active .phase-pill { opacity: 1; }
+      .phase-btn .phase-pill { position: absolute; inset: 0; border-radius: 0.75rem; background: linear-gradient(to right, #6ee7b7, #7dd3fc); box-shadow: 0 0 20px -4px rgba(52,211,153,0.7); opacity: 0; transition: opacity .25s ease; z-index: 0; }
+      .phase-btn > .phase-content { position: relative; z-index: 1; }
+
+      /* Phase content show/hide */
+      .phase-panel { display: none; }
+      .phase-panel.active { display: grid; }
+
+      /* Dot grid mask overlay */
+      .dot-grid {
+        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.35) 1px, transparent 0);
+        background-size: 28px 28px;
+        -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+                mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
+      }
+
+      /* Card hover lift */
+      .card-hover { transition: transform .3s ease, border-color .3s ease, background-color .3s ease; }
+      .card-hover:hover { transform: translateY(-4px); }
+    </style>
+  </head>
+
+  <body class="relative min-h-screen overflow-x-hidden bg-slate-950 text-white antialiased">
+
+    <!-- Global ambient backdrop -->
+    <div class="pointer-events-none fixed inset-0 -z-10">
+      <div class="absolute inset-0" style="background: radial-gradient(ellipse 1200px 800px at 15% -10%, rgba(16,185,129,0.10), transparent 60%);"></div>
+      <div class="absolute inset-0" style="background: radial-gradient(ellipse 1000px 700px at 85% 10%, rgba(56,189,248,0.08), transparent 65%);"></div>
+    </div>
+
+    <!-- ================================ NAV ================================ -->
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+        <a href="#" class="flex items-center gap-2.5">
+          <span class="logo-mark relative grid h-9 w-9 place-items-center rounded-lg">
+            <span class="logo-cjk relative z-10 text-[12px]">
+              <span>进</span>
+              <span>步</span>
+            </span>
+          </span>
+          <div class="leading-tight">
+            <div class="text-sm font-semibold text-white">Genboo · <span class="font-cjk font-bold text-emerald-300">进步</span></div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Humanoid Cohort</div>
+          </div>
+        </a>
+
+        <nav class="hidden items-center gap-8 md:flex">
+          <a href="#platform" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Platform</a>
+          <a href="#program" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Program</a>
+          <a href="#syllabus" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Syllabus</a>
+          <a href="#mentorship" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Mentorship</a>
+        </nav>
+
+        <a href="#apply" class="glow-cta group relative hidden md:inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-950">
+          <span class="glow-cta-bg"></span>
+          <span class="glow-cta-inner flex items-center gap-2">Apply <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <!-- ================================ HERO =============================== -->
+      <section class="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
+        <div class="pointer-events-none absolute inset-0 -z-10">
+          <div class="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[140px]"></div>
+          <div class="absolute right-[-10rem] top-40 h-[28rem] w-[28rem] rounded-full bg-sky-500/15 blur-[140px]"></div>
+          <div class="absolute left-[-10rem] bottom-[-10rem] h-[28rem] w-[28rem] rounded-full bg-emerald-400/10 blur-[140px]"></div>
+        </div>
+
+        <div class="dot-grid pointer-events-none absolute inset-0 -z-10 opacity-[0.18]"></div>
+
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="flex flex-col items-center text-center">
+
+            <div class="mb-7 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/5 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-emerald-200">
+              <span class="pulse-dot relative inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
+              Cohort 01 · Now Accepting Applications
+            </div>
+
+            <h1 class="max-w-5xl bg-gradient-to-br from-white via-white to-slate-400 bg-clip-text text-4xl font-bold leading-[1.05] tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+              Build a Humanoid Robot From Scratch.
+              <br class="hidden md:block" />
+              <span class="bg-gradient-to-r from-emerald-300 via-emerald-200 to-sky-300 bg-clip-text text-transparent">Master ME, EE, and AI.</span>
+            </h1>
+
+            <p class="mt-7 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
+              An elite <span class="font-semibold text-white">20-week cohort</span> for high school students to construct, simulate, and train
+              <span class="font-semibold text-emerald-300">ToddlerBot</span> — the open-source, ML-compatible humanoid platform. Mentored by Genboo engineers with direct technical consultation from the paper's original 1st and 2nd authors.
+            </p>
+
+            <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+              <a href="#apply" class="glow-cta group relative inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-slate-950">
+                <span class="glow-cta-bg"></span>
+                <span class="glow-cta-inner flex items-center gap-2">Apply for the Cohort <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"></i></span>
+              </a>
+              <a href="#syllabus" class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/[0.06] hover:text-emerald-200">
+                <i data-lucide="scroll-text" class="h-4 w-4"></i>
+                View Syllabus
+                <i data-lucide="arrow-right" class="h-4 w-4 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"></i>
+              </a>
+            </div>
+
+            <div class="mt-14 grid w-full max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] sm:grid-cols-4">
+              <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
+                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">20</div>
+                <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Weeks</div>
+              </div>
+              <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
+                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">30</div>
+                <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Active DoFs</div>
+              </div>
+              <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
+                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">6 hr</div>
+                <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Per Week</div>
+              </div>
+              <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
+                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">1:5</div>
+                <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Mentor Ratio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== SHOWCASE ============================ -->
+      <section id="showcase" class="relative py-16 md:py-24">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="grid items-center gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+
+            <!-- Video frame -->
+            <div class="relative">
+              <!-- ambient glow -->
+              <div class="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-emerald-500/25 via-emerald-400/10 to-sky-500/25 blur-2xl"></div>
+
+              <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 shadow-[0_30px_80px_-20px_rgba(16,185,129,0.35)] backdrop-blur-xl">
+                <video
+                  class="block aspect-video w-full object-cover"
+                  src="../assets/videos/push_cart.mp4"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  poster=""
+                ></video>
+
+                <!-- top-left badge -->
+                <div class="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-slate-950/70 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 backdrop-blur-md">
+                  <span class="pulse-dot relative inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                  Live · ToddlerBot
+                </div>
+
+                <!-- bottom caption -->
+                <div class="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent p-4 md:p-5">
+                  <div>
+                    <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">Capstone demo</div>
+                    <div class="mt-1 text-sm font-semibold text-white md:text-base">Whole-body manipulation: pushing a loaded cart</div>
+                  </div>
+                  <div class="hidden items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-200 backdrop-blur-md sm:inline-flex">
+                    <i data-lucide="play" class="h-3 w-3 text-emerald-300"></i>
+                    Auto
+                  </div>
+                </div>
+              </div>
+
+              <!-- bottom strip stats -->
+              <div class="mt-4 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+                <div class="bg-slate-950/60 px-4 py-3 text-center">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Locomotion</div>
+                  <div class="mt-1 text-sm font-semibold text-white">RL · MJX trained</div>
+                </div>
+                <div class="bg-slate-950/60 px-4 py-3 text-center">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Perception</div>
+                  <div class="mt-1 text-sm font-semibold text-white">Stereo fisheye</div>
+                </div>
+                <div class="bg-slate-950/60 px-4 py-3 text-center">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Transfer</div>
+                  <div class="mt-1 text-sm font-semibold text-white">Sim → Real</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Copy -->
+            <div>
+              <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                See it in Action
+              </div>
+              <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
+                This is what <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">your robot</span> will do.
+              </h2>
+              <p class="mt-5 text-base leading-relaxed text-slate-300">
+                Whole-body coordination. Balanced contact forces. A learned policy transferring cleanly from simulation to the real chassis — pushing a loaded cart across the lab floor. That's the end state we engineer toward together.
+              </p>
+
+              <ul class="mt-7 space-y-3.5">
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>
+                  Train an <span class="font-semibold text-white">RL walking policy</span> in MJX, then deploy it onto the robot you built.
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>
+                  Calibrate contact dynamics so the robot can <span class="font-semibold text-white">apply real force to the world</span>.
+                </li>
+                <li class="flex items-start gap-3 text-sm text-slate-200">
+                  <i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>
+                  Ship a portfolio-grade <span class="font-semibold text-white">sim-to-real</span> demo by the end of the cohort.
+                </li>
+              </ul>
+
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <a href="#program" class="group inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/[0.06] hover:text-emerald-200">
+                  How we get there
+                  <i data-lucide="arrow-right" class="h-4 w-4 opacity-70 transition-transform group-hover:translate-x-0.5"></i>
+                </a>
+                <a href="https://toddlerbot.github.io/" target="_blank" rel="noreferrer" class="group inline-flex items-center gap-2 rounded-xl border border-white/10 bg-transparent px-4 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:border-white/20 hover:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-4 w-4" aria-hidden="true">
+                    <path d="M12 .5C5.73.5.67 5.57.67 11.85c0 5.02 3.24 9.27 7.74 10.77.57.11.78-.25.78-.55v-2.13c-3.15.69-3.82-1.34-3.82-1.34-.51-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.66 1.24 3.31.95.1-.74.4-1.24.72-1.53-2.51-.29-5.16-1.27-5.16-5.65 0-1.25.45-2.27 1.17-3.08-.12-.3-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.75.11 3.05.73.81 1.17 1.83 1.17 3.08 0 4.39-2.66 5.36-5.18 5.64.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.79.55 4.49-1.5 7.73-5.75 7.73-10.77C23.33 5.57 18.27.5 12 .5z"/>
+                  </svg>
+                  Original research
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== PLATFORM ============================ -->
+      <section id="platform" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="mx-auto max-w-3xl text-center">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              The Platform
+            </div>
+            <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+              A research-grade humanoid, <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">not a toy kit.</span>
+            </h2>
+            <p class="mt-5 text-base leading-relaxed text-slate-300 md:text-lg">
+              ToddlerBot is the Stanford-published, open-source humanoid platform you'll build, wire, and teach to walk. Every component is portfolio-grade.
+            </p>
+          </div>
+
+          <div class="mt-16 grid gap-6 lg:grid-cols-3">
+            <!-- ME -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="flex items-center justify-between">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                  <i data-lucide="cog" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+                </div>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">ME</span>
+              </div>
+              <div class="mt-7">
+                <div class="text-xs font-mono uppercase tracking-[0.18em] text-slate-400">Mechanical Engineering</div>
+                <h3 class="mt-2 text-xl font-semibold leading-tight text-white">30 Active Degrees of Freedom</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                  7 DoF per arm, 6 per leg, 2 in the neck, 2 in the waist. Ultra-robust 3D-printed structural components engineered for repeated drops, falls, and self-recovery.
+                </p>
+              </div>
+              <ul class="mt-6 space-y-2.5 border-t border-white/5 pt-5 text-sm text-slate-300">
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Anthropomorphic 30-DoF kinematics</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Dynamixel-class actuator integration</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Print-in-place tolerancing &amp; assembly</li>
+              </ul>
+            </div>
+
+            <!-- EE -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="flex items-center justify-between">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-sky-400/30">
+                  <i data-lucide="cable" class="h-6 w-6 text-sky-300" stroke-width="1.8"></i>
+                </div>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">EE</span>
+              </div>
+              <div class="mt-7">
+                <div class="text-xs font-mono uppercase tracking-[0.18em] text-slate-400">Electrical Engineering</div>
+                <h3 class="mt-2 text-xl font-semibold leading-tight text-white">Jetson Orin NX Onboard Compute</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                  Stereo fisheye perception, custom power management, and a clean serial bus topology — production-grade electrical design, not a hobby breadboard.
+                </p>
+              </div>
+              <ul class="mt-6 space-y-2.5 border-t border-white/5 pt-5 text-sm text-slate-300">
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Stereo fisheye camera pipeline</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Custom DC power distribution</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Smart-bus actuator daisy-chain</li>
+              </ul>
+            </div>
+
+            <!-- AI -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="flex items-center justify-between">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                  <i data-lucide="brain" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+                </div>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">CS / AI</span>
+              </div>
+              <div class="mt-7">
+                <div class="text-xs font-mono uppercase tracking-[0.18em] text-slate-400">Computer Science &amp; AI</div>
+                <h3 class="mt-2 text-xl font-semibold leading-tight text-white">Sim-to-Real Reinforcement Learning</h3>
+                <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                  Build a faithful MuJoCo / MJX digital twin, identify system dynamics, and train RL walking policies that transfer to the real chassis.
+                </p>
+              </div>
+              <ul class="mt-6 space-y-2.5 border-t border-white/5 pt-5 text-sm text-slate-300">
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>MuJoCo + MJX physics simulation</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>System identification (sysID)</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>RL omnidirectional locomotion</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== PROGRAM ============================ -->
+      <section id="program" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                Program Structure
+              </div>
+              <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+                Two phases. One robot. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">Six hours a week.</span>
+              </h2>
+            </div>
+            <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
+              <i data-lucide="clock" class="h-3.5 w-3.5 text-emerald-300"></i>
+              6 hr / week · 20 weeks total
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="mt-12 inline-flex rounded-2xl border border-white/10 bg-white/[0.03] p-1.5 backdrop-blur-md">
+            <button class="phase-btn active relative rounded-xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:text-white" data-phase="summer">
+              <span class="phase-pill"></span>
+              <span class="phase-content flex items-center gap-2">
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">Phase 01</span>
+                Summer Intensive
+              </span>
+            </button>
+            <button class="phase-btn relative rounded-xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:text-white" data-phase="fall">
+              <span class="phase-pill"></span>
+              <span class="phase-content flex items-center gap-2">
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">Phase 02</span>
+                Fall Academy
+              </span>
+            </button>
+          </div>
+
+          <!-- Phase: Summer -->
+          <div class="phase-panel active mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="summer">
+            <div class="relative p-8 md:p-10">
+              <div class="flex items-center gap-3">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                  <i data-lucide="wrench" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+                </div>
+                <div>
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Jun – Aug · 8 Weeks</div>
+                  <h3 class="text-2xl font-semibold text-white">Summer Intensive <span class="text-slate-400">— The Physical Build</span></h3>
+                </div>
+              </div>
+              <div class="mt-8">
+                <div class="text-xs font-mono uppercase tracking-[0.18em] text-emerald-300">End-of-phase milestone</div>
+                <p class="mt-3 text-base leading-relaxed text-slate-200">
+                  Assemble the complete 30-DoF chassis, wire every electronic subsystem, calibrate joint zero-points, and deploy Python keyframe scripts so the robot performs open-loop push-ups and squats.
+                </p>
+              </div>
+              <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">Fully-assembled humanoid chassis</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">Calibrated actuator bus &amp; power rails</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">Open-loop keyframe motion demos</div>
+                </div>
+              </div>
+            </div>
+            <div class="relative border-t border-white/5 bg-gradient-to-br from-slate-900/50 to-slate-950/50 p-8 md:p-10 lg:border-l lg:border-t-0">
+              <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Weekly cadence</div>
+              <div class="mt-5 space-y-3">
+                <div>
+                  <div class="mb-1.5 flex items-center justify-between text-xs">
+                    <span class="flex items-center gap-1.5 font-mono uppercase tracking-[0.18em] text-emerald-300">
+                      <i data-lucide="wrench" class="h-3 w-3"></i> Summer Intensive
+                    </span>
+                    <span class="text-emerald-300">8 wk</span>
+                  </div>
+                  <div class="h-2 overflow-hidden rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-sky-300 shadow-[0_0_18px_-2px_rgba(52,211,153,0.7)]" style="width: 40%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-1.5 flex items-center justify-between text-xs">
+                    <span class="flex items-center gap-1.5 font-mono uppercase tracking-[0.18em] text-slate-500">
+                      <i data-lucide="brain" class="h-3 w-3"></i> Fall Academy
+                    </span>
+                    <span class="text-slate-500">12 wk</span>
+                  </div>
+                  <div class="h-2 overflow-hidden rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-white/10" style="width: 60%;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 rounded-xl border border-white/10 bg-slate-950/40 p-5">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                  <div>
+                    <div class="text-sm font-semibold text-white">Hybrid schedule</div>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">In-person lab build sessions on weekends during summer, plus weeknight virtual office hours throughout the fall academy.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phase: Fall -->
+          <div class="phase-panel mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="fall">
+            <div class="relative p-8 md:p-10">
+              <div class="flex items-center gap-3">
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                  <i data-lucide="brain" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+                </div>
+                <div>
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Sep – Dec · 12 Weeks</div>
+                  <h3 class="text-2xl font-semibold text-white">Fall Academy <span class="text-slate-400">— The Digital Brain</span></h3>
+                </div>
+              </div>
+              <div class="mt-8">
+                <div class="text-xs font-mono uppercase tracking-[0.18em] text-emerald-300">End-of-phase milestone</div>
+                <p class="mt-3 text-base leading-relaxed text-slate-200">
+                  Stand up a MuJoCo digital twin, perform motor system identification, train RL walking policies in MJX, and explore real-time VR teleoperation or vision-based manipulation.
+                </p>
+              </div>
+              <div class="mt-8 grid gap-3 sm:grid-cols-3">
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">MuJoCo digital twin + sysID report</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">Trained RL walking policy</div>
+                </div>
+                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                  <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
+                  <div class="mt-2 text-sm leading-snug text-slate-200">Teleop or manipulation capstone demo</div>
+                </div>
+              </div>
+            </div>
+            <div class="relative border-t border-white/5 bg-gradient-to-br from-slate-900/50 to-slate-950/50 p-8 md:p-10 lg:border-l lg:border-t-0">
+              <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Weekly cadence</div>
+              <div class="mt-5 space-y-3">
+                <div>
+                  <div class="mb-1.5 flex items-center justify-between text-xs">
+                    <span class="flex items-center gap-1.5 font-mono uppercase tracking-[0.18em] text-slate-500">
+                      <i data-lucide="wrench" class="h-3 w-3"></i> Summer Intensive
+                    </span>
+                    <span class="text-slate-500">8 wk</span>
+                  </div>
+                  <div class="h-2 overflow-hidden rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-white/10" style="width: 40%;"></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="mb-1.5 flex items-center justify-between text-xs">
+                    <span class="flex items-center gap-1.5 font-mono uppercase tracking-[0.18em] text-emerald-300">
+                      <i data-lucide="brain" class="h-3 w-3"></i> Fall Academy
+                    </span>
+                    <span class="text-emerald-300">12 wk</span>
+                  </div>
+                  <div class="h-2 overflow-hidden rounded-full bg-white/5">
+                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-sky-300 shadow-[0_0_18px_-2px_rgba(52,211,153,0.7)]" style="width: 60%;"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-8 rounded-xl border border-white/10 bg-slate-950/40 p-5">
+                <div class="flex items-start gap-3">
+                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                  <div>
+                    <div class="text-sm font-semibold text-white">Hybrid schedule</div>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">Weeknight virtual seminars and code reviews, plus monthly in-person lab integration days for sim-to-real testing.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== SYLLABUS ============================ -->
+      <section id="syllabus" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-5xl px-6">
+          <div class="max-w-2xl">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              High-Level Syllabus
+            </div>
+            <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+              20 weeks, mapped to <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">real engineering deliverables.</span>
+            </h2>
+            <p class="mt-5 text-base leading-relaxed text-slate-300">
+              Each module is taught lab-first: a short concept primer, then hands-on time on the bench or in simulation, then a code review with your mentor.
+            </p>
+          </div>
+
+          <div class="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md" id="syllabus-acc">
+
+            <!-- Item 1 -->
+            <div class="acc-item open border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="cog" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 1–2</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Anthropomorphic Design &amp; 3D Printing Tolerances</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Summer</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 1–2</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">How humanoid linkages distribute mass, why tolerance stacks dominate joint feel, and how to print structural parts that survive a fall.</div></div></div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="acc-item border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="cable" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 3–4</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Actuator Calibration, Bus Comms &amp; Power Schematics</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Summer</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 3–4</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">Read datasheets like an engineer. Build a clean serial-bus topology, set actuator IDs, and design a power distribution diagram that won't brown-out under load.</div></div></div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="acc-item border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="cpu" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 5–6</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Full Chassis Mechatronics &amp; Jetson Orin NX Setup</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Summer</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 5–6</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">Mate the printed skeleton, route every cable, flash the Jetson, and stand up the on-robot software stack end-to-end.</div></div></div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="acc-item border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="bot" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 7–8</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Kinematics &amp; Python Keyframe Motion Control</span>
+                    <span class="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-200"><i data-lucide="award" class="h-2.5 w-2.5"></i>Milestone</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Summer</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 7–8</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">Forward kinematics, joint-space trajectories, and a keyframe app that drives the real hardware. Summer milestone: live push-ups and squats.</div></div></div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="acc-item border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="flask-conical" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 9–12</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Digital Twins in MuJoCo &amp; System Identification</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Fall</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 9–12</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">Build the simulated twin of your own robot, then identify its true dynamics so simulation actually predicts reality.</div></div></div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="acc-item border-b border-white/5">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="brain" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 13–16</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">RL: Omnidirectional Locomotion Policies in MJX</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Fall</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 13–16</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">PPO-style reinforcement learning, reward shaping, and large-scale parallel rollouts in MJX to train a policy that walks.</div></div></div>
+            </div>
+
+            <!-- Item 7 -->
+            <div class="acc-item">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+                <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="graduation-cap" class="h-5 w-5" stroke-width="1.8"></i></div>
+                <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 17–20</div>
+                <div class="min-w-0 flex-1">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-base font-semibold text-white md:text-lg">Sim-to-Real Transfer, Evaluation &amp; Portfolio Presentation</span>
+                    <span class="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-200"><i data-lucide="award" class="h-2.5 w-2.5"></i>Milestone</span>
+                    <span class="rounded-full border border-white/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-slate-400">Fall</span>
+                  </div>
+                  <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 17–20</div>
+                </div>
+                <i data-lucide="chevron-down" class="acc-chevron h-5 w-5 flex-shrink-0 text-slate-400 transition-transform duration-300"></i>
+              </button>
+              <div class="acc-panel"><div><div class="px-5 pb-6 pl-[68px] text-sm leading-relaxed text-slate-300 md:px-7 md:pl-[180px]">Deploy your policy on the physical robot, measure the reality gap, and produce a research-quality writeup for your portfolio.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== MENTORSHIP =========================== -->
+      <section id="mentorship" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+            <div class="grid lg:grid-cols-[1.2fr_1fr]">
+              <div class="relative p-8 md:p-12">
+                <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                  The Mentorship Advantage
+                </div>
+                <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+                  You're not following a tutorial. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">You're shipping research.</span>
+                </h2>
+                <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
+                  Every cohort student builds against the same platform Stanford's research team publishes on. Your code, sims, and hardware get reviewed by the people who wrote the paper.
+                </p>
+
+                <div class="mt-10 space-y-5">
+                  <div class="flex gap-4">
+                    <div class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                      <i data-lucide="shield-check" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
+                    </div>
+                    <div>
+                      <div class="font-semibold text-white">Direct technical consultation</div>
+                      <p class="mt-1 text-sm leading-relaxed text-slate-300">The 1st and 2nd authors of the original ToddlerBot paper serve as Technical Consultants — reviewing student code, simulation designs, and hardware builds.</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                      <i data-lucide="users" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
+                    </div>
+                    <div>
+                      <div class="font-semibold text-white">Genboo engineers as lead mentors</div>
+                      <p class="mt-1 text-sm leading-relaxed text-slate-300">Working roboticists run weekly labs, code reviews, and 1:1s. Maximum 5 students per mentor so feedback is dense and personal.</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-4">
+                    <div class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-emerald-300" aria-hidden="true">
+                        <path d="M12 .5C5.73.5.67 5.57.67 11.85c0 5.02 3.24 9.27 7.74 10.77.57.11.78-.25.78-.55v-2.13c-3.15.69-3.82-1.34-3.82-1.34-.51-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.66 1.24 3.31.95.1-.74.4-1.24.72-1.53-2.51-.29-5.16-1.27-5.16-5.65 0-1.25.45-2.27 1.17-3.08-.12-.3-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.75.11 3.05.73.81 1.17 1.83 1.17 3.08 0 4.39-2.66 5.36-5.18 5.64.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.79.55 4.49-1.5 7.73-5.75 7.73-10.77C23.33 5.57 18.27.5 12 .5z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <div class="font-semibold text-white">Real open-source contributions</div>
+                      <p class="mt-1 text-sm leading-relaxed text-slate-300">Your improvements to drivers, sim tooling, and policies can land upstream in the ToddlerBot repository — a portfolio piece that compounds.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="relative overflow-hidden border-t border-white/5 bg-gradient-to-br from-slate-900/40 to-slate-950/60 p-8 md:p-12 lg:border-l lg:border-t-0">
+                <div class="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-emerald-500/20 blur-[100px]"></div>
+                <div class="pointer-events-none absolute -left-10 bottom-0 h-60 w-60 rounded-full bg-sky-500/15 blur-[100px]"></div>
+
+                <div class="relative">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Source platform</div>
+                  <a href="https://toddlerbot.github.io/" target="_blank" rel="noreferrer" class="mt-3 inline-flex items-center gap-2 text-2xl font-semibold text-white hover:text-emerald-300">
+                    ToddlerBot
+                    <i data-lucide="arrow-up-right" class="h-5 w-5"></i>
+                  </a>
+                  <p class="mt-2 text-sm text-slate-400">Stanford-published open-source humanoid research platform.</p>
+
+                  <div class="mt-8 space-y-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                      <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Active DoFs</span>
+                      <span class="text-sm font-medium text-white">30</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                      <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Compute</span>
+                      <span class="text-sm font-medium text-white">Jetson Orin NX</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                      <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Perception</span>
+                      <span class="text-sm font-medium text-white">Stereo fisheye</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                      <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Sim</span>
+                      <span class="text-sm font-medium text-white">MuJoCo + MJX</span>
+                    </div>
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                      <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Policy</span>
+                      <span class="text-sm font-medium text-white">RL omnidirectional</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== APPLY ============================ -->
+      <section id="apply" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-6xl px-6">
+          <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+            <div class="pointer-events-none absolute inset-0">
+              <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-emerald-500/25 blur-[140px]"></div>
+              <div class="absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-sky-500/20 blur-[140px]"></div>
+              <div class="dot-grid absolute inset-0 opacity-[0.12]"></div>
+            </div>
+
+            <div class="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+              <div>
+                <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                  Apply · Cohort 01
+                </div>
+                <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+                  Seats are <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">strictly limited.</span>
+                </h2>
+                <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
+                  Due to hardware complexity and lab space constraints, this cohort is highly selective. Ideal candidates have prior exposure to programming
+                  <span class="font-mono text-emerald-200">(Python / C++)</span> or competitive robotics
+                  <span class="font-mono text-emerald-200">(VEX / FRC)</span> — but passion and problem-solving drive are prioritized over credentials.
+                </p>
+                <div class="mt-8 space-y-3">
+                  <div class="flex items-start gap-3 text-sm text-slate-300"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Open to current high school students (grades 9–12).</div>
+                  <div class="flex items-start gap-3 text-sm text-slate-300"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Rolling admissions — earlier applicants get priority lab access.</div>
+                  <div class="flex items-start gap-3 text-sm text-slate-300"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Need-based scholarships available for hardware kit costs.</div>
+                </div>
+              </div>
+
+              <div class="rounded-2xl border border-white/10 bg-slate-950/60 p-7 backdrop-blur-xl">
+                <form id="apply-form" class="space-y-4" action="https://formspree.io/f/xqabbeeb" method="POST">
+                  <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">Express interest</div>
+                  <h3 class="text-xl font-semibold text-white">Start your application</h3>
+                  <div class="space-y-3 pt-2">
+                    <input required name="name" type="text" placeholder="Full name" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <input required name="email" type="email" placeholder="Email" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <input required name="school" type="text" placeholder="School & grade" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <textarea name="note" rows="3" placeholder="A robotics project, repo, or build you're proud of (optional)" class="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"></textarea>
+                  </div>
+
+                  <!-- Hidden routing fields -->
+                  <input type="hidden" name="program" value="Humanoid Cohort 01" />
+                  <input type="hidden" name="source" value="humanoid.genboo.com" />
+                  <input type="hidden" name="_subject" value="Humanoid Cohort Application" />
+                  <!-- Honeypot -->
+                  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true" />
+
+                  <button id="apply-submit" type="submit" class="glow-cta group relative mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-semibold text-slate-950 disabled:cursor-not-allowed disabled:opacity-70">
+                    <span class="glow-cta-bg"></span>
+                    <span class="glow-cta-inner flex items-center gap-2">
+                      <span id="apply-submit-label">Submit Application</span>
+                      <i id="apply-submit-arrow" data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"></i>
+                    </span>
+                  </button>
+                  <p id="apply-error" class="hidden pt-1 text-center text-[12px] text-rose-300">Something went wrong. Please email <a class="underline" href="mailto:hello@genboo.com">hello@genboo.com</a>.</p>
+                  <p class="pt-1 text-center text-[11px] text-slate-500">We'll follow up within 5 business days with next steps.</p>
+                </form>
+
+                <div id="apply-success" class="hidden flex-col items-center py-10 text-center">
+                  <div class="grid h-14 w-14 place-items-center rounded-full bg-emerald-400/15 ring-1 ring-emerald-400/40">
+                    <i data-lucide="check" class="h-7 w-7 text-emerald-300" stroke-width="2.5"></i>
+                  </div>
+                  <h3 class="mt-5 text-xl font-semibold text-white">Application received</h3>
+                  <p class="mt-2 max-w-xs text-sm text-slate-300">Thanks, <span id="apply-name">future roboticist</span>. We'll reach out within 5 business days.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =========================== FOOTER ============================ -->
+    <footer class="relative border-t border-white/5 bg-slate-950/60 py-10 backdrop-blur-xl">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
+        <div class="flex items-center gap-2.5">
+          <span class="logo-mark relative grid h-8 w-8 place-items-center rounded-lg">
+            <span class="logo-cjk relative z-10 text-[11px]">
+              <span>进</span>
+              <span>步</span>
+            </span>
+          </span>
+          <div class="leading-tight">
+            <div class="text-sm font-semibold text-white">Genboo · <span class="font-cjk text-emerald-300">进步</span></div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">© 2026 Genboo</div>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-5 text-xs text-slate-400">
+          <a href="mailto:hello@genboo.com" class="inline-flex items-center gap-1.5 hover:text-emerald-300"><i data-lucide="mail" class="h-3.5 w-3.5"></i>hello@genboo.com</a>
+          <span class="inline-flex items-center gap-1.5"><i data-lucide="map-pin" class="h-3.5 w-3.5"></i>Bay Area, CA</span>
+          <a href="https://toddlerbot.github.io/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-1.5 hover:text-emerald-300">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-3.5 w-3.5" aria-hidden="true">
+              <path d="M12 .5C5.73.5.67 5.57.67 11.85c0 5.02 3.24 9.27 7.74 10.77.57.11.78-.25.78-.55v-2.13c-3.15.69-3.82-1.34-3.82-1.34-.51-1.31-1.26-1.66-1.26-1.66-1.03-.7.08-.69.08-.69 1.14.08 1.74 1.17 1.74 1.17 1.01 1.74 2.66 1.24 3.31.95.1-.74.4-1.24.72-1.53-2.51-.29-5.16-1.27-5.16-5.65 0-1.25.45-2.27 1.17-3.08-.12-.3-.51-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.75.11 3.05.73.81 1.17 1.83 1.17 3.08 0 4.39-2.66 5.36-5.18 5.64.41.36.78 1.06.78 2.13v3.16c0 .31.21.67.79.55 4.49-1.5 7.73-5.75 7.73-10.77C23.33 5.57 18.27.5 12 .5z"/>
+            </svg>
+            ToddlerBot
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      // Render lucide icons
+      lucide.createIcons();
+
+      // Accordion
+      document.querySelectorAll('#syllabus-acc .acc-item').forEach((item) => {
+        const btn = item.querySelector('.acc-toggle');
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('open');
+          document.querySelectorAll('#syllabus-acc .acc-item').forEach((i) => i.classList.remove('open'));
+          if (!isOpen) item.classList.add('open');
+        });
+      });
+
+      // Phase tab switcher
+      document.querySelectorAll('.phase-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const phase = btn.dataset.phase;
+          document.querySelectorAll('.phase-btn').forEach((b) => b.classList.toggle('active', b === btn));
+          document.querySelectorAll('.phase-panel').forEach((p) => p.classList.toggle('active', p.dataset.panel === phase));
+        });
+      });
+
+      // Apply form -> POST to Formspree, then show inline success
+      const form = document.getElementById('apply-form');
+      const success = document.getElementById('apply-success');
+      const errEl = document.getElementById('apply-error');
+      const submitBtn = document.getElementById('apply-submit');
+      const submitLabel = document.getElementById('apply-submit-label');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errEl.classList.add('hidden');
+        submitBtn.disabled = true;
+        const prevLabel = submitLabel.textContent;
+        submitLabel.textContent = 'Sending…';
+
+        try {
+          const data = new FormData(form);
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' },
+          });
+          if (!res.ok) throw new Error('Formspree responded ' + res.status);
+
+          const name = data.get('name') || '';
+          const first = String(name).trim().split(/\s+/)[0];
+          if (first) document.getElementById('apply-name').textContent = first;
+          form.classList.add('hidden');
+          success.classList.remove('hidden');
+          success.classList.add('flex');
+        } catch (err) {
+          console.error(err);
+          errEl.classList.remove('hidden');
+          submitBtn.disabled = false;
+          submitLabel.textContent = prevLabel;
+        }
+      });
+    </script>
+  </body>
+</html>
