@@ -44,29 +44,6 @@
       .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
       .font-cjk { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
 
-      /* 进步 logo mark */
-      .logo-mark {
-        position: relative;
-        background-image: linear-gradient(135deg, #34d399 0%, #38bdf8 100%);
-        box-shadow: 0 0 24px -4px rgba(52, 211, 153, 0.6), inset 0 1px 0 0 rgba(255,255,255,0.25);
-      }
-      .logo-mark::after {
-        content: "";
-        position: absolute; inset: 0;
-        border-radius: inherit;
-        background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0) 55%);
-        pointer-events: none;
-      }
-      .logo-cjk {
-        font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
-        font-weight: 900;
-        color: #0b1220;
-        line-height: 0.85;
-        letter-spacing: -0.02em;
-        text-align: center;
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-      }
-
       /* Accordion smooth open/close via grid-rows trick */
       .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms ease, opacity 300ms ease; opacity: 0; }
       .acc-panel > div { min-height: 0; }
@@ -128,12 +105,6 @@
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
       <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#" class="flex items-center gap-2.5">
-          <span class="logo-mark relative grid h-9 w-9 place-items-center rounded-lg">
-            <span class="logo-cjk relative z-10 text-[12px]">
-              <span>进</span>
-              <span>步</span>
-            </span>
-          </span>
           <div class="leading-tight">
             <div class="text-sm font-semibold text-white">Genboo · <span class="font-cjk font-bold text-emerald-300">进步</span></div>
             <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Humanoid Cohort</div>
@@ -330,7 +301,7 @@
               The Platform
             </div>
             <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-              A research-grade humanoid, <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">not a toy kit.</span>
+              A research-grade humanoid.
             </h2>
             <p class="mt-5 text-base leading-relaxed text-slate-300 md:text-lg">
               ToddlerBot is the Stanford-published, open-source humanoid platform you'll build, wire, and teach to walk. Every component is portfolio-grade.
@@ -899,12 +870,6 @@
     <footer class="relative border-t border-white/5 bg-slate-950/60 py-10 backdrop-blur-xl">
       <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 md:flex-row">
         <div class="flex items-center gap-2.5">
-          <span class="logo-mark relative grid h-8 w-8 place-items-center rounded-lg">
-            <span class="logo-cjk relative z-10 text-[11px]">
-              <span>进</span>
-              <span>步</span>
-            </span>
-          </span>
           <div class="leading-tight">
             <div class="text-sm font-semibold text-white">Genboo · <span class="font-cjk text-emerald-300">进步</span></div>
             <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">© 2026 Genboo</div>
