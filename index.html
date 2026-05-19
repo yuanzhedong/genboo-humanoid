@@ -45,8 +45,10 @@
       .font-cjk { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; }
 
       /* Accordion smooth open/close via grid-rows trick */
-      .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms ease, opacity 300ms ease; opacity: 0; }
-      .acc-panel > div { min-height: 0; }
+      .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 300ms ease, opacity 300ms ease; opacity: 0; overflow: hidden; }
+      .acc-panel > div { min-height: 0; overflow: hidden; }
+      .acc-item:not(.open) .acc-panel { pointer-events: none; }
+      .acc-toggle { position: relative; z-index: 1; }
       .acc-item.open .acc-panel { grid-template-rows: 1fr; opacity: 1; }
       .acc-item.open .acc-chevron { transform: rotate(180deg); color: #6ee7b7; }
       .acc-item.open .acc-icon-wrap { background-color: rgba(52, 211, 153, 0.10); box-shadow: inset 0 0 0 1px rgba(52, 211, 153, 0.40); color: #6ee7b7; }
