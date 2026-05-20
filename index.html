@@ -78,8 +78,12 @@
       .phase-btn > .phase-content { position: relative; z-index: 1; }
 
       /* Phase content show/hide */
-      .phase-panel { display: none; }
+      .phase-panel { display: grid; }
       .phase-panel.active { display: grid; }
+      .journey-step { position: relative; }
+      .journey-step .step-num { font-variant-numeric: tabular-nums; }
+      .journey-arrow { display: none; }
+      @media (min-width: 1024px) { .journey-arrow { display: grid; } }
 
       /* Dot grid mask overlay */
       .dot-grid {
@@ -422,17 +426,20 @@
                 Program Structure
               </div>
               <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-                Three phases. One robot. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">Six hours a week.</span>
+                Three phases. One robot. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">Built in pairs.</span>
               </h2>
+              <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-400">
+                Sequential and cumulative. Each phase builds on the previous one. Schedule and intensity vary by phase &mdash; details below.
+              </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
-                <i data-lucide="clock" class="h-3.5 w-3.5 text-emerald-300"></i>
-                6 hr / week
+                <i data-lucide="calendar-days" class="h-3.5 w-3.5 text-emerald-300"></i>
+                22 weeks total
               </div>
               <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
-                <i data-lucide="calendar-days" class="h-3.5 w-3.5 text-emerald-300"></i>
-                22 weeks
+                <i data-lucide="map-pin" class="h-3.5 w-3.5 text-emerald-300"></i>
+                Summer lab + Fall hybrid
               </div>
               <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
                 <i data-lucide="users" class="h-3.5 w-3.5 text-emerald-300"></i>
@@ -441,33 +448,87 @@
             </div>
           </div>
 
-          <!-- Tabs -->
-          <div class="mt-12 inline-flex flex-wrap rounded-2xl border border-white/10 bg-white/[0.03] p-1.5 backdrop-blur-md">
-            <button class="phase-btn active relative rounded-xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:text-white" data-phase="summer">
-              <span class="phase-pill"></span>
-              <span class="phase-content flex items-center gap-2">
-                <span class="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">Phase 01</span>
-                Summer Intensive
-              </span>
-            </button>
-            <button class="phase-btn relative rounded-xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:text-white" data-phase="fall">
-              <span class="phase-pill"></span>
-              <span class="phase-content flex items-center gap-2">
-                <span class="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">Phase 02</span>
-                Fall Academy
-              </span>
-            </button>
-            <button class="phase-btn relative rounded-xl px-5 py-2.5 text-sm font-medium text-slate-300 transition-all duration-300 hover:text-white" data-phase="output">
-              <span class="phase-pill"></span>
-              <span class="phase-content flex items-center gap-2">
-                <span class="font-mono text-[10px] uppercase tracking-[0.18em] opacity-70">Phase 03</span>
-                Output Sprint
-              </span>
-            </button>
+          <!-- Program journey overview -->
+          <div class="mt-12 relative grid grid-cols-1 gap-3 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch lg:gap-0">
+            <!-- 01 Summer -->
+            <a href="#phase-01" class="journey-step group rounded-2xl border border-emerald-400/25 bg-gradient-to-br from-emerald-400/[0.08] via-white/[0.02] to-emerald-400/[0.03] p-5 transition-all hover:border-emerald-400/50 hover:bg-emerald-400/[0.06]">
+              <div class="flex items-center justify-between">
+                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">Phase 01</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Jun&ndash;Aug</span>
+              </div>
+              <div class="mt-3 flex items-center gap-2">
+                <i data-lucide="wrench" class="h-4 w-4 text-emerald-300"></i>
+                <div class="text-base font-semibold text-white">Summer Intensive</div>
+              </div>
+              <div class="mt-1 text-sm font-medium text-emerald-200/90">Reproduce ToddlerBot</div>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">8 wk</span>
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">In-person lab</span>
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">~6 hr/wk</span>
+              </div>
+            </a>
+
+            <!-- Arrow 1 -->
+            <div class="journey-arrow place-items-center px-2">
+              <i data-lucide="arrow-right" class="h-5 w-5 text-slate-600" stroke-width="1.5"></i>
+            </div>
+
+            <!-- 02 Fall -->
+            <a href="#phase-02" class="journey-step group rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.06] via-white/[0.02] to-sky-400/[0.03] p-5 transition-all hover:border-sky-400/40 hover:bg-sky-400/[0.06]">
+              <div class="flex items-center justify-between">
+                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">Phase 02</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Sep&ndash;Dec</span>
+              </div>
+              <div class="mt-3 flex items-center gap-2">
+                <i data-lucide="brain" class="h-4 w-4 text-sky-300"></i>
+                <div class="text-base font-semibold text-white">Fall Academy</div>
+              </div>
+              <div class="mt-1 text-sm font-medium text-sky-200/90">Simulate, Control &amp; Improve</div>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">12 wk</span>
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">Hybrid</span>
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">Weekly virtual + monthly lab</span>
+              </div>
+            </a>
+
+            <!-- Arrow 2 -->
+            <div class="journey-arrow place-items-center px-2">
+              <i data-lucide="arrow-right" class="h-5 w-5 text-slate-600" stroke-width="1.5"></i>
+            </div>
+
+            <!-- 03 Output -->
+            <a href="#phase-03" class="journey-step group rounded-2xl border border-violet-400/20 bg-gradient-to-br from-violet-400/[0.06] via-white/[0.02] to-violet-400/[0.03] p-5 transition-all hover:border-violet-400/40 hover:bg-violet-400/[0.06]">
+              <div class="flex items-center justify-between">
+                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-violet-300">Phase 03</span>
+                <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Dec&ndash;Jan</span>
+              </div>
+              <div class="mt-3 flex items-center gap-2">
+                <i data-lucide="trophy" class="h-4 w-4 text-violet-300"></i>
+                <div class="text-base font-semibold text-white">Output Sprint</div>
+              </div>
+              <div class="mt-1 text-sm font-medium text-violet-200/90">Final Project &amp; Showcase</div>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">2 wk</span>
+                <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">Daily virtual + showcase day</span>
+              </div>
+            </a>
+          </div>
+
+          <p class="mt-6 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-slate-500">
+            <i data-lucide="chevron-down" class="inline h-3 w-3 align-text-bottom"></i>&nbsp; Detail for each phase below
+          </p>
+
+          <!-- =========================== PHASE 01 =========================== -->
+          <div id="phase-01" class="mt-16 mb-4 flex items-center gap-4">
+            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/40">
+              <span class="font-mono text-xs font-bold text-emerald-300">01</span>
+            </div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-emerald-300">Phase 01 of 03 &middot; Summer</div>
+            <div class="hidden h-px flex-1 bg-gradient-to-r from-emerald-400/40 to-transparent sm:block"></div>
           </div>
 
           <!-- Phase: Summer -->
-          <div class="phase-panel active mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="summer">
+          <div class="phase-panel active overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="summer">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -540,16 +601,25 @@
                 <div class="flex items-start gap-3">
                   <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
                   <div>
-                    <div class="text-sm font-semibold text-white">Hybrid schedule</div>
-                    <p class="mt-1 text-sm leading-relaxed text-slate-300">In-person lab build sessions on weekends during summer, plus weeknight virtual office hours throughout the fall academy.</p>
+                    <div class="text-sm font-semibold text-white">Summer schedule &middot; In-person, lab-heavy</div>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">Approximately <span class="font-medium text-white">6 hours per week</span>, weekend-weighted, in our lab space. Hands-on build sessions where pairs work side-by-side with mentors on physical assembly, wiring, and bring-up.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- =========================== PHASE 02 =========================== -->
+          <div id="phase-02" class="mt-16 mb-4 flex items-center gap-4">
+            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-sky-400/10 ring-1 ring-sky-400/40">
+              <span class="font-mono text-xs font-bold text-sky-300">02</span>
+            </div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-sky-300">Phase 02 of 03 &middot; Fall</div>
+            <div class="hidden h-px flex-1 bg-gradient-to-r from-sky-400/40 to-transparent sm:block"></div>
+          </div>
+
           <!-- Phase: Fall -->
-          <div class="phase-panel mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="fall">
+          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="fall">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -659,16 +729,25 @@
                 <div class="flex items-start gap-3">
                   <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
                   <div>
-                    <div class="text-sm font-semibold text-white">Hybrid schedule</div>
-                    <p class="mt-1 text-sm leading-relaxed text-slate-300">Weeknight virtual seminars and code reviews, plus monthly in-person lab integration days for sim-to-real testing.</p>
+                    <div class="text-sm font-semibold text-white">Fall schedule &middot; Hybrid &mdash; weekly virtual + monthly in-person</div>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">Weeknight virtual seminars and code reviews, <span class="font-medium text-white">plus monthly in-person lab integration days</span> for sim-to-real testing on the robot you built in summer.</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- =========================== PHASE 03 =========================== -->
+          <div id="phase-03" class="mt-16 mb-4 flex items-center gap-4">
+            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-violet-400/10 ring-1 ring-violet-400/40">
+              <span class="font-mono text-xs font-bold text-violet-300">03</span>
+            </div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-violet-300">Phase 03 of 03 &middot; Output Sprint</div>
+            <div class="hidden h-px flex-1 bg-gradient-to-r from-violet-400/40 to-transparent sm:block"></div>
+          </div>
+
           <!-- Phase: Output Sprint -->
-          <div class="phase-panel mt-8 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="output">
+          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="output">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -758,8 +837,8 @@
                 <div class="flex items-start gap-3">
                   <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
                   <div>
-                    <div class="text-sm font-semibold text-white">Hybrid schedule</div>
-                    <p class="mt-1 text-sm leading-relaxed text-slate-300">One in-person showcase day for talks &amp; demos, plus daily virtual writing rooms and review sessions throughout the sprint.</p>
+                    <div class="text-sm font-semibold text-white">Sprint schedule &middot; Daily virtual + showcase day</div>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-300">Daily virtual writing rooms and review sessions throughout the sprint, plus <span class="font-medium text-white">one in-person showcase day</span> for talks and demos.</p>
                   </div>
                 </div>
               </div>
@@ -1187,12 +1266,16 @@
         });
       });
 
-      // Phase tab switcher
-      document.querySelectorAll('.phase-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const phase = btn.dataset.phase;
-          document.querySelectorAll('.phase-btn').forEach((b) => b.classList.toggle('active', b === btn));
-          document.querySelectorAll('.phase-panel').forEach((p) => p.classList.toggle('active', p.dataset.panel === phase));
+      // Smooth-scroll for journey-step anchors so phase deep-links don't jump abruptly
+      document.querySelectorAll('a.journey-step[href^="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const id = a.getAttribute('href').slice(1);
+          const target = document.getElementById(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            history.replaceState(null, '', '#' + id);
+          }
         });
       });
 
