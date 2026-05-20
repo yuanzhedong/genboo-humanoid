@@ -239,6 +239,7 @@
 
               <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 shadow-[0_30px_80px_-20px_rgba(16,185,129,0.35)] backdrop-blur-xl">
                 <video
+                  id="showcase-video"
                   class="block aspect-video w-full object-cover"
                   src="assets/videos/push_cart.mp4"
                   autoplay
@@ -246,8 +247,10 @@
                   loop
                   playsinline
                   preload="metadata"
-                  poster=""
-                ></video>
+                  poster="toddlerbot.jpg"
+                >
+                  <img class="block aspect-video w-full object-cover" src="toddlerbot.jpg" alt="ToddlerBot humanoid robots in the Genboo lab" />
+                </video>
 
                 <!-- top-left badge -->
                 <div class="pointer-events-none absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-slate-950/70 px-3 py-1 text-[10px] font-mono uppercase tracking-[0.18em] text-emerald-200 backdrop-blur-md">
@@ -1265,6 +1268,24 @@
           if (!isOpen) item.classList.add('open');
         });
       });
+
+      // Showcase video fallback: if the mp4 can't load (network, format, etc.), swap to toddlerbot.png
+      (function () {
+        const v = document.getElementById('showcase-video');
+        if (!v) return;
+        const swapToImage = () => {
+          if (!v.parentNode) return;
+          const img = document.createElement('img');
+          img.className = v.className;
+          img.src = 'toddlerbot.jpg';
+          img.alt = 'ToddlerBot humanoid robots in the Genboo lab';
+          v.replaceWith(img);
+        };
+        v.addEventListener('error', swapToImage, { once: true });
+        // Also catch the case where the source element itself errors
+        const inner = v.querySelector('source');
+        if (inner) inner.addEventListener('error', swapToImage, { once: true });
+      })();
 
       // Smooth-scroll for journey-step anchors so phase deep-links don't jump abruptly
       document.querySelectorAll('a.journey-step[href^="#"]').forEach((a) => {
