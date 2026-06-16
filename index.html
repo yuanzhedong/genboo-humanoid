@@ -13,7 +13,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Humanoid Cohort 01 — Genboo Robotics × ToddlerBot</title>
-    <meta name="description" content="A selective 22-week research-style robotics cohort for high school students, built around ToddlerBot — the open-source ML-compatible humanoid platform. Mechanical assembly, electronics, MuJoCo simulation, control, and AI. Authorized education partner of the ToddlerBot project, with technical consultation from the original ToddlerBot paper's first two co-authors." />
+    <meta name="description" content="A selective 22-week research-style robotics cohort for high school students, built around ToddlerBot — the open-source, ML-compatible humanoid platform. A research-informed learning model grounded in learning science: mastery-based progression, control before AI, and research-grade deliverables (paper, repo, talk). Authorized education partner of the ToddlerBot project, with technical consultation from the original ToddlerBot paper's first two co-authors." />
+    <link rel="canonical" href="https://humanoid.genboo.com/" />
+
+    <!-- Open Graph / Facebook / iMessage / Slack -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Genboo · Humanoid Cohort" />
+    <meta property="og:url" content="https://humanoid.genboo.com/" />
+    <meta property="og:title" content="Humanoid Cohort 01 — Build, Simulate &amp; Train a Real Humanoid Robot" />
+    <meta property="og:description" content="A selective 22-week research-style robotics cohort for high school students, built around ToddlerBot — the open-source, ML-compatible humanoid platform. Authorized education partner of the ToddlerBot project." />
+    <meta property="og:image" content="https://humanoid.genboo.com/og-image.jpg" />
+    <meta property="og:image:alt" content="Two ToddlerBot humanoid robots reproduced by students in the Genboo lab" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Humanoid Cohort 01 — Build, Simulate &amp; Train a Real Humanoid Robot" />
+    <meta name="twitter:description" content="A selective 22-week research-style robotics cohort for high school students, built around ToddlerBot — the open-source, ML-compatible humanoid platform." />
+    <meta name="twitter:image" content="https://humanoid.genboo.com/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Two ToddlerBot humanoid robots reproduced by students in the Genboo lab" />
+
+    <!-- Structured data: course offering -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Humanoid Cohort 01",
+      "description": "A selective 22-week research-style robotics cohort for high school students, built around the ToddlerBot open-source humanoid platform. A research-informed learning model grounded in learning science — mastery-based progression, control before AI, and research-grade deliverables — covering mechanical assembly, electronics, MuJoCo simulation, control, and AI.",
+      "provider": {
+        "@type": "Organization",
+        "name": "Genboo",
+        "url": "https://genboo.com"
+      },
+      "url": "https://humanoid.genboo.com/",
+      "educationalLevel": "High school",
+      "inLanguage": "en"
+    }
+    </script>
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="alternate icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="apple-touch-icon" href="favicon.svg" />
@@ -96,6 +134,29 @@
       /* Card hover lift */
       .card-hover { transition: transform .3s ease, border-color .3s ease, background-color .3s ease; }
       .card-hover:hover { transform: translateY(-4px); }
+
+      /* Mobile menu open state (grid-rows trick, matches accordion) */
+      #mobile-menu.open { grid-template-rows: 1fr; }
+      #menu-toggle[aria-expanded="true"] .menu-icon-open { display: none; }
+      #menu-toggle[aria-expanded="true"] .menu-icon-close { display: inline-block; }
+
+      /* Scroll-spy active nav link */
+      .nav-link.active { color: #6ee7b7; }
+      .nav-link.active::after {
+        content: ""; display: block; height: 2px; margin-top: 3px; border-radius: 9999px;
+        background: linear-gradient(to right, #34d399, #38bdf8);
+      }
+      .nav-link[data-mobile].active { background-color: rgba(52,211,153,0.08); }
+      .nav-link[data-mobile].active::after { display: none; }
+
+      /* Respect reduced-motion preferences */
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        *, *::before, *::after {
+          animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+          transition-duration: .001ms !important; scroll-behavior: auto !important;
+        }
+      }
     </style>
   </head>
 
@@ -118,16 +179,41 @@
         </a>
 
         <nav class="hidden items-center gap-8 md:flex">
-          <a href="#platform" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Platform</a>
-          <a href="#program" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Program</a>
-          <a href="#syllabus" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Syllabus</a>
-          <a href="#mentorship" class="text-sm text-slate-300 transition-colors hover:text-emerald-300">Mentorship</a>
+          <a href="#platform" data-nav class="nav-link text-sm text-slate-300 transition-colors hover:text-emerald-300">Platform</a>
+          <a href="#approach" data-nav class="nav-link text-sm text-slate-300 transition-colors hover:text-emerald-300">Approach</a>
+          <a href="#program" data-nav class="nav-link text-sm text-slate-300 transition-colors hover:text-emerald-300">Program</a>
+          <a href="#syllabus" data-nav class="nav-link text-sm text-slate-300 transition-colors hover:text-emerald-300">Syllabus</a>
+          <a href="#mentorship" data-nav class="nav-link text-sm text-slate-300 transition-colors hover:text-emerald-300">Mentorship</a>
         </nav>
 
         <a href="#apply" class="glow-cta group relative hidden md:inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-950">
           <span class="glow-cta-bg"></span>
           <span class="glow-cta-inner flex items-center gap-2">Apply <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
         </a>
+
+        <!-- Mobile menu toggle -->
+        <button id="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
+          class="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-200 transition-colors hover:border-emerald-400/40 hover:text-emerald-200 md:hidden">
+          <i data-lucide="menu" class="menu-icon-open h-5 w-5"></i>
+          <i data-lucide="x" class="menu-icon-close hidden h-5 w-5"></i>
+        </button>
+      </div>
+
+      <!-- Mobile menu panel -->
+      <div id="mobile-menu" class="mobile-menu grid grid-rows-[0fr] overflow-hidden border-t border-white/5 bg-slate-950/90 backdrop-blur-xl transition-[grid-template-rows] duration-300 ease-out md:hidden">
+        <div class="min-h-0 overflow-hidden">
+          <nav class="flex flex-col gap-1 px-6 py-4">
+            <a href="#platform" data-nav data-mobile class="nav-link rounded-lg px-3 py-3 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-emerald-300">Platform</a>
+            <a href="#approach" data-nav data-mobile class="nav-link rounded-lg px-3 py-3 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-emerald-300">Approach</a>
+            <a href="#program" data-nav data-mobile class="nav-link rounded-lg px-3 py-3 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-emerald-300">Program</a>
+            <a href="#syllabus" data-nav data-mobile class="nav-link rounded-lg px-3 py-3 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-emerald-300">Syllabus</a>
+            <a href="#mentorship" data-nav data-mobile class="nav-link rounded-lg px-3 py-3 text-sm text-slate-300 transition-colors hover:bg-white/5 hover:text-emerald-300">Mentorship</a>
+            <a href="#apply" data-mobile class="glow-cta group relative mt-2 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold text-slate-950">
+              <span class="glow-cta-bg"></span>
+              <span class="glow-cta-inner flex items-center gap-2">Apply for the Cohort <i data-lucide="arrow-right" class="h-4 w-4"></i></span>
+            </a>
+          </nav>
+        </div>
       </div>
     </header>
 
@@ -154,6 +240,10 @@
                 <span class="pulse-dot relative inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
                 Cohort 01 · Now Accepting Applications
               </div>
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-slate-200">
+                <i data-lucide="flask-conical" class="h-3.5 w-3.5"></i>
+                Research-Informed Learning Model
+              </div>
             </div>
 
             <h1 class="max-w-5xl bg-gradient-to-br from-white via-white to-slate-400 bg-clip-text text-4xl font-bold leading-[1.05] tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
@@ -163,8 +253,7 @@
             </h1>
 
             <p class="mt-7 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
-              A <span class="font-semibold text-white">selective 22-week research-style robotics cohort</span> for high school students, built around
-              <span class="font-semibold text-emerald-300">ToddlerBot</span> — the open-source, ML-compatible humanoid platform. <span class="font-semibold text-white">Authorized and supported by the ToddlerBot team</span>, with technical consultation from the original ToddlerBot paper's first two co-authors.
+              Frontier humanoid-robotics research normally lives inside funded university labs — out of reach for the students most eager to do it. The Humanoid Cohort changes that: a <span class="font-semibold text-white">selective 22-week research apprenticeship</span> where high-school students reproduce and extend <span class="font-semibold text-emerald-300">ToddlerBot</span>, the open-source humanoid platform Stanford publishes on. <span class="font-semibold text-white">Authorized and supported by the ToddlerBot team</span>, with technical consultation from the paper's first two co-authors.
             </p>
 
             <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
@@ -414,6 +503,104 @@
                 <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>System identification (sysID)</li>
                 <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>RL omnidirectional locomotion</li>
               </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================== APPROACH ============================ -->
+      <section id="approach" class="relative py-24 md:py-32">
+        <div class="mx-auto max-w-7xl px-6">
+          <div class="mx-auto max-w-3xl text-center">
+            <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              Our Learning Model
+            </div>
+            <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
+              A research apprenticeship, <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">not a robotics class.</span>
+            </h2>
+            <p class="mt-5 text-base leading-relaxed text-slate-300 md:text-lg">
+              The cohort is designed around how learning and research actually work. Every design choice draws on established learning-science principles &mdash; mastery-based progression, learning by building, and deliberate practice with expert feedback &mdash; applied to a real, published research platform.
+            </p>
+          </div>
+
+          <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <!-- Principle 1 -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                <i data-lucide="hammer" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+              </div>
+              <div class="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Constructionism</div>
+              <h3 class="mt-2 text-lg font-semibold leading-tight text-white">Learn by building real systems</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                Understanding is earned at the bench, not lectured. Students reproduce a research-grade humanoid from parts &mdash; the same platform Stanford publishes on &mdash; so every concept is anchored to something they built and can debug.
+              </p>
+            </div>
+
+            <!-- Principle 2 -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                <i data-lucide="layers" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+              </div>
+              <div class="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Mastery learning</div>
+              <h3 class="mt-2 text-lg font-semibold leading-tight text-white">Verify each layer before the next</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                One actuator &rarr; one limb &rarr; lower body &rarr; full chassis. Each stage has an explicit, checkable success criterion. No one advances on a layer they can't yet make work &mdash; difficulty is scaffolded, not dumped.
+              </p>
+            </div>
+
+            <!-- Principle 3 -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-sky-400/30">
+                <i data-lucide="brain-circuit" class="h-6 w-6 text-sky-300" stroke-width="1.8"></i>
+              </div>
+              <div class="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Responsible AI</div>
+              <h3 class="mt-2 text-lg font-semibold leading-tight text-white">Control before AI &mdash; no black boxes</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                Students reach reinforcement learning only after they understand the mechanics, electronics, and control underneath it. AI is a tool they can reason about and audit &mdash; not magic they invoke and trust blindly.
+              </p>
+            </div>
+
+            <!-- Principle 4 -->
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                <i data-lucide="file-text" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
+              </div>
+              <div class="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Research output</div>
+              <h3 class="mt-2 text-lg font-semibold leading-tight text-white">Ship paper, repo, and talk</h3>
+              <p class="mt-3 text-sm leading-relaxed text-slate-300">
+                Every student produces the artifacts research labs and admissions actually read: a short technical paper, an open-source contribution, and a recorded talk &mdash; concrete, measurable outcomes rather than a certificate of attendance.
+              </p>
+            </div>
+          </div>
+
+          <!-- Access + scale callout -->
+          <div class="mt-10 grid gap-4 lg:grid-cols-2">
+            <div class="relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-sky-400/[0.05] p-7 backdrop-blur-md">
+              <div class="flex items-start gap-4">
+                <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                  <i data-lucide="scale" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
+                </div>
+                <div>
+                  <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">Access &amp; equity</div>
+                  <p class="mt-3 text-sm leading-relaxed text-slate-200">
+                    Frontier humanoid research is normally locked inside well-funded labs. The cohort opens that work to high-school students, with <span class="font-semibold text-white">need-based scholarships</span> on hardware costs so cost isn't the barrier to entry.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="relative overflow-hidden rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.06] via-white/[0.02] to-emerald-400/[0.05] p-7 backdrop-blur-md">
+              <div class="flex items-start gap-4">
+                <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-sky-400/10 ring-1 ring-sky-400/30">
+                  <i data-lucide="trending-up" class="h-5 w-5 text-sky-300" stroke-width="1.8"></i>
+                </div>
+                <div>
+                  <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">Designed to scale</div>
+                  <p class="mt-3 text-sm leading-relaxed text-slate-200">
+                    Cohort 01 is the first run of a repeatable model: a research platform, a mastery-based curriculum, and a mentor ratio that holds. Each cohort's open-source contributions and documentation make the <span class="font-semibold text-white">next cohort cheaper and faster to run.</span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1167,8 +1354,8 @@
                   Seats are <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">strictly limited.</span>
                 </h2>
                 <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
-                  Due to hardware complexity and lab space constraints, this cohort is highly selective. Ideal candidates have prior exposure to programming
-                  <span class="font-mono text-emerald-200">(Python / C++)</span> — but passion and problem-solving drive are prioritized over credentials.
+                  Cohort 01 is small by design — hardware and lab space are the real constraints, so we select for students who'll get the most from a research apprenticeship and carry the model forward. Prior programming exposure
+                  <span class="font-mono text-emerald-200">(Python / C++)</span> helps, but curiosity and problem-solving drive matter more than credentials. Graduates leave with a working humanoid platform, research-grade artifacts, and a mentor network in humanoid robotics.
                 </p>
                 <div class="mt-8 space-y-3">
                   <div class="flex items-start gap-3 text-sm text-slate-300"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Open to current high school students (grades 9–12).</div>
@@ -1258,6 +1445,56 @@
     <script>
       // Render lucide icons
       lucide.createIcons();
+
+      // Mobile menu toggle
+      (function () {
+        const toggle = document.getElementById('menu-toggle');
+        const menu = document.getElementById('mobile-menu');
+        if (!toggle || !menu) return;
+        const close = () => { menu.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open menu'); };
+        const open = () => { menu.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); toggle.setAttribute('aria-label', 'Close menu'); };
+        toggle.addEventListener('click', () => {
+          menu.classList.contains('open') ? close() : open();
+        });
+        // Close after tapping any in-menu link
+        menu.querySelectorAll('a[data-mobile]').forEach((a) => a.addEventListener('click', close));
+        // Close on Escape
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+      })();
+
+      // Scroll-spy: highlight the nav link for the section currently in view
+      (function () {
+        const links = Array.from(document.querySelectorAll('.nav-link[data-nav]'));
+        if (!links.length || !('IntersectionObserver' in window)) return;
+        const byId = {};
+        links.forEach((l) => { (byId[l.getAttribute('href').slice(1)] ||= []).push(l); });
+        const sections = Object.keys(byId)
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+        let activeId = null;
+        const setActive = (id) => {
+          if (id === activeId) return;
+          activeId = id;
+          links.forEach((l) => l.classList.toggle('active', l.getAttribute('href').slice(1) === id));
+        };
+        const io = new IntersectionObserver((entries) => {
+          // Pick the entry nearest the top of the viewport among those intersecting
+          const visible = entries.filter((e) => e.isIntersecting)
+            .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          if (visible.length) setActive(visible[0].target.id);
+        }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+        sections.forEach((s) => io.observe(s));
+      })();
+
+      // Pause the autoplaying showcase video for visitors who prefer reduced motion
+      (function () {
+        const v = document.getElementById('showcase-video');
+        if (!v) return;
+        const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const apply = () => { try { mq.matches ? v.pause() : v.play(); } catch (_) {} };
+        apply();
+        mq.addEventListener('change', apply);
+      })();
 
       // Accordion
       document.querySelectorAll('#syllabus-acc .acc-item').forEach((item) => {
