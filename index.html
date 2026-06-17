@@ -95,15 +95,10 @@
       @keyframes pulse-ring { 0% { transform: scale(.85); opacity: .75; } 80%, 100% { transform: scale(1.6); opacity: 0; } }
       .pulse-dot::before { content: ""; position: absolute; inset: 0; border-radius: 9999px; background: #34d399; animation: pulse-ring 1.6s cubic-bezier(0,0,.2,1) infinite; }
 
-      /* Glow CTA */
-      .glow-cta::before {
-        content: ""; position: absolute; inset: 0; border-radius: 0.75rem;
-        background: linear-gradient(to right, #34d399, #6ee7b7, #38bdf8);
-        opacity: .7; filter: blur(22px); transition: opacity .3s ease;
-        z-index: 0;
-      }
-      .glow-cta:hover::before { opacity: 1; }
-      .glow-cta > .glow-cta-bg { position: absolute; inset: 0; border-radius: 0.75rem; background: linear-gradient(to right, #34d399, #6ee7b7, #38bdf8); z-index: 0; }
+      /* CTA — solid, flat (no glow halo) */
+      .glow-cta::before { content: none; }
+      .glow-cta > .glow-cta-bg { position: absolute; inset: 0; border-radius: 0.75rem; background: #10b981; transition: background .2s ease; z-index: 0; }
+      .glow-cta:hover > .glow-cta-bg { background: #34d399; }
       .glow-cta > .glow-cta-inner { position: relative; z-index: 1; }
 
       /* Selection color */
@@ -124,12 +119,7 @@
       @media (min-width: 1024px) { .journey-arrow { display: grid; } }
 
       /* Dot grid mask overlay */
-      .dot-grid {
-        background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.35) 1px, transparent 0);
-        background-size: 28px 28px;
-        -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
-                mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 40%, transparent 100%);
-      }
+      .dot-grid { display: none; }
 
       /* Card hover lift */
       .card-hover { transition: transform .3s ease, border-color .3s ease, background-color .3s ease; }
@@ -162,11 +152,7 @@
 
   <body class="relative min-h-screen overflow-x-hidden bg-slate-950 text-white antialiased">
 
-    <!-- Global ambient backdrop -->
-    <div class="pointer-events-none fixed inset-0 -z-10">
-      <div class="absolute inset-0" style="background: radial-gradient(ellipse 1200px 800px at 15% -10%, rgba(16,185,129,0.10), transparent 60%);"></div>
-      <div class="absolute inset-0" style="background: radial-gradient(ellipse 1000px 700px at 85% 10%, rgba(56,189,248,0.08), transparent 65%);"></div>
-    </div>
+    <!-- ambient glow removed for a flatter look -->
 
     <!-- ================================ NAV ================================ -->
     <header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
@@ -193,7 +179,7 @@
 
         <!-- Mobile menu toggle -->
         <button id="menu-toggle" type="button" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false"
-          class="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[0.03] text-slate-200 transition-colors hover:border-emerald-400/40 hover:text-emerald-200 md:hidden">
+          class="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-slate-900/50 text-slate-200 transition-colors hover:border-emerald-400/40 hover:text-emerald-200 md:hidden">
           <i data-lucide="menu" class="menu-icon-open h-5 w-5"></i>
           <i data-lucide="x" class="menu-icon-close hidden h-5 w-5"></i>
         </button>
@@ -220,11 +206,7 @@
     <main>
       <!-- ================================ HERO =============================== -->
       <section class="relative overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
-        <div class="pointer-events-none absolute inset-0 -z-10">
-          <div class="absolute -top-32 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-emerald-500/20 blur-[140px]"></div>
-          <div class="absolute right-[-10rem] top-40 h-[28rem] w-[28rem] rounded-full bg-sky-500/15 blur-[140px]"></div>
-          <div class="absolute left-[-10rem] bottom-[-10rem] h-[28rem] w-[28rem] rounded-full bg-emerald-400/10 blur-[140px]"></div>
-        </div>
+        <div class="pointer-events-none absolute inset-0 -z-10"></div>
 
         <div class="dot-grid pointer-events-none absolute inset-0 -z-10 opacity-[0.18]"></div>
 
@@ -232,7 +214,7 @@
           <div class="flex flex-col items-center text-center">
 
             <div class="mb-6 flex flex-wrap items-center justify-center gap-2.5">
-              <div class="inline-flex items-center gap-2 rounded-full border border-sky-400/40 bg-sky-400/10 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-sky-200">
+              <div class="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-emerald-200">
                 <i data-lucide="badge-check" class="h-3.5 w-3.5"></i>
                 ToddlerBot Education Partner
               </div>
@@ -240,16 +222,16 @@
                 <span class="pulse-dot relative inline-block h-2 w-2 rounded-full bg-emerald-400"></span>
                 Cohort 01 · Now Accepting Applications
               </div>
-              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-slate-200">
+              <div class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-slate-900/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.18em] text-slate-200">
                 <i data-lucide="flask-conical" class="h-3.5 w-3.5"></i>
                 Research-Informed Learning Model
               </div>
             </div>
 
-            <h1 class="max-w-5xl bg-gradient-to-br from-white via-white to-slate-400 bg-clip-text text-4xl font-bold leading-[1.05] tracking-tight text-transparent sm:text-5xl md:text-6xl lg:text-7xl">
+            <h1 class="max-w-5xl text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
               Build, Simulate, and Train a Real Humanoid Robot.
               <br class="hidden md:block" />
-              <span class="bg-gradient-to-r from-emerald-300 via-emerald-200 to-sky-300 bg-clip-text text-transparent">Mechanical &middot; Electrical &middot; Computer Science &middot; AI.</span>
+              <span class="text-emerald-400">Mechanical &middot; Electrical &middot; Computer Science &middot; AI.</span>
             </h1>
 
             <p class="mt-7 max-w-3xl text-base leading-relaxed text-slate-300 md:text-lg">
@@ -261,28 +243,28 @@
                 <span class="glow-cta-bg"></span>
                 <span class="glow-cta-inner flex items-center gap-2">Apply for the Cohort <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"></i></span>
               </a>
-              <a href="#syllabus" class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/[0.06] hover:text-emerald-200">
+              <a href="#syllabus" class="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-slate-900/50 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-slate-800/70 hover:text-emerald-200">
                 <i data-lucide="scroll-text" class="h-4 w-4"></i>
                 View Syllabus
                 <i data-lucide="arrow-right" class="h-4 w-4 opacity-60 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"></i>
               </a>
             </div>
 
-            <div class="mt-14 grid w-full max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] sm:grid-cols-4">
+            <div class="mt-14 grid w-full max-w-4xl grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/10 bg-slate-900/40 sm:grid-cols-4">
               <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
-                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">22</div>
+                <div class="text-3xl font-bold text-white">22</div>
                 <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Weeks</div>
               </div>
               <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
-                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">30</div>
+                <div class="text-3xl font-bold text-white">30</div>
                 <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Active DoFs</div>
               </div>
               <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
-                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">6 hr</div>
+                <div class="text-3xl font-bold text-white">6 hr</div>
                 <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Per Week</div>
               </div>
               <div class="bg-slate-950/60 px-6 py-5 text-center backdrop-blur-md">
-                <div class="bg-gradient-to-b from-white to-slate-400 bg-clip-text text-3xl font-bold text-transparent">1:4</div>
+                <div class="text-3xl font-bold text-white">1:4</div>
                 <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Mentor Ratio</div>
               </div>
             </div>
@@ -294,18 +276,18 @@
       <section id="audience" class="relative py-12 md:py-16">
         <div class="mx-auto max-w-7xl px-6">
           <div class="mb-8 inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+            <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
             Built for
           </div>
           <div class="grid gap-4 md:grid-cols-2">
-            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-md transition-colors hover:border-emerald-400/30 hover:bg-white/[0.05]">
+            <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 backdrop-blur-md transition-colors hover:border-emerald-400/30 hover:bg-slate-800/60">
               <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/30">
                 <i data-lucide="graduation-cap" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
               </div>
               <div class="mt-4 text-base font-semibold text-white">High-school engineers</div>
               <p class="mt-2 text-sm leading-relaxed text-slate-300">Aiming at top engineering programs. The cohort offers serious technical depth — a substantive research-style experience to draw on in applications and interviews.</p>
             </div>
-            <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 backdrop-blur-md transition-colors hover:border-emerald-400/30 hover:bg-white/[0.05]">
+            <div class="rounded-2xl border border-white/10 bg-slate-900/50 p-6 backdrop-blur-md transition-colors hover:border-emerald-400/30 hover:bg-slate-800/60">
               <div class="grid h-10 w-10 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/30">
                 <i data-lucide="wrench" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
               </div>
@@ -324,9 +306,9 @@
             <!-- Video frame -->
             <div class="relative">
               <!-- ambient glow -->
-              <div class="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-emerald-500/25 via-emerald-400/10 to-sky-500/25 blur-2xl"></div>
+              <!-- showcase glow removed -->
 
-              <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 shadow-[0_30px_80px_-20px_rgba(16,185,129,0.35)] backdrop-blur-xl">
+              <div class="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/60 shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl">
                 <video
                   id="showcase-video"
                   class="block aspect-video w-full object-cover"
@@ -353,7 +335,7 @@
                     <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">Capstone demo</div>
                     <div class="mt-1 text-sm font-semibold text-white md:text-base">Whole-body manipulation: pushing a loaded cart</div>
                   </div>
-                  <div class="hidden items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-200 backdrop-blur-md sm:inline-flex">
+                  <div class="hidden items-center gap-1.5 rounded-full border border-white/15 bg-slate-800/60 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-200 backdrop-blur-md sm:inline-flex">
                     <i data-lucide="play" class="h-3 w-3 text-emerald-300"></i>
                     Auto
                   </div>
@@ -361,7 +343,7 @@
               </div>
 
               <!-- bottom strip stats -->
-              <div class="mt-4 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+              <div class="mt-4 grid grid-cols-3 gap-px overflow-hidden rounded-xl border border-white/10 bg-slate-900/40">
                 <div class="bg-slate-950/60 px-4 py-3 text-center">
                   <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Locomotion</div>
                   <div class="mt-1 text-sm font-semibold text-white">RL · MJX trained</div>
@@ -380,11 +362,11 @@
             <!-- Copy -->
             <div>
               <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                 What ToddlerBot Can Do
               </div>
               <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-4xl lg:text-5xl">
-                The platform's <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">published research</span> baseline.
+                The platform's <span class="text-emerald-400">published research</span> baseline.
               </h2>
               <p class="mt-5 text-base leading-relaxed text-slate-300">
                 Whole-body coordination, balanced contact forces, and sim-to-real RL transfer — demonstrated in the Stanford-published ToddlerBot paper. This video shows what the platform is capable of in research hands. <span class="font-semibold text-white">Cohort 01 reproduces the platform and explores parts of this stack with mentor guidance</span> — the exact deliverable each cohort ships depends on team progress and chosen track.
@@ -406,7 +388,7 @@
               </ul>
 
               <div class="mt-8 flex flex-wrap items-center gap-3">
-                <a href="#program" class="group inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.03] px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-white/[0.06] hover:text-emerald-200">
+                <a href="#program" class="group inline-flex items-center gap-2 rounded-xl border border-white/15 bg-slate-900/50 px-4 py-2.5 text-sm font-semibold text-white backdrop-blur-md transition-all duration-300 hover:border-emerald-400/40 hover:bg-slate-800/70 hover:text-emerald-200">
                   How we get there
                   <i data-lucide="arrow-right" class="h-4 w-4 opacity-70 transition-transform group-hover:translate-x-0.5"></i>
                 </a>
@@ -427,7 +409,7 @@
         <div class="mx-auto max-w-7xl px-6">
           <div class="mx-auto max-w-3xl text-center">
             <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
               The Platform
             </div>
             <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
@@ -440,7 +422,7 @@
 
           <div class="mt-16 grid gap-6 lg:grid-cols-3">
             <!-- ME -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="flex items-center justify-between">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
                   <i data-lucide="cog" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
@@ -462,10 +444,10 @@
             </div>
 
             <!-- EE -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="flex items-center justify-between">
-                <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-sky-400/30">
-                  <i data-lucide="cable" class="h-6 w-6 text-sky-300" stroke-width="1.8"></i>
+                <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                  <i data-lucide="cable" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
                 </div>
                 <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">EE</span>
               </div>
@@ -477,14 +459,14 @@
                 </p>
               </div>
               <ul class="mt-6 space-y-2.5 border-t border-white/5 pt-5 text-sm text-slate-300">
-                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Stereo fisheye camera pipeline</li>
-                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Custom DC power distribution</li>
-                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" stroke-width="2.5"></i>Smart-bus actuator daisy-chain</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Stereo fisheye camera pipeline</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Custom DC power distribution</li>
+                <li class="flex items-start gap-2.5"><i data-lucide="check" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300" stroke-width="2.5"></i>Smart-bus actuator daisy-chain</li>
               </ul>
             </div>
 
             <!-- AI -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="flex items-center justify-between">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
                   <i data-lucide="brain" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
@@ -513,11 +495,11 @@
         <div class="mx-auto max-w-7xl px-6">
           <div class="mx-auto max-w-3xl text-center">
             <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
               Our Learning Model
             </div>
             <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-              A research apprenticeship, <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">not a robotics class.</span>
+              A research apprenticeship, <span class="text-emerald-400">not a robotics class.</span>
             </h2>
             <p class="mt-5 text-base leading-relaxed text-slate-300 md:text-lg">
               The cohort is designed around how learning and research actually work. Every design choice draws on established learning-science principles &mdash; mastery-based progression, learning by building, and deliberate practice with expert feedback &mdash; applied to a real, published research platform.
@@ -526,7 +508,7 @@
 
           <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             <!-- Principle 1 -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
                 <i data-lucide="hammer" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
               </div>
@@ -538,7 +520,7 @@
             </div>
 
             <!-- Principle 2 -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
                 <i data-lucide="layers" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
               </div>
@@ -550,9 +532,9 @@
             </div>
 
             <!-- Principle 3 -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
-              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-sky-400/30">
-                <i data-lucide="brain-circuit" class="h-6 w-6 text-sky-300" stroke-width="1.8"></i>
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
+              <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
+                <i data-lucide="brain-circuit" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
               </div>
               <div class="mt-6 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Responsible AI</div>
               <h3 class="mt-2 text-lg font-semibold leading-tight text-white">Control before AI &mdash; no black boxes</h3>
@@ -562,7 +544,7 @@
             </div>
 
             <!-- Principle 4 -->
-            <div class="card-hover relative rounded-2xl border border-white/10 bg-white/[0.03] p-7 backdrop-blur-xl hover:border-white/20">
+            <div class="card-hover relative rounded-2xl border border-white/10 bg-slate-900/50 p-7 backdrop-blur-xl hover:border-white/20">
               <div class="grid h-12 w-12 place-items-center rounded-xl bg-white/5 ring-1 ring-emerald-400/30">
                 <i data-lucide="file-text" class="h-6 w-6 text-emerald-300" stroke-width="1.8"></i>
               </div>
@@ -576,7 +558,7 @@
 
           <!-- Access + scale callout -->
           <div class="mt-10 grid gap-4 lg:grid-cols-2">
-            <div class="relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-sky-400/[0.05] p-7 backdrop-blur-md">
+            <div class="relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-emerald-400/[0.05] p-7 backdrop-blur-md">
               <div class="flex items-start gap-4">
                 <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
                   <i data-lucide="scale" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
@@ -589,13 +571,13 @@
                 </div>
               </div>
             </div>
-            <div class="relative overflow-hidden rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.06] via-white/[0.02] to-emerald-400/[0.05] p-7 backdrop-blur-md">
+            <div class="relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-emerald-400/[0.05] p-7 backdrop-blur-md">
               <div class="flex items-start gap-4">
-                <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-sky-400/10 ring-1 ring-sky-400/30">
-                  <i data-lucide="trending-up" class="h-5 w-5 text-sky-300" stroke-width="1.8"></i>
+                <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
+                  <i data-lucide="trending-up" class="h-5 w-5 text-emerald-300" stroke-width="1.8"></i>
                 </div>
                 <div>
-                  <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">Designed to scale</div>
+                  <div class="font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">Designed to scale</div>
                   <p class="mt-3 text-sm leading-relaxed text-slate-200">
                     Cohort 01 is the first run of a repeatable model: a research platform, a mastery-based curriculum, and a mentor ratio that holds. Each cohort's open-source contributions and documentation make the <span class="font-semibold text-white">next cohort cheaper and faster to run.</span>
                   </p>
@@ -612,26 +594,26 @@
           <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
             <div class="max-w-2xl">
               <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                 Program Structure
               </div>
               <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-                Three phases. One robot. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">Built in pairs.</span>
+                Three phases. One robot. <span class="text-emerald-400">Built in pairs.</span>
               </h2>
               <p class="mt-4 max-w-xl text-sm leading-relaxed text-slate-400">
                 Sequential and cumulative. Each phase builds on the previous one. Schedule and intensity vary by phase &mdash; details below.
               </p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
-              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
+              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/50 px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
                 <i data-lucide="calendar-days" class="h-3.5 w-3.5 text-emerald-300"></i>
                 22 weeks total
               </div>
-              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
+              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/50 px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
                 <i data-lucide="map-pin" class="h-3.5 w-3.5 text-emerald-300"></i>
                 Summer lab + Fall hybrid
               </div>
-              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
+              <div class="flex items-center gap-2 rounded-full border border-white/10 bg-slate-900/50 px-3.5 py-2 text-xs font-mono uppercase tracking-[0.18em] text-slate-300 backdrop-blur-md">
                 <i data-lucide="users" class="h-3.5 w-3.5 text-emerald-300"></i>
                 1:4 mentor ratio
               </div>
@@ -664,16 +646,16 @@
             </div>
 
             <!-- 02 Fall -->
-            <a href="#phase-02" class="journey-step group rounded-2xl border border-sky-400/20 bg-gradient-to-br from-sky-400/[0.06] via-white/[0.02] to-sky-400/[0.03] p-5 transition-all hover:border-sky-400/40 hover:bg-sky-400/[0.06]">
+            <a href="#phase-02" class="journey-step group rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-emerald-400/[0.03] p-5 transition-all hover:border-emerald-400/40 hover:bg-emerald-400/[0.06]">
               <div class="flex items-center justify-between">
-                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-sky-300">Phase 02</span>
+                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">Phase 02</span>
                 <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Sep&ndash;Dec</span>
               </div>
               <div class="mt-3 flex items-center gap-2">
-                <i data-lucide="brain" class="h-4 w-4 text-sky-300"></i>
+                <i data-lucide="brain" class="h-4 w-4 text-emerald-300"></i>
                 <div class="text-base font-semibold text-white">Fall Academy</div>
               </div>
-              <div class="mt-1 text-sm font-medium text-sky-200/90">Simulate, Control &amp; Improve</div>
+              <div class="mt-1 text-sm font-medium text-emerald-200/90">Simulate, Control &amp; Improve</div>
               <div class="mt-4 flex flex-wrap gap-1.5">
                 <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">12 wk</span>
                 <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">Hybrid</span>
@@ -687,16 +669,16 @@
             </div>
 
             <!-- 03 Output -->
-            <a href="#phase-03" class="journey-step group rounded-2xl border border-violet-400/20 bg-gradient-to-br from-violet-400/[0.06] via-white/[0.02] to-violet-400/[0.03] p-5 transition-all hover:border-violet-400/40 hover:bg-violet-400/[0.06]">
+            <a href="#phase-03" class="journey-step group rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-emerald-400/[0.03] p-5 transition-all hover:border-emerald-400/40 hover:bg-emerald-400/[0.06]">
               <div class="flex items-center justify-between">
-                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-violet-300">Phase 03</span>
+                <span class="step-num font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">Phase 03</span>
                 <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500">Dec&ndash;Jan</span>
               </div>
               <div class="mt-3 flex items-center gap-2">
-                <i data-lucide="trophy" class="h-4 w-4 text-violet-300"></i>
+                <i data-lucide="trophy" class="h-4 w-4 text-emerald-300"></i>
                 <div class="text-base font-semibold text-white">Output Sprint</div>
               </div>
-              <div class="mt-1 text-sm font-medium text-violet-200/90">Final Project &amp; Showcase</div>
+              <div class="mt-1 text-sm font-medium text-emerald-200/90">Final Project &amp; Showcase</div>
               <div class="mt-4 flex flex-wrap gap-1.5">
                 <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">2 wk</span>
                 <span class="rounded-full bg-white/5 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-slate-300 ring-1 ring-white/10">Daily virtual + showcase day</span>
@@ -718,7 +700,7 @@
           </div>
 
           <!-- Phase: Summer -->
-          <div class="phase-panel active overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="summer">
+          <div class="phase-panel active overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="summer">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -736,15 +718,15 @@
                 </p>
               </div>
               <div class="mt-8 grid gap-3 sm:grid-cols-3">
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Powered, calibrated humanoid platform</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Every joint verified &amp; software-controllable</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Engineering notebook + bring-up checklist</div>
                 </div>
@@ -761,7 +743,7 @@
                     <span class="text-emerald-300">8 wk</span>
                   </div>
                   <div class="h-2 overflow-hidden rounded-full bg-white/5">
-                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-sky-300 shadow-[0_0_18px_-2px_rgba(52,211,153,0.7)]" style="width: 36%;"></div>
+                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-emerald-300" style="width: 36%;"></div>
                   </div>
                 </div>
                 <div>
@@ -789,7 +771,7 @@
               </div>
               <div class="mt-8 rounded-xl border border-white/10 bg-slate-950/40 p-5">
                 <div class="flex items-start gap-3">
-                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                   <div>
                     <div class="text-sm font-semibold text-white">Summer schedule &middot; In-person, lab-heavy</div>
                     <p class="mt-1 text-sm leading-relaxed text-slate-300">Approximately <span class="font-medium text-white">6 hours per week</span>, weekend-weighted, in our lab space. Hands-on build sessions where pairs work side-by-side with mentors on physical assembly, wiring, and bring-up.</p>
@@ -801,15 +783,15 @@
 
           <!-- =========================== PHASE 02 =========================== -->
           <div id="phase-02" class="mt-16 mb-4 flex items-center gap-4">
-            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-sky-400/10 ring-1 ring-sky-400/40">
-              <span class="font-mono text-xs font-bold text-sky-300">02</span>
+            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/40">
+              <span class="font-mono text-xs font-bold text-emerald-300">02</span>
             </div>
-            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-sky-300">Phase 02 of 03 &middot; Fall</div>
-            <div class="hidden h-px flex-1 bg-gradient-to-r from-sky-400/40 to-transparent sm:block"></div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-emerald-300">Phase 02 of 03 &middot; Fall</div>
+            <div class="hidden h-px flex-1 bg-gradient-to-r from-emerald-400/40 to-transparent sm:block"></div>
           </div>
 
           <!-- Phase: Fall -->
-          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="fall">
+          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="fall">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -827,23 +809,23 @@
                 </p>
               </div>
               <div class="mt-8 grid gap-3 sm:grid-cols-3">
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Joint scripts, logging &amp; teleop tools</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">MuJoCo model matched to your hardware</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="sparkles" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Controlled motion + RL experiments</div>
                 </div>
               </div>
 
               <!-- Final project tracks: every student picks a focus that fits their strength -->
-              <div class="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-                <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-sky-300">
+              <div class="mt-10 rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+                <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">
                   <i data-lucide="compass" class="h-3.5 w-3.5"></i>
                   Final project · pick your track
                 </div>
@@ -868,11 +850,11 @@
                     <span><span class="font-semibold text-white">Control</span> — create a stable keyframe motion (standing, squatting, stepping)</span>
                   </li>
                   <li class="flex items-start gap-2.5 text-sm text-slate-200">
-                    <i data-lucide="brain" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                    <i data-lucide="brain" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                     <span><span class="font-semibold text-white">AI / RL</span> — modify reward or observation in simulation, analyze the change</span>
                   </li>
                   <li class="flex items-start gap-2.5 text-sm text-slate-200">
-                    <i data-lucide="file-text" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                    <i data-lucide="file-text" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                     <span><span class="font-semibold text-white">Documentation</span> — build a student-friendly assembly guide from your engineering notebook</span>
                   </li>
                 </ul>
@@ -900,7 +882,7 @@
                     <span class="text-emerald-300">12 wk</span>
                   </div>
                   <div class="h-2 overflow-hidden rounded-full bg-white/5">
-                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-sky-300 shadow-[0_0_18px_-2px_rgba(52,211,153,0.7)]" style="width: 55%;"></div>
+                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-emerald-300" style="width: 55%;"></div>
                   </div>
                 </div>
                 <div>
@@ -917,7 +899,7 @@
               </div>
               <div class="mt-8 rounded-xl border border-white/10 bg-slate-950/40 p-5">
                 <div class="flex items-start gap-3">
-                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                   <div>
                     <div class="text-sm font-semibold text-white">Fall schedule &middot; Hybrid &mdash; weekly virtual + in-person</div>
                     <p class="mt-1 text-sm leading-relaxed text-slate-300">Weeknight virtual seminars and code reviews, <span class="font-medium text-white">plus in-person lab integration days</span> for sim-to-real testing on the robot you built in summer.</p>
@@ -929,15 +911,15 @@
 
           <!-- =========================== PHASE 03 =========================== -->
           <div id="phase-03" class="mt-16 mb-4 flex items-center gap-4">
-            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-violet-400/10 ring-1 ring-violet-400/40">
-              <span class="font-mono text-xs font-bold text-violet-300">03</span>
+            <div class="grid h-9 w-9 flex-shrink-0 place-items-center rounded-lg bg-emerald-400/10 ring-1 ring-emerald-400/40">
+              <span class="font-mono text-xs font-bold text-emerald-300">03</span>
             </div>
-            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-violet-300">Phase 03 of 03 &middot; Output Sprint</div>
-            <div class="hidden h-px flex-1 bg-gradient-to-r from-violet-400/40 to-transparent sm:block"></div>
+            <div class="font-mono text-[11px] uppercase tracking-[0.22em] text-emerald-300">Phase 03 of 03 &middot; Output Sprint</div>
+            <div class="hidden h-px flex-1 bg-gradient-to-r from-emerald-400/40 to-transparent sm:block"></div>
           </div>
 
           <!-- Phase: Output Sprint -->
-          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="output">
+          <div class="phase-panel overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl lg:grid-cols-[1.1fr_1fr]" data-panel="output">
             <div class="relative p-8 md:p-10">
               <div class="flex items-center gap-3">
                 <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -955,23 +937,23 @@
                 </p>
               </div>
               <div class="mt-8 grid gap-3 sm:grid-cols-3">
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="file-text" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">4-page technical paper (research-paper format)</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="git-pull-request" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Open-source PR to the ToddlerBot ecosystem</div>
                 </div>
-                <div class="rounded-xl border border-white/10 bg-white/[0.02] p-4">
+                <div class="rounded-xl border border-white/10 bg-slate-900/40 p-4">
                   <i data-lucide="mic" class="h-4 w-4 text-emerald-300"></i>
                   <div class="mt-2 text-sm leading-snug text-slate-200">Demo reel + 8-min showcase talk</div>
                 </div>
               </div>
 
               <!-- Why this matters -->
-              <div class="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] p-6">
-                <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-sky-300">
+              <div class="mt-10 rounded-2xl border border-white/10 bg-slate-900/40 p-6">
+                <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">
                   <i data-lucide="award" class="h-3.5 w-3.5"></i>
                   Why this matters
                 </div>
@@ -1019,13 +1001,13 @@
                     <span class="text-emerald-300">2 wk</span>
                   </div>
                   <div class="h-2 overflow-hidden rounded-full bg-white/5">
-                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-sky-300 shadow-[0_0_18px_-2px_rgba(52,211,153,0.7)]" style="width: 9%;"></div>
+                    <div class="h-full rounded-full bg-gradient-to-r from-emerald-300 to-emerald-300" style="width: 9%;"></div>
                   </div>
                 </div>
               </div>
               <div class="mt-8 rounded-xl border border-white/10 bg-slate-950/40 p-5">
                 <div class="flex items-start gap-3">
-                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                  <i data-lucide="calendar" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                   <div>
                     <div class="text-sm font-semibold text-white">Sprint schedule &middot; Daily virtual + showcase day</div>
                     <p class="mt-1 text-sm leading-relaxed text-slate-300">Daily virtual writing rooms and review sessions throughout the sprint, plus <span class="font-medium text-white">one in-person showcase day</span> for talks and demos.</p>
@@ -1042,22 +1024,22 @@
         <div class="mx-auto max-w-5xl px-6">
           <div class="max-w-2xl">
             <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
               High-Level Syllabus
             </div>
             <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-              22 weeks, mapped to <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">real engineering deliverables.</span>
+              22 weeks, mapped to <span class="text-emerald-400">real engineering deliverables.</span>
             </h2>
             <p class="mt-5 text-base leading-relaxed text-slate-300">
               Each module is taught lab-first: a short concept primer, then hands-on time on the bench or in simulation, then a code review with your mentor.
             </p>
           </div>
 
-          <div class="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-md" id="syllabus-acc">
+          <div class="mt-12 overflow-hidden rounded-2xl border border-white/10 bg-slate-900/40 backdrop-blur-md" id="syllabus-acc">
 
             <!-- Item 1: Weeks 1-2 -->
             <div class="acc-item open border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="book-open" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 1&ndash;2</div>
                 <div class="min-w-0 flex-1">
@@ -1074,7 +1056,7 @@
 
             <!-- Item 2: Weeks 3-4 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="wrench" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 3&ndash;4</div>
                 <div class="min-w-0 flex-1">
@@ -1091,7 +1073,7 @@
 
             <!-- Item 3: Weeks 5-6 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="cable" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 5&ndash;6</div>
                 <div class="min-w-0 flex-1">
@@ -1108,7 +1090,7 @@
 
             <!-- Item 4: Weeks 7-8 MILESTONE -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="bot" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 7&ndash;8</div>
                 <div class="min-w-0 flex-1">
@@ -1126,7 +1108,7 @@
 
             <!-- Item 5: Weeks 9-11 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="terminal" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 9&ndash;11</div>
                 <div class="min-w-0 flex-1">
@@ -1143,7 +1125,7 @@
 
             <!-- Item 6: Weeks 12-14 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="flask-conical" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 12&ndash;14</div>
                 <div class="min-w-0 flex-1">
@@ -1160,7 +1142,7 @@
 
             <!-- Item 7: Weeks 15-16 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="sliders-horizontal" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 15&ndash;16</div>
                 <div class="min-w-0 flex-1">
@@ -1177,7 +1159,7 @@
 
             <!-- Item 8: Weeks 17-20 -->
             <div class="acc-item border-b border-white/5">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="brain" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 17&ndash;20</div>
                 <div class="min-w-0 flex-1">
@@ -1194,14 +1176,14 @@
 
             <!-- Item 9: Weeks 21-22 MILESTONE -->
             <div class="acc-item">
-              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-7">
+              <button class="acc-toggle group flex w-full items-center gap-4 px-5 py-5 text-left transition-colors hover:bg-slate-900/50 md:px-7">
                 <div class="acc-icon-wrap grid h-10 w-10 flex-shrink-0 place-items-center rounded-lg bg-white/5 text-slate-300 ring-1 ring-white/10 transition-all"><i data-lucide="trophy" class="h-5 w-5" stroke-width="1.8"></i></div>
                 <div class="hidden w-28 flex-shrink-0 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-400 sm:block">Weeks 21&ndash;22</div>
                 <div class="min-w-0 flex-1">
                   <div class="flex flex-wrap items-center gap-2">
                     <span class="text-base font-semibold text-white md:text-lg">Final Project &amp; Cohort Showcase</span>
                     <span class="inline-flex items-center gap-1 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-200"><i data-lucide="award" class="h-2.5 w-2.5"></i>Milestone</span>
-                    <span class="rounded-full border border-sky-400/30 bg-sky-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-sky-200">Output</span>
+                    <span class="rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-200">Output</span>
                   </div>
                   <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-slate-500 sm:hidden">Weeks 21&ndash;22</div>
                 </div>
@@ -1212,7 +1194,7 @@
           </div>
 
           <!-- Cohort 01 promise callout -->
-          <div class="mt-10 relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-sky-400/[0.05] p-7 md:p-9 backdrop-blur-md">
+          <div class="mt-10 relative overflow-hidden rounded-2xl border border-emerald-400/20 bg-gradient-to-br from-emerald-400/[0.06] via-white/[0.02] to-emerald-400/[0.05] p-7 md:p-9 backdrop-blur-md">
             <div class="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-emerald-400/40 to-transparent"></div>
             <div class="flex items-start gap-4 md:gap-6">
               <div class="grid h-11 w-11 flex-shrink-0 place-items-center rounded-xl bg-emerald-400/10 ring-1 ring-emerald-400/30">
@@ -1234,15 +1216,15 @@
       <!-- =========================== MENTORSHIP =========================== -->
       <section id="mentorship" class="relative py-24 md:py-32">
         <div class="mx-auto max-w-7xl px-6">
-          <div class="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+          <div class="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 backdrop-blur-xl">
             <div class="grid lg:grid-cols-[1.2fr_1fr]">
               <div class="relative p-8 md:p-12">
                 <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                   The Mentorship Advantage
                 </div>
                 <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-                  You're not following a tutorial. <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">You're working with researchers.</span>
+                  You're not following a tutorial. <span class="text-emerald-400">You're working with researchers.</span>
                 </h2>
                 <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
                   Every cohort student works on the same platform Stanford's research team publishes on. Code, simulation designs, and hardware decisions receive technical input from working researchers — including the original ToddlerBot paper's first two co-authors as Technical Consultants.
@@ -1256,7 +1238,7 @@
                     <div>
                       <div class="flex flex-wrap items-center gap-2">
                         <div class="font-semibold text-white">ToddlerBot team support</div>
-                        <span class="inline-flex items-center gap-1 rounded-full border border-sky-400/40 bg-sky-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-sky-200">
+                        <span class="inline-flex items-center gap-1 rounded-full border border-emerald-400/40 bg-emerald-400/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-200">
                           <i data-lucide="badge-check" class="h-2.5 w-2.5"></i>
                           Authorized partner
                         </span>
@@ -1294,8 +1276,7 @@
               </div>
 
               <div class="relative overflow-hidden border-t border-white/5 bg-gradient-to-br from-slate-900/40 to-slate-950/60 p-8 md:p-12 lg:border-l lg:border-t-0">
-                <div class="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-emerald-500/20 blur-[100px]"></div>
-                <div class="pointer-events-none absolute -left-10 bottom-0 h-60 w-60 rounded-full bg-sky-500/15 blur-[100px]"></div>
+                <!-- mentorship glow removed -->
 
                 <div class="relative">
                   <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Source platform</div>
@@ -1306,23 +1287,23 @@
                   <p class="mt-2 text-sm text-slate-400">Stanford-published open-source humanoid research platform.</p>
 
                   <div class="mt-8 space-y-3">
-                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/40 px-4 py-3">
                       <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Active DoFs</span>
                       <span class="text-sm font-medium text-white">30</span>
                     </div>
-                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/40 px-4 py-3">
                       <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Compute</span>
                       <span class="text-sm font-medium text-white">Jetson Orin NX</span>
                     </div>
-                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/40 px-4 py-3">
                       <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Perception</span>
                       <span class="text-sm font-medium text-white">Stereo fisheye</span>
                     </div>
-                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/40 px-4 py-3">
                       <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Sim</span>
                       <span class="text-sm font-medium text-white">MuJoCo + MJX</span>
                     </div>
-                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
+                    <div class="flex items-center justify-between rounded-lg border border-white/10 bg-slate-900/40 px-4 py-3">
                       <span class="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-400">Policy</span>
                       <span class="text-sm font-medium text-white">RL omnidirectional</span>
                     </div>
@@ -1337,21 +1318,19 @@
       <!-- =========================== APPLY ============================ -->
       <section id="apply" class="relative py-24 md:py-32">
         <div class="mx-auto max-w-6xl px-6">
-          <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-xl">
+          <div class="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/50 backdrop-blur-xl">
             <div class="pointer-events-none absolute inset-0">
-              <div class="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-emerald-500/25 blur-[140px]"></div>
-              <div class="absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-sky-500/20 blur-[140px]"></div>
               <div class="dot-grid absolute inset-0 opacity-[0.12]"></div>
             </div>
 
             <div class="relative grid gap-10 p-8 md:p-12 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
               <div>
                 <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-emerald-300/90">
-                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_2px_rgba(52,211,153,0.7)]"></span>
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                   Apply · Cohort 01
                 </div>
                 <h2 class="mt-5 text-3xl font-bold tracking-tight text-white md:text-5xl">
-                  Seats are <span class="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-transparent">strictly limited.</span>
+                  Seats are <span class="text-emerald-400">strictly limited.</span>
                 </h2>
                 <p class="mt-5 max-w-xl text-base leading-relaxed text-slate-300">
                   Cohort 01 is small by design — hardware and lab space are the real constraints, so we select for students who'll get the most from a research apprenticeship and carry the model forward. Prior programming exposure
@@ -1364,9 +1343,9 @@
                 </div>
 
                 <!-- Investment / tuition note -->
-                <div class="mt-6 rounded-xl border border-white/10 bg-white/[0.02] p-4 backdrop-blur-md">
+                <div class="mt-6 rounded-xl border border-white/10 bg-slate-900/40 p-4 backdrop-blur-md">
                   <div class="flex items-start gap-3">
-                    <i data-lucide="info" class="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300"></i>
+                    <i data-lucide="info" class="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-300"></i>
                     <div>
                       <div class="text-sm font-semibold text-white">Investment details shared in the interview</div>
                       <p class="mt-1 text-sm leading-relaxed text-slate-300">Selected applicants discuss tuition, <a href="https://docs.google.com/spreadsheets/d/1LDB2Vf4umWNCfXxlohkn_7QmugMzibrw__6n9LiGWHE/edit?usp=sharing" target="_blank" rel="noreferrer" class="underline decoration-emerald-400/40 decoration-1 underline-offset-4 text-emerald-200 transition-colors hover:text-emerald-300 hover:decoration-emerald-300">hardware kit costs</a>, and scholarship eligibility once shortlisted. We're committed to making the cohort financially feasible for students who belong here.</p>
@@ -1380,10 +1359,10 @@
                   <div class="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-300">Express interest</div>
                   <h3 class="text-xl font-semibold text-white">Start your application</h3>
                   <div class="space-y-3 pt-2">
-                    <input required name="name" type="text" placeholder="Full name" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
-                    <input required name="email" type="email" placeholder="Email" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
-                    <input required name="school" type="text" placeholder="School & grade" class="w-full rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
-                    <textarea name="note" rows="3" placeholder="A robotics project, repo, or build you're proud of (optional)" class="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"></textarea>
+                    <input required name="name" type="text" placeholder="Full name" class="w-full rounded-xl border border-white/10 bg-slate-900/50 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <input required name="email" type="email" placeholder="Email" class="w-full rounded-xl border border-white/10 bg-slate-900/50 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <input required name="school" type="text" placeholder="School & grade" class="w-full rounded-xl border border-white/10 bg-slate-900/50 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20" />
+                    <textarea name="note" rows="3" placeholder="A robotics project, repo, or build you're proud of (optional)" class="w-full resize-none rounded-xl border border-white/10 bg-slate-900/50 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"></textarea>
                   </div>
 
                   <!-- Hidden routing fields -->
