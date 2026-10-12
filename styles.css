@@ -686,3 +686,21 @@
       .pdf-viewer iframe { display: none; }
       .pdf-preview { display: block; }
     }
+
+    /* Learning journey as a card grid: same 16:9 media, number, week, title, one line.
+       Desktop: Build and Control (weeks 1-6) on a wider first row, Simulate / Learn / Demonstrate below. */
+    .phases { grid-template-columns: 1fr; gap: clamp(2.5rem, 2rem + 2vw, 3.5rem) clamp(1.25rem, .75rem + 1.5vw, 2rem); }
+    .phases > .phase, .phases > .phase:nth-child(even) { grid-template-columns: 1fr; align-items: start; gap: var(--s-4); }
+    .phases > .phase:nth-child(n) .phase-media-wrap { order: 0; }
+    .phases > .phase { align-content: start; }
+    .phases .phase-media, .phases .phase-media.video-frame { aspect-ratio: 16 / 9; }
+    .phases .phase h3 { font-size: clamp(1.625rem, 1.3rem + 1vw, 2.125rem); margin-top: var(--s-1); }
+    .phases .phase .summary { margin-top: var(--s-2); font-size: var(--fs-base); }
+    @media (min-width: 760px) {
+      .phases { grid-template-columns: repeat(6, 1fr); }
+      .phases > .phase { grid-column: span 2; }
+      .phases > .phase:nth-child(-n+2) { grid-column: span 3; }
+    }
+
+    /* Fact headings stay on one line (incl. "ME + EE + CS + AI") */
+    .fact dt { font-size: clamp(1.2rem, .85rem + 1.25vw, 1.875rem); white-space: nowrap; }
