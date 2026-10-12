@@ -301,8 +301,29 @@
     .milestone p { color: var(--ink); font-weight: 500; }
     .milestone .ext { margin-top: .4rem; font-size: var(--fs-sm); color: var(--ink-3); font-weight: 400; }
     @media (min-width: 900px) {
-      .phase { grid-template-columns: 1fr 1fr; }
-      .phase:nth-child(even) .phase-media-wrap { order: 2; }
+      .phase { grid-template-columns: 5fr 6fr; }
+      .phases > .phase:nth-child(even) { grid-template-columns: 6fr 5fr; }
+      .phases > .phase:nth-child(even) .phase-media-wrap { order: 2; }
+    }
+    /* Journey: proportional 8-week strip, then compact stage rows; Learn + Demonstrate share week 8 side by side */
+    .phases { gap: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+    .phase .phase-media { aspect-ratio: 16 / 9; }
+    .phase-pair { display: grid; gap: clamp(2.5rem, 2rem + 2.5vw, 4.5rem); }
+    .phase-pair .phase { grid-template-columns: 1fr; align-items: start; }
+    .phase-pair { align-items: start; }
+    .phase-pair .phase .phase-media, .phase-pair .phase .phase-media.video-frame { aspect-ratio: 2 / 1; }
+    .phase-pair .phase .phase-media-wrap { order: 0; }
+    @media (min-width: 900px) { .phase-pair { grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 1rem + 2vw, 3rem); } }
+    .wkstrip { list-style: none; margin: 0 0 clamp(2.5rem, 2rem + 2.5vw, 4rem); padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .wkstrip a { display: grid; gap: .2rem; height: 100%; padding: .85rem 1rem .9rem; border-top: 4px solid var(--ink); background: var(--surface); color: var(--ink); text-decoration: none; transition: background-color .2s; }
+    .wkstrip a:hover { background: var(--surface-2); }
+    .wkstrip .n, .wkstrip .wk { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+    .wkstrip b { font-size: var(--fs-md); font-weight: 500; letter-spacing: -0.01em; }
+    .wkstrip li:nth-child(2) a { border-top-color: color-mix(in srgb, var(--ink) 75%, transparent); }
+    .wkstrip li:nth-child(3) a { border-top-color: color-mix(in srgb, var(--ink) 50%, transparent); }
+    .wkstrip li:nth-child(4) a { border-top-color: var(--accent); }
+    @media (min-width: 700px) {
+      .wkstrip { grid-template-columns: 4fr 2fr 1.15fr 1.15fr; }
     }
 
     /* ============================== APPROACH (dark) ============================== */

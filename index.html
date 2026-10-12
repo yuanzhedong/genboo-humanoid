@@ -170,7 +170,7 @@
         <div class="section-head reveal">
           <span class="eyebrow">Real students · Real robots · Real engineering</span>
           <h2 class="h2" id="projects-title">From individual parts to a working humanoid.</h2>
-          <p class="lede">Students work as a team through the engineering process: mechanical assembly, wiring and actuator calibration, programming, and testing on real hardware. These photos are from previous cohorts.</p>
+          <p class="lede">Students work as a team through the engineering process: mechanical assembly, wiring and actuator calibration, programming, and testing on real hardware.</p>
         </div>
 
         <div class="mosaic">
@@ -217,19 +217,20 @@
       <div class="container">
         <div class="section-head reveal">
           <span class="eyebrow">The learning journey · Cohort 03</span>
-          <h2 class="h2" id="curriculum-title">Build → Control → Simulate → Learn → Demonstrate.</h2>
+          <h2 class="h2" id="curriculum-title">Build, control, simulate, learn, demonstrate.</h2>
           <p class="lede">Eight weekly sessions, three hours each, with four students building one robot together. Most of the time is hands-on hardware. Simulation and reinforcement learning come at the end, as a first look at what's next.</p>
         </div>
 
+        <ol class="wkstrip reveal" aria-label="Eight weeks at a glance">
+          <li style="--w:4"><a href="#phase-build"><span class="n">01</span><b>Build</b><span class="wk">Weeks 1–4</span></a></li>
+          <li style="--w:2"><a href="#phase-control"><span class="n">02</span><b>Control</b><span class="wk">Weeks 5–6</span></a></li>
+          <li style="--w:1"><a href="#phase-simulate"><span class="n">03</span><b>Simulate</b><span class="wk">Week 7</span></a></li>
+          <li style="--w:1" class="split"><a href="#phase-learn"><span class="n">04 · 05</span><b>Learn &amp; Demo</b><span class="wk">Week 8</span></a></li>
+        </ol>
+
         <div class="phases">
           <article class="phase reveal" id="phase-build" aria-labelledby="ph1">
-            <div class="phase-media-wrap phase-media-stack">
-              <div class="phase-media">
-                <img src="assets/img/fleet-build-740.webp"
-                     srcset="assets/img/fleet-build-480.webp 480w, assets/img/fleet-build-740.webp 740w"
-                     sizes="(min-width: 900px) 45vw, 92vw" width="740" height="530" loading="lazy" decoding="async"
-                     alt="A row of partly built ToddlerBot torsos in blue, brown, green, and black mounted on aluminum test stands in front of orange parts bins" />
-              </div>
+            <div class="phase-media-wrap">
               <div class="phase-media">
                 <img src="assets/img/student-assembly-hands-1200.webp"
                      srcset="assets/img/student-assembly-hands-640.webp 640w, assets/img/student-assembly-hands-1200.webp 1200w"
@@ -241,12 +242,6 @@
               <div class="phase-num"><span class="n">01</span><span class="when">Weeks 1–4</span></div>
               <h3 id="ph1">Build</h3>
               <p class="summary">Understand the robot as a system, then assemble it as a team. Start with one limb, because a single limb teaches almost everything.</p>
-              <ul class="learn-list">
-                <li>Robot architecture, degrees of freedom, and how actuators, sensors, controller, and battery connect</li>
-                <li>Mechanical assembly: joints, servo orientation, fasteners, alignment, and cable routing</li>
-                <li>Arms, legs, torso, head and neck: splitting the work across the team, then integrating it</li>
-                <li>Electronics and wiring checks: power system, servo bus, connectors, and multimeter basics</li>
-              </ul>
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A team-assembled humanoid, wired and inspected, ready for its first power-on.</p>
@@ -267,12 +262,6 @@
               <div class="phase-num"><span class="n">02</span><span class="when">Weeks 5–6</span></div>
               <h3 id="ph2">Control</h3>
               <p class="summary">Make the robot do exactly what you tell it to, then measure how far reality differs from the command.</p>
-              <ul class="learn-list">
-                <li>A safe power-on checklist, and knowing when power-on must wait</li>
-                <li>Servo IDs and zero-point calibration for every joint</li>
-                <li>Linux, Python, and the robot's configuration files</li>
-                <li>Joint scripts and logging. <em>“Move joint 3 by 10 degrees, log commanded vs. actual angle, and explain the difference.”</em></li>
-              </ul>
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A powered, calibrated robot: every joint recognized and zeroed, running a verified scripted motion.</p>
@@ -294,12 +283,6 @@
               <div class="phase-num"><span class="n">03</span><span class="when">Week 7</span></div>
               <h3 id="ph3">Simulate</h3>
               <p class="summary">Simulation is a controlled approximation of reality, not a video game. See your robot's model move, then compare it with the real thing.</p>
-              <ul class="learn-list">
-                <li>Open-loop vs. closed-loop control, and why robots slip, tip, and lag</li>
-                <li>Designing a simple standing or keyframe motion and running it on the robot</li>
-                <li>Loading the robot's model in MuJoCo: bodies, joints, and actuators</li>
-                <li>Comparing the same motion in simulation and on hardware</li>
-              </ul>
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A keyframe motion that runs on your robot, and the same motion compared in MuJoCo.</p>
@@ -307,9 +290,10 @@
             </div>
           </article>
 
+          <div class="phase-pair">
           <article class="phase reveal" id="phase-learn" aria-labelledby="ph4">
             <div class="phase-media-wrap">
-              <div class="phase-media" style="aspect-ratio:2/1">
+              <div class="phase-media">
                 <img src="assets/img/sim-parallel-training-1880.webp"
                      srcset="assets/img/sim-parallel-training-640.webp 640w, assets/img/sim-parallel-training-1200.webp 1200w, assets/img/sim-parallel-training-1880.webp 1880w"
                      sizes="(min-width: 900px) 45vw, 92vw" width="1880" height="940" loading="lazy" decoding="async"
@@ -320,12 +304,6 @@
               <div class="phase-num"><span class="n">04</span><span class="when">Week 8 · Preview</span></div>
               <h3 id="ph4">Learn</h3>
               <p class="summary">A first look at reinforcement learning, once you understand the mechanics, electronics, and control underneath it.</p>
-              <ul class="learn-list">
-                <li>Policy, reward, observation, and action, and how trying different actions guides learning</li>
-                <li>Watching a supplied policy train on many simulated robots at once</li>
-                <li>Changing one reward and describing what changes</li>
-                <li>Why behavior learned in simulation doesn't always transfer to real hardware</li>
-              </ul>
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A guided experiment: change one reward in supplied training code and explain what happened.</p>
@@ -335,37 +313,26 @@
           </article>
 
           <article class="phase reveal" id="phase-demonstrate" aria-labelledby="ph5">
-            <div class="phase-media-wrap phase-media-stack">
-              <div class="phase-media video-frame" style="aspect-ratio:3/1">
+            <div class="phase-media-wrap">
+              <div class="phase-media video-frame">
                 <video data-autoplay muted loop playsinline preload="none" poster="assets/img/walking-trial-poster.webp" width="900" height="300"
                        aria-label="A ToddlerBot walking across a taped floor during a supervised trial, with a safety tether held by a mentor">
                   <source src="assets/videos/walking-trial.mp4" type="video/mp4" />
                 </video>
                 <button class="video-toggle" type="button" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
               </div>
-              <div class="phase-media">
-                <img src="assets/img/students-celebrate-1200.webp"
-                     srcset="assets/img/students-celebrate-640.webp 640w, assets/img/students-celebrate-1200.webp 1200w"
-                     sizes="(min-width: 900px) 45vw, 92vw" width="1400" height="788" loading="lazy" decoding="async"
-                     alt="Students and their teacher high-fiving next to two humanoid robots after a successful test" />
-              </div>
             </div>
             <div>
               <div class="phase-num"><span class="n">05</span><span class="when">Week 8 · Showcase</span></div>
               <h3 id="ph5">Demonstrate</h3>
               <p class="summary">Show what your team built, including what didn't work and why.</p>
-              <ul class="learn-list">
-                <li>Demonstrating your robot's verified motion</li>
-                <li>Walking through your engineering notebook: decisions, measurements, and failures</li>
-                <li>Explaining one problem the team diagnosed, and how</li>
-                <li>A short team presentation at the cohort showcase</li>
-              </ul>
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A team showcase demo, plus your own engineering notebook.</p>
               </div>
             </div>
           </article>
+          </div>
         </div>
 
         <a class="learn-more reveal" href="curriculum.html">See the week-by-week syllabus <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
