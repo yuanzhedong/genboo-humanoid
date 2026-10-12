@@ -1,0 +1,3 @@
+# Raw camera originals can carry GPS/EXIF metadata; publish only the stripped WebP derivatives
+*.HEIC
+*.heic
