@@ -8,6 +8,17 @@
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
 
+      /* ---------- Logo: on the home page, scroll back to the top instead of reloading ---------- */
+      var onHome = /(^|\/)(index\.html)?$/.test(location.pathname);
+      document.querySelectorAll('a.brand').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          if (!onHome) return;
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+          if (location.hash) history.replaceState(null, '', location.pathname);
+        });
+      });
+
       /* ---------- Mobile menu ---------- */
       var toggle = document.querySelector('.menu-toggle');
       var menu = document.getElementById('mobile-menu');
@@ -40,7 +51,11 @@
         var video = frame.querySelector('video');
         var vbtn = frame.querySelector('.video-toggle');
         if (!video || !vbtn) return;
-        var userPaused = reduceMotion.matches;
+        // Key frame stays visible until the video is genuinely playing; if autoplay is blocked
+        // (iOS Low Power Mode, data saver) or the file fails, visitors keep the still image.
+        var saveData = navigator.connection && navigator.connection.saveData;
+        var userPaused = reduceMotion.matches || !!saveData;
+        video.addEventListener('playing', function () { frame.classList.add('is-playing'); });
         var setBtn = function () {
           var playing = !video.paused;
           vbtn.setAttribute('aria-pressed', String(playing));
@@ -56,7 +71,10 @@
         vbtn.addEventListener('click', function () {
           if (video.paused) { userPaused = false; play(); } else { userPaused = true; video.pause(); }
         });
-        video.addEventListener('error', function () { vbtn.hidden = true; }, true);
+        var fail = function () { vbtn.hidden = true; frame.classList.remove('is-playing'); video.remove(); };
+        video.addEventListener('error', fail, true);
+        var src = video.querySelector('source');
+        if (src) src.addEventListener('error', fail);
         if ('IntersectionObserver' in window) {
           new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
