@@ -14,9 +14,12 @@ Any push to `main` auto-deploys in ~30 seconds.
 
 ## Files
 
-- `index.html` — the deployed page (standalone, no build step, no CSS/JS frameworks; styles and scripts are inline)
+- `index.html` — home: hero, student projects, platform, learning journey, research teaser, apply form
+- `curriculum.html` — week-by-week Cohort 03 syllabus and the 22-week follow-on track
+- `research.html` — the TALE 2026 paper and how students learn
+- `styles.css` / `main.js` — shared by all pages (no build step, no frameworks)
 - `assets/img/` — responsive WebP images (`<name>-<width>.webp`). Student photos come from the TALE 2026 paper figures, faces already blurred
-- `assets/videos/toddlerbot-cart-720p.mp4` — muted 720p platform demo (ToddlerBot research team's video, not student work); `push_cart.mp4` is the unused original
+- `assets/videos/walking-trial.mp4` — muted supervised walking clip used in the Demonstrate stage
 - `assets/videos/sim-keyframe-wave.mp4` — muted MuJoCo keyframe clip (from `~/toddlerbot_demos/demo_wave.mp4`) used in the Simulate stage
 - `og-image.jpg` — 1200×630 social-share image
 - `HumanoidCohort.jsx` — original React component source (reference only, not served; out of date)

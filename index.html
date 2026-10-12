@@ -15,7 +15,7 @@
   <title>Humanoid Cohort 03 — Build a Real Humanoid Robot | Genboo</title>
   <meta name="description" content="An 8-week hands-on humanoid robotics program for high-school students: teams of four build, wire, calibrate, and program a real ToddlerBot humanoid, with a first look at simulation and reinforcement learning." />
   <link rel="canonical" href="https://humanoid.genboo.com/" />
-  <meta name="theme-color" content="#f6f6f3" />
+  <meta name="theme-color" content="#fdfaf8" />
 
   <!-- Open Graph / Facebook / iMessage / Slack -->
   <meta property="og:type" content="website" />
@@ -62,647 +62,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <!-- Fonts load without blocking first paint; system fonts render until they arrive -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" /></noscript>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" /></noscript>
 
   <link rel="preload" as="image" type="image/webp"
     imagesrcset="assets/img/robots-three-800.webp 800w, assets/img/robots-three-1400.webp 1400w, assets/img/robots-three-2000.webp 2000w"
     imagesizes="(min-width: 1180px) 50vw, 92vw" fetchpriority="high" />
 
-  <style>
-    /* ============================== TOKENS ============================== */
-    :root {
-      --bg: #f6f6f3;
-      --surface: #ffffff;
-      --surface-2: #efefea;
-      --ink: #0e1215;
-      --ink-2: #39414a;
-      --ink-3: #5c656e;
-      --line: #dfdfd8;
-      --line-strong: #c9c9c0;
-
-      --graphite: #111518;
-      --graphite-2: #1a1f23;
-      --graphite-line: #2b3238;
-      --on-dark: #f3f4f2;
-      --on-dark-2: #b8c0c6;
-      --on-dark-3: #8d979f;
-
-      --accent: #0a7a53;          /* emerald, 5.3:1 on white */
-      --accent-hover: #075f41;
-      --accent-tint: #e3f2eb;
-      --accent-dark: #3ed39b;     /* accent on graphite */
-
-      --danger: #b42318;
-
-      --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
-      --font-cjk: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
-
-      /* type scale */
-      --fs-xs: .75rem;
-      --fs-sm: .875rem;
-      --fs-base: 1rem;
-      --fs-md: 1.125rem;
-      --fs-lg: clamp(1.125rem, 1rem + .5vw, 1.3125rem);
-      --fs-xl: clamp(1.375rem, 1.15rem + .9vw, 1.75rem);
-      --fs-h2: clamp(2rem, 1.4rem + 2.6vw, 3.25rem);
-      --fs-h1: clamp(2.5rem, 1.6rem + 3.6vw, 4.25rem);
-
-      /* spacing scale (4px base) */
-      --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem; --s-5: 1.5rem;
-      --s-6: 2rem; --s-7: 3rem; --s-8: 4rem; --s-9: 6rem;
-      --section-y: clamp(4.5rem, 3rem + 6vw, 8rem);
-      --gutter: clamp(1rem, .5rem + 2.5vw, 2rem);
-      --container: 1200px;
-      --radius: 14px;
-      --radius-sm: 8px;
-      --header-h: 64px;
-    }
-
-    /* ============================== BASE ============================== */
-    *, *::before, *::after { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); -webkit-text-size-adjust: 100%; }
-    body {
-      margin: 0; background: var(--bg); color: var(--ink);
-      font-family: var(--font-sans); font-size: var(--fs-base); line-height: 1.6;
-      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-      overflow-x: clip;
-    }
-    img, video, svg { display: block; max-width: 100%; }
-    img, video { height: auto; }
-    a { color: inherit; }
-    h1, h2, h3, h4, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
-    ul, ol { padding: 0; list-style: none; }
-    h1, h2, h3, h4 { line-height: 1.1; letter-spacing: -0.025em; font-weight: 700; text-wrap: balance; }
-    p { text-wrap: pretty; }
-    ::selection { background: #bfe8d6; color: var(--ink); }
-    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-    .on-dark :focus-visible { outline-color: var(--accent-dark); }
-
-    .skip-link {
-      position: absolute; left: var(--s-4); top: -100px; z-index: 100;
-      background: var(--ink); color: #fff; padding: var(--s-3) var(--s-4); border-radius: var(--radius-sm);
-      text-decoration: none; font-weight: 600;
-    }
-    .skip-link:focus { top: var(--s-3); }
-    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-
-    .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
-    .section { padding-block: var(--section-y); }
-    .section + .section:not(.on-dark):not(.tinted) { border-top: 1px solid var(--line); }
-    .on-dark { background: var(--graphite); color: var(--on-dark); }
-    .tinted { background: var(--surface-2); }
-
-    .icon { width: 1.125em; height: 1.125em; flex: none; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* ============================== TYPE ============================== */
-    .eyebrow {
-      font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase; color: var(--accent);
-    }
-    .on-dark .eyebrow { color: var(--accent-dark); }
-    .h2 { font-size: var(--fs-h2); }
-    .lede { font-size: var(--fs-lg); line-height: 1.55; color: var(--ink-2); max-width: 46rem; }
-    .on-dark .lede { color: var(--on-dark-2); }
-    .muted { color: var(--ink-3); }
-    .on-dark .muted { color: var(--on-dark-3); }
-    .section-head { display: grid; gap: var(--s-4); max-width: 52rem; margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem); }
-    .mono { font-family: var(--font-mono); }
-    .text-link {
-      color: var(--accent); font-weight: 600; text-decoration: underline; text-decoration-thickness: 1px;
-      text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
-    }
-    .text-link:hover { color: var(--accent-hover); text-decoration-color: currentColor; }
-    .on-dark .text-link { color: var(--accent-dark); }
-
-    /* ============================== BUTTONS ============================== */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-      min-height: 48px; padding: .75rem 1.375rem; border-radius: 999px;
-      font: 600 var(--fs-sm)/1 var(--font-sans); text-decoration: none; cursor: pointer;
-      border: 1px solid transparent; transition: background-color .2s, color .2s, border-color .2s;
-      white-space: nowrap;
-    }
-    .btn .icon { transition: transform .2s; }
-    .btn:hover .icon-arrow { transform: translateX(3px); }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-hover); }
-    .btn-secondary { background: transparent; color: var(--ink); border-color: var(--line-strong); }
-    .btn-secondary:hover { border-color: var(--ink); }
-    .on-dark .btn-secondary { color: var(--on-dark); border-color: var(--graphite-line); }
-    .on-dark .btn-secondary:hover { border-color: var(--on-dark-2); }
-    .btn-lg { min-height: 54px; padding-inline: 1.75rem; font-size: var(--fs-base); }
-    .btn-row { display: flex; flex-wrap: wrap; gap: var(--s-3); }
-    @media (max-width: 400px) { .btn { white-space: normal; text-align: center; } }
-    @media (max-width: 559px) { .hero .btn-row .btn { flex: 1 1 100%; } }
-
-    /* ============================== HEADER ============================== */
-    .site-header {
-      position: sticky; top: 0; z-index: 50; height: var(--header-h);
-      background: color-mix(in srgb, var(--bg) 92%, transparent);
-      backdrop-filter: saturate(1.4) blur(12px); -webkit-backdrop-filter: saturate(1.4) blur(12px);
-      border-bottom: 1px solid transparent; transition: border-color .2s;
-    }
-    .site-header.scrolled { border-bottom-color: var(--line); }
-    .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s-5); }
-    .brand { display: flex; flex-direction: column; text-decoration: none; line-height: 1.15; }
-    .brand-name { font-weight: 700; font-size: .95rem; letter-spacing: -0.01em; }
-    .brand-name .cjk { font-family: var(--font-cjk); color: var(--accent); font-weight: 700; }
-    .brand-sub { font-family: var(--font-mono); font-size: .625rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
-    .nav { display: none; gap: clamp(1rem, .4rem + 1.4vw, 1.75rem); }
-    .nav a {
-      position: relative; font-size: var(--fs-sm); font-weight: 500; color: var(--ink-2); text-decoration: none;
-      padding-block: .5rem;
-    }
-    .nav a:hover, .nav a.active { color: var(--ink); }
-    .nav a.active::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent); border-radius: 2px; }
-    .header-cta { display: none; min-height: 40px; padding: .6rem 1.1rem; }
-    .menu-toggle {
-      display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 10px;
-      border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink); cursor: pointer;
-    }
-    .menu-toggle .icon-close { display: none; }
-    .menu-toggle[aria-expanded="true"] .icon-open { display: none; }
-    .menu-toggle[aria-expanded="true"] .icon-close { display: block; }
-    .mobile-menu {
-      position: fixed; inset: var(--header-h) 0 auto 0; z-index: 49;
-      background: var(--bg); border-bottom: 1px solid var(--line);
-      box-shadow: 0 24px 40px -24px rgba(0,0,0,.25);
-    }
-    .mobile-menu[hidden] { display: none; }
-    .mobile-menu nav { display: grid; padding: var(--s-3) var(--gutter) var(--s-5); }
-    .mobile-menu a:not(.btn) {
-      display: flex; align-items: center; min-height: 52px; font-size: var(--fs-md); font-weight: 500;
-      text-decoration: none; border-bottom: 1px solid var(--line);
-    }
-    .mobile-menu .btn { margin-top: var(--s-5); }
-    @media (min-width: 960px) {
-      .nav, .header-cta { display: flex; }
-      .menu-toggle, .mobile-menu { display: none !important; }
-    }
-
-    /* ============================== HERO ============================== */
-    .hero { padding-block: clamp(1.5rem, .5rem + 3vw, 4rem) clamp(3.5rem, 2rem + 5vw, 6rem); }
-    .hero-grid { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 4.5rem); align-items: center; }
-    .badges { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-5); }
-    .badge {
-      display: inline-flex; align-items: center; gap: .5rem; min-height: 32px; padding: .35rem .8rem;
-      border-radius: 999px; border: 1px solid var(--line-strong); background: var(--surface);
-      font-size: .8125rem; font-weight: 500; color: var(--ink-2); text-decoration: none;
-    }
-    a.badge:hover { border-color: var(--ink-3); color: var(--ink); }
-    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--accent-tint); }
-    .hero h1 { font-size: var(--fs-h1); letter-spacing: -0.035em; line-height: 1.02; }
-    .hero h1 .accent { color: var(--accent); display: block; }
-    .hero .lede { margin-top: var(--s-5); }
-    .hero .btn-row { margin-top: var(--s-6); }
-    .hero-note { margin-top: var(--s-5); font-size: var(--fs-sm); color: var(--ink-3); max-width: 38rem; }
-    .hero-media { position: relative; }
-    .hero-media-cap { font-size: .8125rem; color: var(--ink-3); margin-top: var(--s-3); line-height: 1.45; }
-    .hero-media figure { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--surface-2); }
-    .hero-media img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-media .main { aspect-ratio: 4 / 3; }
-
-    .hero-note { margin-top: var(--s-5); }
-    .plain-link { color: var(--ink-3); text-decoration: none; }
-    .plain-link b { color: var(--ink); font-weight: 600; }
-    .plain-link .icon { display: inline; width: .9em; height: .9em; vertical-align: -1px; margin-left: .15rem; transition: transform .2s; }
-    .plain-link:hover { color: var(--ink); }
-    .plain-link:hover .icon { transform: translate(2px, -2px); color: var(--accent); }
-    .facts {
-      margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      border-top: 1px solid var(--line-strong);
-    }
-    .fact { padding: var(--s-5) var(--s-4) var(--s-5) 0; border-bottom: 1px solid var(--line); }
-    .fact dt { font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
-    .fact dd { margin-top: var(--s-2); font-size: var(--fs-sm); color: var(--ink-2); line-height: 1.45; }
-    .hero-media { max-width: 760px; }
-    @media (min-width: 1180px) {
-      .hero-grid { grid-template-columns: 1.12fr 1fr; }
-      .hero .btn-row .btn { min-height: 50px; padding-inline: 1.3rem; font-size: .9375rem; }
-      .hero-media { max-width: none; }
-    }
-    @media (min-width: 960px) {
-      .facts { grid-template-columns: repeat(4, 1fr); }
-      .fact { border-bottom: 0; padding-right: var(--s-5); }
-      .fact + .fact { border-left: 1px solid var(--line); padding-left: var(--s-5); }
-    }
-
-    /* ============================== GALLERY (mosaic) ============================== */
-    .mosaic {
-      display: grid; gap: var(--s-2);
-      grid-template-columns: 1fr 1fr; grid-auto-rows: 44vw;
-      grid-template-areas:
-        "team team" "team team"
-        "pair pair"
-        "solder integ"
-        "bench bench"
-        "bringup bringup" "bringup bringup";
-    }
-    .tile { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--surface-2); min-width: 0; }
-    .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .tile figcaption {
-      position: absolute; left: var(--s-3); bottom: var(--s-3); max-width: calc(100% - 1.5rem);
-      padding: .35rem .75rem; border-radius: 999px; background: rgba(14, 18, 21, .72); color: #fff;
-      font-size: .8125rem; font-weight: 600; line-height: 1.3;
-      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    }
-    /* Hover: gentle zoom on the photo, label lifts and turns accent; siblings dim slightly */
-    .tile img { transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .4s ease; }
-    .tile figcaption { transition: background-color .3s ease, transform .3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-      .tile:hover img { transform: scale(1.045); }
-      .tile:hover figcaption { background: var(--accent); transform: translateY(-3px); }
-      .mosaic:hover .tile:not(:hover) img { filter: brightness(.82) saturate(.85); }
-    }
-    .m-team { grid-area: team; } .m-pair { grid-area: pair; } .m-solder { grid-area: solder; }
-    .m-integ { grid-area: integ; } .m-bench { grid-area: bench; } .m-bringup { grid-area: bringup; }
-    .m-bringup img { object-position: 50% 20%; }
-    @media (min-width: 760px) {
-      .mosaic {
-        gap: var(--s-3);
-        grid-template-columns: 5fr 3.5fr 3.5fr; grid-auto-rows: clamp(170px, 19vw, 270px);
-        grid-template-areas:
-          "team pair pair"
-          "team solder integ"
-          "bench bench bringup"
-          "bench bench bringup";
-      }
-      .m-bringup img { object-position: 50% 30%; }
-    }
-    .evidence {
-      margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; gap: var(--s-5);
-      padding: clamp(1.5rem, 1rem + 2vw, 2.25rem); border-radius: var(--radius);
-      background: var(--surface); border: 1px solid var(--line);
-    }
-    .evidence p { color: var(--ink-2); }
-    .evidence strong { color: var(--ink); }
-    @media (min-width: 860px) { .evidence { grid-template-columns: 1.3fr 1fr; align-items: center; } }
-
-    /* ============================== PLATFORM BAND ============================== */
-    .platform-grid { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4rem); align-items: center; }
-    .video-frame { position: relative; border-radius: var(--radius); overflow: hidden; background: #000; aspect-ratio: 16 / 9; }
-    .video-frame video { width: 100%; height: 100%; object-fit: cover; }
-    .video-toggle {
-      position: absolute; right: var(--s-3); bottom: var(--s-3);
-      display: inline-flex; align-items: center; gap: .4rem; min-height: 40px; padding: .5rem .9rem;
-      border-radius: 999px; border: 1px solid rgba(255,255,255,.25); background: rgba(10,12,14,.72); color: #fff;
-      font: 600 .8125rem/1 var(--font-sans); cursor: pointer;
-    }
-    .video-toggle:hover { background: rgba(10,12,14,.9); }
-    .video-credit { margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--on-dark-3); }
-    .spec-list { margin-top: var(--s-6); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--graphite-line); }
-    .spec-list div { padding: var(--s-4) var(--s-3) var(--s-4) 0; border-bottom: 1px solid var(--graphite-line); }
-    .spec-list dt { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--on-dark-3); }
-    .spec-list dd { margin-top: .25rem; font-weight: 600; }
-    @media (min-width: 960px) { .platform-grid { grid-template-columns: 1.25fr 1fr; } }
-
-    /* ============================== JOURNEY ============================== */
-    .stepper {
-      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-bottom: clamp(2.5rem, 2rem + 3vw, 5rem);
-      counter-reset: step; position: relative;
-    }
-    .stepper a {
-      position: relative; display: grid; gap: .35rem; justify-items: start; padding-top: 1.25rem;
-      text-decoration: none; color: var(--ink-2); font-weight: 600; font-size: clamp(.75rem, .6rem + .6vw, 1.0625rem);
-      border-top: 2px solid var(--line-strong); min-height: 44px;
-    }
-    .stepper a::before {
-      content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%;
-      background: var(--bg); border: 2px solid var(--accent);
-    }
-    .stepper a .mono { font-size: .625rem; letter-spacing: .14em; color: var(--accent); font-weight: 500; }
-    .stepper a:hover { color: var(--ink); }
-    .stepper a.active { border-top-color: var(--accent); color: var(--ink); }
-    .stepper a.active::before { background: var(--accent); }
-    .stepper .arrow { display: none; }
-
-    .phases { display: grid; gap: clamp(3.5rem, 2.5rem + 4vw, 7rem); }
-    .phase { display: grid; gap: clamp(1.5rem, 1rem + 2vw, 3.5rem); align-items: center; }
-    .phase-media { border-radius: var(--radius); overflow: hidden; background: var(--surface-2); aspect-ratio: 16 / 10; }
-    .phase-media img { width: 100%; height: 100%; object-fit: cover; }
-    .phase-media-cap { margin-top: var(--s-2); font-size: .8125rem; color: var(--ink-3); }
-    .phase-num { display: flex; align-items: baseline; gap: var(--s-3); }
-    .phase-num .n { font-family: var(--font-mono); font-size: var(--fs-sm); color: var(--accent); }
-    .phase-num .when { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-    .phase h3 { font-size: clamp(2rem, 1.5rem + 2vw, 3rem); margin-top: var(--s-2); }
-    .phase .summary { margin-top: var(--s-3); color: var(--ink-2); font-size: var(--fs-md); }
-    .learn-list { margin-top: var(--s-5); display: grid; gap: .55rem; }
-    .learn-list li { position: relative; padding-left: 1.15rem; color: var(--ink-2); }
-    .learn-list li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-    .milestone {
-      margin-top: var(--s-5); padding: var(--s-4) var(--s-5); border-left: 3px solid var(--accent);
-      background: var(--surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    }
-    .milestone .eyebrow { display: block; margin-bottom: .25rem; }
-    .milestone p { color: var(--ink); font-weight: 500; }
-    .milestone .ext { margin-top: .4rem; font-size: var(--fs-sm); color: var(--ink-3); font-weight: 400; }
-    @media (min-width: 900px) {
-      .phase { grid-template-columns: 1fr 1fr; }
-      .phase:nth-child(even) .phase-media-wrap { order: 2; }
-    }
-    @media (max-width: 599px) {
-      .stepper a { font-size: .6875rem; letter-spacing: -0.01em; }
-      .stepper a .mono { display: none; }
-    }
-
-    /* ============================== APPROACH (dark) ============================== */
-    .gates { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); margin: var(--s-6) 0 var(--s-2); }
-    .gate {
-      display: inline-flex; align-items: center; min-height: 40px; padding: .45rem .9rem; border-radius: 999px;
-      border: 1px solid var(--graphite-line); background: var(--graphite-2); font-size: var(--fs-sm); font-weight: 600;
-    }
-    .gate:last-child { border-color: var(--accent-dark); color: var(--accent-dark); }
-    .gates .icon { color: var(--on-dark-3); width: 1rem; height: 1rem; }
-    .principles { margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; border-top: 1px solid var(--graphite-line); }
-    .principle { display: grid; gap: var(--s-2); padding: var(--s-5) 0; border-bottom: 1px solid var(--graphite-line); }
-    .principle .k { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent-dark); }
-    .principle h3 { font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .principle p { color: var(--on-dark-2); }
-    .principle .ex { font-size: var(--fs-sm); color: var(--on-dark-3); }
-    .principle .ex em { color: var(--on-dark); font-style: normal; }
-    @media (min-width: 860px) {
-      .principle { grid-template-columns: 3rem 1fr 1.25fr; gap: var(--s-6); align-items: baseline; }
-    }
-    .pull {
-      margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); font-size: var(--fs-xl); line-height: 1.35; letter-spacing: -0.02em;
-      max-width: 44rem; font-weight: 600;
-    }
-    .pull span { color: var(--on-dark-3); font-weight: 400; display: block; font-size: var(--fs-sm); letter-spacing: 0; margin-top: var(--s-3); }
-
-    /* ============================== RESEARCH ============================== */
-    .paper {
-      display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: calc(var(--radius) + 4px);
-      overflow: hidden;
-    }
-    .paper-main { padding: clamp(1.5rem, 1rem + 3vw, 3.5rem); }
-    .venue { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-    .venue span {
-      display: inline-flex; align-items: center; min-height: 28px; padding: .2rem .65rem; border-radius: 6px;
-      font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase;
-      background: var(--surface-2); color: var(--ink-2);
-    }
-    .venue .primary { background: var(--accent-tint); color: var(--accent-hover); }
-    .paper h3 { margin-top: var(--s-5); font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2.25rem); line-height: 1.18; letter-spacing: -0.025em; }
-    .authors { margin-top: var(--s-4); color: var(--ink-2); }
-    .authors small { display: block; color: var(--ink-3); font-size: var(--fs-sm); margin-top: .15rem; }
-    .paper-abstract { margin-top: var(--s-5); color: var(--ink-2); max-width: 44rem; }
-    .paper .btn-row { margin-top: var(--s-6); }
-
-
-    .tracks { margin-top: clamp(2.5rem, 2rem + 2vw, 4rem); }
-    .tracks-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-3); align-items: baseline; margin-bottom: var(--s-5); }
-    .tracks-head h3 { font-size: var(--fs-xl); }
-    .track-table { display: grid; gap: var(--s-2); }
-    .track-row { display: grid; gap: var(--s-2); }
-    .track-row > .label { font-family: var(--font-mono); font-size: var(--fs-xs); font-weight: 500; letter-spacing: .08em; color: var(--ink); padding-top: .6rem; }
-    .track-row ol { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-    .track-row li {
-      flex: 1 1 8rem; padding: .6rem .8rem; border-radius: var(--radius-sm); background: var(--surface);
-      border: 1px solid var(--line); font-size: var(--fs-sm); line-height: 1.35; color: var(--ink-2);
-    }
-    .track-row li.gate-step { border-color: color-mix(in srgb, var(--accent) 40%, var(--line)); background: var(--accent-tint); color: var(--ink); font-weight: 500; }
-    .track-axis { display: flex; justify-content: space-between; margin-top: var(--s-3); font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-    .track-outcomes { margin-top: var(--s-5); display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); font-size: var(--fs-sm); color: var(--ink-2); }
-    .track-outcomes b { color: var(--ink); }
-    .fig-note { margin-top: var(--s-4); font-size: .8125rem; color: var(--ink-3); max-width: 52rem; }
-    @media (min-width: 860px) {
-      .track-row { grid-template-columns: 5.5rem 1fr; }
-      .track-row ol { flex-wrap: nowrap; }
-      .track-axis { margin-left: 6rem; }
-    }
-
-    /* ============================== INSTRUCTOR ============================== */
-    .instructor { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4.5rem); }
-    .instructor-name { font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem); letter-spacing: -0.035em; }
-    .instructor-role { margin-top: var(--s-2); color: var(--ink-3); font-weight: 500; }
-    .instructor .lede { margin-top: var(--s-5); }
-    blockquote.quote {
-      margin-top: var(--s-6); padding-left: var(--s-5); border-left: 3px solid var(--accent);
-      font-size: var(--fs-lg); line-height: 1.5; color: var(--ink); max-width: 40rem;
-    }
-    blockquote.quote footer { margin-top: var(--s-3); font-size: var(--fs-sm); color: var(--ink-3); }
-    .creds { display: grid; border-top: 1px solid var(--line-strong); align-content: start; }
-    .creds > div { padding: var(--s-5) 0; border-bottom: 1px solid var(--line); display: grid; gap: var(--s-2); }
-    .creds dt { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
-    .creds dd { color: var(--ink-2); }
-    .creds dd ul { display: grid; gap: .4rem; }
-    .creds dd strong { color: var(--ink); font-weight: 600; }
-    .creds-short { border-top: 1px solid var(--line-strong); }
-    .creds-short li { padding: var(--s-4) 0; border-bottom: 1px solid var(--line); color: var(--ink-2); font-weight: 500; }
-    .disclaimer { margin-top: var(--s-5); font-size: .8125rem; color: var(--ink-3); line-height: 1.5; }
-    .support {
-      margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; gap: var(--s-4);
-      padding: clamp(1.5rem, 1rem + 2vw, 2.25rem); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line);
-    }
-    .support h3 { font-size: var(--fs-md); letter-spacing: -0.01em; }
-    .support ul { display: grid; gap: var(--s-4); }
-    .support li { color: var(--ink-2); font-size: var(--fs-sm); }
-    .support li b { color: var(--ink); display: block; font-size: var(--fs-base); margin-bottom: .15rem; }
-    @media (min-width: 960px) {
-      .instructor { grid-template-columns: 1.2fr 1fr; }
-      .support ul { grid-template-columns: repeat(3, 1fr); gap: var(--s-6); }
-    }
-
-    /* ============================== SYLLABUS ============================== */
-    .schedule { display: grid; gap: var(--s-3); margin-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem); }
-    .sched {
-      padding: var(--s-5); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line);
-      display: grid; gap: var(--s-2); align-content: start;
-    }
-    .sched .top { display: flex; justify-content: space-between; gap: var(--s-3); font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-    .sched .top .wk { color: var(--accent); }
-    .sched h3 { font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .sched .sub { font-weight: 500; color: var(--ink-2); }
-    .sched p { font-size: var(--fs-sm); color: var(--ink-2); }
-    .sched .bar { position: relative; height: 6px; border-radius: 6px; background: var(--surface-2); overflow: hidden; margin-top: var(--s-3); }
-    .sched .bar i { position: absolute; top: 0; bottom: 0; background: var(--accent); border-radius: 6px; }
-    .sched .bar-label { font-family: var(--font-mono); font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
-    @media (min-width: 860px) { .schedule { grid-template-columns: repeat(3, 1fr); } }
-
-    .acc { border-top: 1px solid var(--line-strong); }
-    .acc details { border-bottom: 1px solid var(--line); }
-    .acc summary {
-      list-style: none; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: var(--s-3);
-      align-items: center; padding: var(--s-5) 0; min-height: 56px;
-    }
-    .acc summary::-webkit-details-marker { display: none; }
-    .acc summary .t { display: grid; gap: .25rem; }
-    .acc summary .wk { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
-    .acc summary .title { font-size: var(--fs-md); font-weight: 600; line-height: 1.3; }
-    .acc summary .tags { display: inline-flex; flex-wrap: wrap; gap: .35rem; margin-left: .25rem; vertical-align: middle; }
-    .tag {
-      display: inline-flex; align-items: center; padding: .1rem .5rem; border-radius: 999px; border: 1px solid var(--line-strong);
-      font-family: var(--font-mono); font-size: .625rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); font-weight: 500;
-    }
-    .tag.ms { border-color: transparent; background: var(--accent-tint); color: var(--accent-hover); }
-    .acc summary .chev { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line-strong); display: grid; place-items: center; transition: transform .25s, background-color .2s; }
-    .acc details[open] summary .chev { transform: rotate(180deg); background: var(--ink); color: #fff; border-color: var(--ink); }
-    .acc summary:hover .title { color: var(--accent-hover); }
-    .acc .body { padding: 0 0 var(--s-5); color: var(--ink-2); max-width: 48rem; }
-    @media (min-width: 760px) {
-      .acc summary .t { grid-template-columns: 8rem 1fr; align-items: baseline; }
-      .acc .body { padding-left: 8.75rem; }
-    }
-    .tracks-pick { margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); }
-    .tracks-pick h3 { font-size: var(--fs-xl); }
-    .tracks-pick > p { margin-top: var(--s-3); color: var(--ink-2); max-width: 46rem; }
-    .pick-grid { margin-top: var(--s-5); display: grid; gap: var(--s-3); }
-    .pick-grid li { padding: var(--s-4) var(--s-5); border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); font-size: var(--fs-sm); }
-    .pick-grid li b { display: block; color: var(--ink); font-size: var(--fs-base); margin-bottom: .15rem; }
-    @media (min-width: 700px) { .pick-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (min-width: 1024px) { .pick-grid { grid-template-columns: repeat(3, 1fr); } }
-
-    .format-strip { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: clamp(2rem, 1.5rem + 2vw, 3rem); }
-    .format-strip li { display: inline-flex; gap: .35rem; align-items: baseline; padding: .55rem .95rem; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: var(--fs-sm); color: var(--ink-2); }
-    .format-strip b { color: var(--ink); }
-    .followon { margin-top: clamp(3rem, 2.5rem + 3vw, 5rem); padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); border-top: 1px solid var(--line-strong); }
-    .followon-head { max-width: 46rem; margin-bottom: var(--s-6); }
-    .followon-head h3 { margin-top: var(--s-3); font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .followon-head p { margin-top: var(--s-3); color: var(--ink-2); }
-    .followon .schedule { margin-bottom: var(--s-5); }
-    .more > summary {
-      list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; min-height: 48px;
-      padding: .7rem 1.2rem; border-radius: 999px; border: 1px solid var(--line-strong); font-weight: 600; font-size: var(--fs-sm); background: var(--surface);
-    }
-    .more > summary::-webkit-details-marker { display: none; }
-    .more > summary:hover { border-color: var(--ink); }
-    .more[open] > summary .icon { transform: rotate(180deg); }
-    .more-body { margin-top: var(--s-5); }
-    .tracks-pick h4 { font-size: var(--fs-xl); letter-spacing: -0.02em; }
-
-    /* ============================== OUTCOMES ============================== */
-    .outcomes { display: grid; gap: var(--s-4); }
-    .oc { padding: clamp(1.5rem, 1rem + 1.5vw, 2rem); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
-    .oc .eyebrow { display: block; }
-    .oc h3 { margin-top: var(--s-2); font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .oc > p { margin-top: var(--s-2); font-size: var(--fs-sm); color: var(--ink-3); }
-    .oc ul { margin-top: var(--s-5); display: grid; gap: var(--s-4); }
-    .oc li { display: grid; grid-template-columns: auto 1fr; gap: .75rem; color: var(--ink-2); font-size: var(--fs-sm); }
-    .oc li b { display: block; color: var(--ink); font-size: var(--fs-base); font-weight: 600; margin-bottom: .1rem; }
-    .oc li .icon { color: var(--accent); margin-top: .2rem; }
-    .oc.ext { background: transparent; border-style: dashed; border-color: var(--line-strong); }
-    .oc.ext li .icon { color: var(--ink-3); }
-    @media (min-width: 960px) { .outcomes { grid-template-columns: repeat(3, 1fr); } }
-    .reality {
-      margin-top: var(--s-5); display: grid; gap: var(--s-5); padding: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-      border-radius: var(--radius); background: var(--graphite); color: var(--on-dark);
-    }
-    .reality h3 { font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .reality p { color: var(--on-dark-2); }
-    @media (min-width: 860px) { .reality { grid-template-columns: 1fr 1.4fr; } }
-
-    /* ============================== CTA BAND ============================== */
-    .cta-band { padding-block: clamp(3.5rem, 2.5rem + 4vw, 6rem); }
-    .cta-inner { display: grid; gap: var(--s-6); align-items: center; }
-    .cta-inner h2 { font-size: var(--fs-h2); }
-    .cta-inner p { margin-top: var(--s-3); color: var(--on-dark-2); font-size: var(--fs-md); max-width: 38rem; }
-    @media (min-width: 860px) { .cta-inner { grid-template-columns: 1.5fr auto; } }
-
-    /* ============================== PROGRAM DETAILS ============================== */
-    .details-grid { display: grid; border-top: 1px solid var(--line-strong); }
-    .details-grid > div { display: grid; gap: var(--s-2); padding: var(--s-5) 0; border-bottom: 1px solid var(--line); }
-    .details-grid dt { font-weight: 600; }
-    .details-grid dd { color: var(--ink-2); }
-    @media (min-width: 760px) {
-      .details-grid > div { grid-template-columns: 14rem 1fr; gap: var(--s-6); }
-    }
-    .steps { margin-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); display: grid; gap: var(--s-3); counter-reset: s; }
-    .steps li { counter-increment: s; padding: var(--s-5); border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
-    .steps li::before { content: "0" counter(s); display: block; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--accent); margin-bottom: var(--s-3); }
-    .steps b { display: block; font-size: var(--fs-md); margin-bottom: .25rem; }
-    .steps span { font-size: var(--fs-sm); color: var(--ink-2); }
-    @media (min-width: 860px) { .steps { grid-template-columns: repeat(4, 1fr); } }
-
-    /* ============================== FAQ ============================== */
-    .faq-wrap { display: grid; gap: var(--s-6); }
-    @media (min-width: 960px) { .faq-wrap { grid-template-columns: 1fr 2fr; gap: var(--s-8); } .faq-wrap .section-head { position: sticky; top: calc(var(--header-h) + 2rem); align-self: start; } }
-    .faq summary .title { font-size: var(--fs-md); }
-    .faq summary { grid-template-columns: 1fr auto; }
-    .faq .body { padding-left: 0 !important; }
-    .faq .body p + p { margin-top: var(--s-3); }
-
-    /* ============================== APPLY ============================== */
-    .apply-grid { display: grid; gap: clamp(2rem, 1.5rem + 3vw, 4rem); align-items: start; }
-    @media (min-width: 960px) { .apply-grid { grid-template-columns: 1fr 1.05fr; } }
-    .apply-points { margin-top: var(--s-6); display: grid; gap: var(--s-3); }
-    .apply-points li { display: flex; gap: .65rem; color: var(--on-dark-2); }
-    .apply-points .icon { color: var(--accent-dark); margin-top: .2rem; }
-    .form-card { background: var(--surface); color: var(--ink); border-radius: calc(var(--radius) + 4px); padding: clamp(1.5rem, 1rem + 2vw, 2.5rem); }
-    .form-card h3 { font-size: var(--fs-xl); letter-spacing: -0.02em; }
-    .form-card .intro { margin-top: var(--s-2); font-size: var(--fs-sm); color: var(--ink-3); }
-    .fields { margin-top: var(--s-5); display: grid; gap: var(--s-4); }
-    .field-row { display: grid; gap: var(--s-4); }
-    @media (min-width: 560px) { .field-row { grid-template-columns: 1fr 1fr; } }
-    .field { display: grid; gap: .4rem; }
-    .field label, .field legend { font-size: var(--fs-sm); font-weight: 600; color: var(--ink); padding: 0; }
-    .field .opt { font-weight: 400; color: var(--ink-3); }
-    .field .hint { font-size: .8125rem; color: var(--ink-3); }
-    .input {
-      width: 100%; min-height: 48px; padding: .7rem .9rem; border-radius: 10px; border: 1px solid var(--line-strong);
-      background: #fff; color: var(--ink); font: 400 var(--fs-base)/1.4 var(--font-sans);
-      transition: border-color .15s, box-shadow .15s;
-    }
-    textarea.input { min-height: 112px; resize: vertical; }
-    select.input { appearance: none; -webkit-appearance: none; padding-right: 2.5rem;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235c656e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-position: right .8rem center; background-size: 1.1rem; }
-    .input:hover { border-color: var(--ink-3); }
-    .input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); }
-    .input[aria-invalid="true"] { border-color: var(--danger); }
-    .input[aria-invalid="true"]:focus { box-shadow: 0 0 0 3px color-mix(in srgb, var(--danger) 20%, transparent); }
-    .err { font-size: .8125rem; color: var(--danger); font-weight: 500; }
-    .err:empty { display: none; }
-    .seg { border: 0; margin: 0; padding: 0; display: grid; gap: .4rem; }
-    .seg .opts { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-    .seg label.opt-pill {
-      display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: .5rem .95rem; border-radius: 999px;
-      border: 1px solid var(--line-strong); cursor: pointer; font-weight: 500; font-size: var(--fs-sm); color: var(--ink);
-    }
-    .seg input { accent-color: var(--accent); width: 1rem; height: 1rem; margin: 0; }
-    .seg label.opt-pill:has(input:checked) { border-color: var(--accent); background: var(--accent-tint); }
-    .seg label.opt-pill:has(input:focus-visible) { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
-    .form-actions { margin-top: var(--s-5); display: grid; gap: var(--s-3); }
-    .form-actions .btn { width: 100%; }
-    .btn[disabled] { opacity: .7; cursor: progress; }
-    .form-status { font-size: var(--fs-sm); }
-    .form-status.error { color: var(--danger); font-weight: 500; }
-    .form-foot { font-size: .8125rem; color: var(--ink-3); text-align: center; }
-    .success { text-align: center; padding: var(--s-6) 0; }
-    .success[hidden] { display: none; }
-    .success .tick { width: 56px; height: 56px; margin: 0 auto; border-radius: 50%; background: var(--accent-tint); color: var(--accent); display: grid; place-items: center; }
-    .success .tick .icon { width: 28px; height: 28px; stroke-width: 2.5; }
-    .success h3 { margin-top: var(--s-4); }
-    .success p { margin-top: var(--s-2); color: var(--ink-2); }
-    .spinner { width: 1rem; height: 1rem; border-radius: 50%; border: 2px solid rgba(255,255,255,.45); border-top-color: #fff; animation: spin .8s linear infinite; display: none; }
-    .btn.loading .spinner { display: inline-block; }
-    .btn.loading .icon-arrow { display: none; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ============================== FOOTER ============================== */
-    .site-footer { padding-block: var(--s-8) var(--s-6); border-top: 1px solid var(--line); }
-    .footer-grid { display: grid; gap: var(--s-6); }
-    .footer-grid h2 { font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; margin-bottom: var(--s-3); }
-    .footer-grid ul { display: grid; gap: .5rem; font-size: var(--fs-sm); }
-    .footer-grid a { color: var(--ink-2); text-decoration: none; }
-    .footer-grid a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
-    .footer-legal { margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--line); display: grid; gap: var(--s-3); font-size: .8125rem; color: var(--ink-3); line-height: 1.55; }
-    @media (min-width: 860px) { .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
-
-    /* ============================== MOTION ============================== */
-    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.in { opacity: 1; transform: none; }
-    .no-js .reveal { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-      .reveal { opacity: 1; transform: none; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body class="no-js">
@@ -732,12 +100,10 @@
         <span class="brand-sub">Humanoid Cohort</span>
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#projects" data-nav>Student Projects</a>
-        <a href="#curriculum" data-nav>Curriculum</a>
-        <a href="#research" data-nav>Research</a>
-        <a href="#instructor" data-nav>Instructor</a>
-        <a href="#program" data-nav>Program</a>
-        <a href="#faq" data-nav>FAQ</a>
+        <a href="#projects">Student Projects</a>
+        <a href="curriculum.html">Curriculum</a>
+        <a href="research.html">Research</a>
+        <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
       </nav>
       <a href="#apply" class="btn btn-primary header-cta">Apply to the Program</a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
@@ -749,11 +115,9 @@
   <div class="mobile-menu" id="mobile-menu" hidden>
     <nav aria-label="Mobile">
       <a href="#projects">Student Projects</a>
-      <a href="#curriculum">Curriculum</a>
-      <a href="#research">Research</a>
-      <a href="#instructor">Instructor</a>
-      <a href="#program">Program details</a>
-      <a href="#faq">FAQ</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="research.html">Research</a>
+      <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
       <a href="#apply" class="btn btn-primary btn-lg">Apply to the Program <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </nav>
   </div>
@@ -767,13 +131,12 @@
             <div class="badges">
               <a class="badge" href="#apply"><span class="badge-dot" aria-hidden="true"></span>Cohort 03 · Now reviewing applications</a>
             </div>
-            <h1 id="hero-title">Build a real humanoid robot. <span class="accent">Learn to make it move.</span></h1>
-            <p class="lede">A hands-on robotics program for high-school students. Build and program a real humanoid as a team of four, with a first look at simulation and reinforcement learning.</p>
+            <h1 id="hero-title">Build a real humanoid robot.</h1>
+            <p class="lede">A hands-on robotics program for high-school students.</p>
             <div class="btn-row">
-              <a href="https://arxiv.org/pdf/2609.25674" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Read our TALE 2026 paper <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-              <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" class="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">Instructor's Stanford story <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+              <a href="https://arxiv.org/pdf/2609.25674" class="btn btn-primary btn-lg" target="_blank" rel="noopener noreferrer">Read our IEEE TALE curriculum paper <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+              <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" class="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">Instructor's story <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
             </div>
-            <p class="hero-note"><a class="plain-link" href="https://toddlerbot.github.io/" target="_blank" rel="noopener noreferrer">Built on <b>ToddlerBot</b>, the open-source humanoid · Genboo is an authorized education partner <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a></p>
           </div>
 
           <div class="hero-media">
@@ -783,7 +146,12 @@
                    sizes="(min-width: 1180px) 50vw, 92vw" width="2000" height="1500" fetchpriority="high" decoding="async"
                    alt="Three ToddlerBot humanoid robots standing side by side on a workbench, with chest nameplates reading 'Tidal Wave Unleashed II', 'Gilbert', and 'Alan'" />
             </figure>
-            <p class="hero-media-cap">Three ToddlerBots from our lab, all named and built by students: Tidal Wave Unleashed II, Gilbert, and Alan.</p>
+            <figure class="main hero-extra">
+              <img src="assets/img/fleet-build-740.webp"
+                   srcset="assets/img/fleet-build-480.webp 480w, assets/img/fleet-build-740.webp 740w"
+                   sizes="(min-width: 1180px) 50vw, 92vw" width="740" height="530" loading="lazy" decoding="async"
+                   alt="A row of partly built ToddlerBot torsos in blue, brown, green, and black mounted on test stands" />
+            </figure>
           </div>
         </div>
 
@@ -841,41 +209,6 @@
             <figcaption>Bring-up</figcaption>
           </figure>
         </div>
-
-        <div class="evidence reveal">
-          <p><strong>What a previous course achieved:</strong> pairs of high-school students assembled ToddlerBot humanoids, completed the course, and achieved robot walking, as reported in our <a class="text-link" href="#research">IEEE TALE 2026 paper</a>. Robots were built collaboratively; each pair shared one robot.</p>
-          <p class="muted">Student faces are blurred to protect their privacy. Student performance and learning data are reserved for a separate study and are not claimed here.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================ PLATFORM (dark) ================================ -->
-    <section class="section on-dark" id="platform" data-spy="projects" aria-labelledby="platform-title">
-      <div class="container platform-grid">
-        <div class="reveal">
-          <div class="video-frame">
-            <video id="platform-video" muted loop playsinline preload="none"
-                   poster="assets/img/toddlerbot-cart-poster.webp" width="1280" height="720"
-                   aria-label="ToddlerBot research demo: a red humanoid robot pushes a toy wagon across the floor using whole-body control">
-              <source src="assets/videos/toddlerbot-cart-720p.mp4" type="video/mp4" />
-            </video>
-            <button class="video-toggle" type="button" aria-pressed="false" hidden>
-              <svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span>
-            </button>
-          </div>
-          <p class="video-credit">Video: ToddlerBot research team (Shi et al., CoRL 2025). It shows what the platform can do in expert hands, not a student deliverable.</p>
-        </div>
-        <div class="reveal">
-          <span class="eyebrow">The platform</span>
-          <h2 class="h2" id="platform-title" style="margin-top:1rem">A research humanoid, small enough for a classroom.</h2>
-          <p class="lede" style="margin-top:1.25rem">ToddlerBot is open-source hardware and software used in published robot-learning research. Students work with the same platform and tools, guided step by step, with no proprietary kit and no black boxes.</p>
-          <dl class="spec-list">
-            <div><dt>Joints</dt><dd>30 active DoF</dd></div>
-            <div><dt>Compute</dt><dd>Jetson Orin NX</dd></div>
-            <div><dt>Perception</dt><dd>Stereo fisheye cameras</dd></div>
-            <div><dt>Simulation</dt><dd>MuJoCo + MJX</dd></div>
-          </dl>
-        </div>
       </div>
     </section>
 
@@ -888,17 +221,15 @@
           <p class="lede">Eight weekly sessions, three hours each, with four students building one robot together. Most of the time is hands-on hardware. Simulation and reinforcement learning come at the end, as a first look at what's next.</p>
         </div>
 
-        <nav class="stepper" aria-label="Learning journey stages">
-          <a href="#phase-build"><span class="mono">01</span>Build</a>
-          <a href="#phase-control"><span class="mono">02</span>Control</a>
-          <a href="#phase-simulate"><span class="mono">03</span>Simulate</a>
-          <a href="#phase-learn"><span class="mono">04</span>Learn</a>
-          <a href="#phase-demonstrate"><span class="mono">05</span>Demonstrate</a>
-        </nav>
-
         <div class="phases">
           <article class="phase reveal" id="phase-build" aria-labelledby="ph1">
-            <div class="phase-media-wrap">
+            <div class="phase-media-wrap phase-media-stack">
+              <div class="phase-media">
+                <img src="assets/img/fleet-build-740.webp"
+                     srcset="assets/img/fleet-build-480.webp 480w, assets/img/fleet-build-740.webp 740w"
+                     sizes="(min-width: 900px) 45vw, 92vw" width="740" height="530" loading="lazy" decoding="async"
+                     alt="A row of partly built ToddlerBot torsos in blue, brown, green, and black mounted on aluminum test stands in front of orange parts bins" />
+              </div>
               <div class="phase-media">
                 <img src="assets/img/student-assembly-hands-1200.webp"
                      srcset="assets/img/student-assembly-hands-640.webp 640w, assets/img/student-assembly-hands-1200.webp 1200w"
@@ -998,13 +329,20 @@
               <div class="milestone">
                 <span class="eyebrow">Milestone</span>
                 <p>A guided experiment: change one reward in supplied training code and explain what happened.</p>
-                <p class="ext">Training policies, sim-to-real testing, and walking are the focus of the <a class="text-link" href="#advanced-track">22-week track</a>.</p>
+                <p class="ext">Training policies, sim-to-real testing, and walking are the focus of the <a class="text-link" href="curriculum.html#advanced-track">22-week track</a>.</p>
               </div>
             </div>
           </article>
 
           <article class="phase reveal" id="phase-demonstrate" aria-labelledby="ph5">
-            <div class="phase-media-wrap">
+            <div class="phase-media-wrap phase-media-stack">
+              <div class="phase-media video-frame" style="aspect-ratio:3/1">
+                <video data-autoplay muted loop playsinline preload="none" poster="assets/img/walking-trial-poster.webp" width="900" height="300"
+                       aria-label="A ToddlerBot walking across a taped floor during a supervised trial, with a safety tether held by a mentor">
+                  <source src="assets/videos/walking-trial.mp4" type="video/mp4" />
+                </video>
+                <button class="video-toggle" type="button" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
+              </div>
               <div class="phase-media">
                 <img src="assets/img/students-celebrate-1200.webp"
                      srcset="assets/img/students-celebrate-640.webp 640w, assets/img/students-celebrate-1200.webp 1200w"
@@ -1030,7 +368,7 @@
           </article>
         </div>
 
-        <p class="reveal" style="margin-top:3rem"><a class="text-link" href="#syllabus">See the week-by-week syllabus ↓</a></p>
+        <a class="learn-more reveal" href="curriculum.html">See the week-by-week syllabus <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </section>
 
@@ -1040,390 +378,27 @@
         <div class="section-head reveal">
           <span class="eyebrow">Research</span>
           <h2 class="h2" id="research-title">Built on research. Grounded in real engineering.</h2>
-          <p class="lede">Our curriculum is informed by our team's work on bringing humanoid robotics and reinforcement learning into high-school education. The paper describes a structured framework that takes students from mechanical assembly and robot control to simulation and AI-driven experimentation.</p>
+          <p class="lede">Our curriculum is described in a peer-reviewed paper from our team.</p>
         </div>
 
         <article class="paper reveal" aria-labelledby="paper-title">
           <div class="paper-main">
-            <div class="venue">
-              <span class="primary">IEEE TALE 2026 · Accepted paper</span>
-              <span>arXiv:2609.25674 · Sept 2026</span>
-            </div>
-            <h3 id="paper-title">Teaching Reinforcement Learning and Humanoid Robotics to High-School Students: An Expert-Validated Curriculum Design on a Low-Cost Open Platform</h3>
-            <p class="authors">Yuanzhe Dong, Jie Cao, and Shuman Wang
-              <small>Stanford University · University of North Carolina at Chapel Hill</small></p>
-            <p class="paper-abstract">Teaching a full robotics research workflow (assembly, electronics, simulation, learning, and deployment) to novices is hard to organize. The paper presents a course framework that ties all of it to one shared robot: pairs of students assemble an open-source humanoid, train a walking policy in simulation, and test it on the physical robot. The framework was refined through structured review by five experts in robotics research, engineering, secondary STEM teaching, and curriculum design.</p>
+            <div class="venue"><span class="primary">IEEE TALE 2026 · Accepted paper</span></div>
+            <h3 id="paper-title">Teaching Reinforcement Learning and Humanoid Robotics to High-School Students</h3>
+            <p class="authors">Yuanzhe Dong, Jie Cao, and Shuman Wang</p>
             <div class="btn-row">
-              <a class="btn btn-primary" href="https://arxiv.org/pdf/2609.25674" target="_blank" rel="noopener noreferrer">Read the paper (PDF) <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              <a class="btn btn-secondary" href="https://arxiv.org/abs/2609.25674" target="_blank" rel="noopener noreferrer">arXiv page <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
+              <a class="btn btn-primary" href="https://arxiv.org/pdf/2609.25674" target="_blank" rel="noopener noreferrer">Read the paper <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
             </div>
           </div>
         </article>
 
-        <div class="tracks reveal" aria-labelledby="tracks-title">
-          <div class="tracks-head">
-            <h3 id="tracks-title">Four tracks, one robot</h3>
-            <span class="eyebrow">Adapted from Fig. 3 of the paper</span>
-          </div>
-          <div class="track-table">
-            <div class="track-row"><span class="label">ME</span>
-              <ol><li>Design &amp; mechanisms</li><li>Describing motion</li><li>Explaining balance</li><li>Motion &amp; control</li></ol></div>
-            <div class="track-row"><span class="label">BUILD</span>
-              <ol><li>Arm assembly</li><li>Arms &amp; legs</li><li>Head &amp; neck</li><li class="gate-step">Torso &amp; assembly checks</li></ol></div>
-            <div class="track-row"><span class="label">EE</span>
-              <ol><li>Lab &amp; electrical safety</li><li>Connecting motors</li><li>Testing circuits</li><li class="gate-step">Safe power-on</li></ol></div>
-            <div class="track-row"><span class="label">CS + AI</span>
-              <ol><li>Virtual experiments</li><li>Learning from rewards</li><li>Training &amp; evaluation</li><li class="gate-step">Testing on the robot</li></ol></div>
-          </div>
-          <div class="track-axis" aria-hidden="true"><span>Early</span><span>Conceptual progression →</span><span>Late</span></div>
-          <p class="track-outcomes"><span><b>Intended outcomes:</b></span><span>A working robot</span><span>Explain AI behavior</span><span>Test predictions</span><span>Justify decisions</span></p>
-          <p class="fig-note">Highlighted steps are safety and readiness gates: on-robot control requires the safe power-on gate, and walking requires a standing test. Simulation can begin before hardware is ready. This is a conceptual progression, not a synchronized timetable.</p>
-        </div>
-      </div>
-    </section>
+        <a class="learn-more reveal" href="research.html">How students learn <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
 
-    <!-- ================================ APPROACH (dark) ================================ -->
-    <section class="section on-dark" id="approach" data-spy="research" aria-labelledby="approach-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">How students learn</span>
-          <h2 class="h2" id="approach-title">Learn by building, testing, and debugging.</h2>
-          <p class="lede">Hard engineering topics become learnable when they're broken into checkable steps, and when every concept connects to something you can watch your own robot do.</p>
-        </div>
-
-        <div class="reveal" aria-label="Readiness gates">
-          <span class="eyebrow">Readiness gates</span>
-          <ol class="gates">
-            <li class="gate">Safety induction</li><li aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></li>
-            <li class="gate">Component checks</li><li aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></li>
-            <li class="gate">Power-on</li><li aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></li>
-            <li class="gate">Calibration</li><li aria-hidden="true"><svg class="icon"><use href="#i-arrow"/></svg></li>
-            <li class="gate">First motion</li>
-          </ol>
-        </div>
-
-        <div class="principles">
-          <div class="principle reveal"><span class="k">01</span><h3>One robot connects every subject</h3>
-            <p>Mechanical, electrical, and software work all show up in the same robot's behavior. <span class="ex">When a standing attempt fails, students explain it using <em>both</em> balance and control.</span></p></div>
-          <div class="principle reveal"><span class="k">02</span><h3>Big tasks become checkable milestones</h3>
-            <p>One actuator, then one limb, then the lower body, then the full robot. <span class="ex">Each step has an explicit success check before the next one starts.</span></p></div>
-          <div class="principle reveal"><span class="k">03</span><h3>Simulation first, then hardware</h3>
-            <p>Predictions are made in simulation, then checked against real measurements. <span class="ex">In week 7, you run the same motion in MuJoCo and on your robot, and explain the differences.</span></p></div>
-          <div class="principle reveal"><span class="k">04</span><h3>Worked example → controlled change → your call</h3>
-            <p>Students start from working code, change one thing, then make their own bounded decisions. <span class="ex">Example: modify a working joint script, then design your team's own keyframe motion.</span></p></div>
-          <div class="principle reveal"><span class="k">05</span><h3>Team robot, individual understanding</h3>
-            <p>Four students share one robot and rotate operating and checking roles. <span class="ex">Each student keeps their own engineering notebook of predictions, measurements, and failure explanations.</span></p></div>
-        </div>
-
-        <p class="pull reveal">“Bad wiring beats good code every time.”<span>A lesson from the electronics module. Debugging isn't a detour from the curriculum. It is the curriculum.</span></p>
-      </div>
-    </section>
-
-    <!-- ================================ INSTRUCTOR ================================ -->
-    <section class="section" id="instructor" aria-labelledby="instructor-title">
-      <span id="mentorship" aria-hidden="true"></span>
-      <div class="container">
-        <div class="instructor">
-          <div class="reveal">
-            <span class="eyebrow">Instructor</span>
-            <h2 class="h2" id="instructor-title" style="margin-top:1rem">Meet your instructor.</h2>
-            <p class="lede" style="margin-top:1.25rem">An AI engineer with graduate robotics training, who teaches students to understand, build, and experiment with the systems behind the technology.</p>
-            <p style="margin-top:1.5rem"><a class="text-link" href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Read the Stanford Online story →</a></p>
-          </div>
-          <div class="reveal">
-            <ul class="creds-short">
-              <li>Senior deep learning engineer in industry</li>
-              <li>Stanford Online Graduate Certificate in AI; completing a Stanford Master's in Mechanical Engineering</li>
-              <li>Teaching hands-on robotics to local students since 2025</li>
-              <li>First author of the <a class="text-link" href="#research">TALE 2026 curriculum paper</a></li>
-            </ul>
-            <p class="disclaimer">Genboo is independently operated and is not affiliated with, sponsored by, or endorsed by Stanford University.</p>
-          </div>
-        </div>
-
-        <div class="support reveal">
-          <h3>Technical support around the cohort</h3>
-          <ul>
-            <li><b>ToddlerBot education partner</b>Genboo is an authorized education partner of the ToddlerBot project.</li>
-            <li><b>Platform consultants</b>The original first two co-authors of ToddlerBot serve as technical consultants on student code, simulation, and hardware.</li>
-            <li><b>Small-group mentoring</b>Weekly labs, code reviews, and check-ins at a 1:4 mentor-to-student ratio.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================ SYLLABUS ================================ -->
-    <section class="section tinted" id="syllabus" data-spy="curriculum" aria-labelledby="syllabus-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Cohort 03 syllabus</span>
-          <h2 class="h2" id="syllabus-title">Eight weeks, one robot, week by week.</h2>
-          <p class="lede">Each 3-hour session is lab-first: a short concept primer, hands-on time on the robot, then a debrief with your mentor.</p>
-        </div>
-
-        <ul class="format-strip reveal" aria-label="Cohort 03 format">
-          <li><b>8</b> weekly sessions</li>
-          <li><b>3 hours</b> each</li>
-          <li><b>4 students</b> per robot</li>
-          <li><b>In person</b> · Bay Area</li>
-          <li><b>Dates</b> shared with applicants</li>
-        </ul>
-
-        <div class="acc reveal">
-          <details>
-            <summary><span class="t"><span class="wk">Week 1</span><span class="title">Robot Architecture, Lab Safety &amp; Your First Limb</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Understand the robot as a system before you touch a screw: ToddlerBot architecture, degrees of freedom, the actuator/sensor/controller/battery loop, lab safety, and engineering notebooks. Then start one limb. It teaches joints, servo orientation, fasteners, and alignment.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 2</span><span class="title">Arms &amp; Legs</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Split into sub-teams to build the remaining limbs. Cable routing, bearings, torque limits, and checking that every joint moves freely before you move on.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 3</span><span class="title">Torso, Head &amp; Neck</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Integrate the limbs onto the torso, then install the head, neck, and stereo cameras. Finish with a mechanical inspection checklist.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 4</span><span class="title">Electronics &amp; Wiring Checks</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Power system, onboard computer, servo bus, IMU, connector labeling, and multimeter basics. Every connection is checked before power-on. Hard lesson: bad wiring beats good code every time.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 5</span><span class="title">Safe Power-On, Servo IDs &amp; Calibration <span class="tags"><span class="tag ms">Milestone</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Follow the power-on checklist, assign servo IDs, and zero-point calibrate every joint. <strong>Milestone:</strong> the robot powers on safely and every joint is recognized and calibrated.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 6</span><span class="title">Joint Scripts &amp; Logging</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Linux, the Python environment, and robot config files. Practical task: <em>“Move joint 3 by 10 degrees, log commanded vs. actual angle, and explain the difference.”</em> That's a real robotics lesson, not AI magic.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 7</span><span class="title">Keyframe Motion &amp; MuJoCo Intro</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Open-loop vs. closed-loop control. Design a simple standing or keyframe motion and run it on the robot. Load the robot's model in MuJoCo and compare one motion in simulation and on hardware.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Week 8</span><span class="title">Reinforcement Learning Preview &amp; Showcase <span class="tags"><span class="tag ms">Milestone</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">What a policy, reward, observation, and action are. Watch a supplied policy train in simulation and change one reward. Then the showcase: <strong>milestone</strong> demo of your robot's verified motion and a short team presentation.</div>
-          </details>
-        </div>
-
-        <div class="followon reveal" id="advanced-track" aria-labelledby="followon-title">
-          <div class="followon-head">
-            <span class="eyebrow">After Cohort 03</span>
-            <h3 id="followon-title">Want to go further? The 22-week track.</h3>
-            <p>Our longer research track goes deeper on the same platform over a summer lab, a fall hybrid term, and a final output sprint: MuJoCo model matching, control, reinforcement-learning experiments, and a technical write-up. Ask us about availability.</p>
-          </div>
-        <div class="schedule" id="program-phases">
-          <div class="sched reveal" id="phase-01">
-            <div class="top"><span class="wk">Phase 01 · 8 weeks</span><span>Jun–Aug</span></div>
-            <h3>Summer Intensive</h3>
-            <p class="sub">Reproduce ToddlerBot</p>
-            <p>In-person lab, about 6 hours per week, weekend-weighted. Teams build side by side with mentors: assembly, wiring, and bring-up.</p>
-            <div class="bar" aria-hidden="true"><i style="left:0;width:36.4%"></i></div><span class="bar-label">Weeks 1–8 of 22</span>
-          </div>
-          <div class="sched reveal" id="phase-02">
-            <div class="top"><span class="wk">Phase 02 · 12 weeks</span><span>Sep–Dec</span></div>
-            <h3>Fall Academy</h3>
-            <p class="sub">Simulate, control &amp; improve</p>
-            <p>Hybrid: weeknight virtual seminars and code reviews, plus in-person lab integration days for sim-to-real testing on the robot you built in summer.</p>
-            <div class="bar" aria-hidden="true"><i style="left:36.4%;width:54.5%"></i></div><span class="bar-label">Weeks 9–20 of 22</span>
-          </div>
-          <div class="sched reveal" id="phase-03">
-            <div class="top"><span class="wk">Phase 03 · 2 weeks</span><span>Dec–Jan</span></div>
-            <h3>Output Sprint</h3>
-            <p class="sub">Final project &amp; showcase</p>
-            <p>Daily virtual writing and review sessions, plus one in-person showcase day for talks and demos.</p>
-            <div class="bar" aria-hidden="true"><i style="left:90.9%;width:9.1%"></i></div><span class="bar-label">Weeks 21–22 of 22</span>
-          </div>
-        </div>
-
-          <details class="more">
-            <summary>See the full 22-week syllabus <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
-            <div class="more-body">
-        <div class="acc">
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 1–2</span><span class="title">Foundations &amp; Robot Architecture <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Understand the robot as a system before you touch a single screw. ToddlerBot architecture, degrees of freedom, the actuator/sensor/controller/battery loop, lab safety, GitHub and engineering notebooks, and how to read CAD and assembly drawings.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 3–4</span><span class="title">Mechanical Build: One Limb First, Then Lower Body <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Start with a single leg or arm module before tackling the full robot. One limb teaches almost everything: joints, servo orientation, fasteners, bearings, cable routing, alignment, torque limits, and debugging. Once one limb works cleanly, the rest is repetition. Then assemble the full lower body.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 5–6</span><span class="title">Electronics, Wiring &amp; Joint Calibration <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Power system, Jetson, servo bus, IMU, connector labeling, multimeter basics, and a safe power-on sequence. Each joint gets its servo ID assigned and zero-point calibrated. Hard lesson: bad wiring beats good code every time.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 7–8</span><span class="title">Software Bring-Up &amp; Reproduction Demo <span class="tags"><span class="tag ms">Milestone</span><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Linux basics, Python environment, robot config files, and simple joint test scripts. <strong>Phase 1 success demo:</strong> the robot powers on safely, every joint is recognized and calibrated, and it can run a simple verified motion sequence. The goal isn't “the robot walks” yet.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 9–11</span><span class="title">Software Infrastructure &amp; Joint Control <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Git workflow, robot config files, joint IDs, logging, teleoperation scripts, and basic sensor reading. Practical milestone: <em>“Move joint 3 by 10 degrees, log commanded vs. actual angle, and explain the difference.”</em> That is a real robotics lesson, not AI magic.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 12–14</span><span class="title">Simulation in MuJoCo <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Why simulation matters. MuJoCo model and XML structure: joints, bodies, actuators, contact, and gravity. The difference between simulation and the real robot. Match sim joint limits to your hardware. Simulation is a controlled approximation of reality, not a video game.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 15–16</span><span class="title">Control Before AI <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Open-loop vs. closed-loop. Position control and PD control. Balance intuition. Gait as a sequence. Failure modes: slipping, tipping, delay, and weak torque. Students create a simple standing, rocking, stepping, or keyframe motion. The lesson: AI sits on top of mechanics, electronics, and control, not in place of them.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 17–20</span><span class="title">AI / RL / Sim-to-Real Experiments &amp; Capstone Iteration <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Reinforcement learning fundamentals: policy, reward, observation, and action. Domain randomization, the sim-to-real gap, and what can go wrong when deploying to hardware. Practical deliverable: run or modify a baseline policy or motion experiment, change one parameter, and analyze the behavior. Then iterate toward your final-project track.</div>
-          </details>
-          <details>
-            <summary><span class="t"><span class="wk">Weeks 21–22</span><span class="title">Final Project &amp; Cohort Showcase <span class="tags"><span class="tag ms">Milestone</span><span class="tag">Output</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body">Pick a track (Mechanical, Electronics, Simulation, Control, AI, or Documentation) and produce a portfolio-quality deliverable: demo video, technical write-up in research-paper format, GitHub documentation, a short showcase talk, and a written reflection on <em>what failed, what changed, and what you learned.</em></div>
-          </details>
-        </div>
-
-        <div class="tracks-pick">
-          <h4>Final project: pick your track</h4>
-          <p>Everyone learns the basics across the whole stack. The final deliverable goes deep in one direction:</p>
-          <ul class="pick-grid">
-            <li><b>Mechanical</b>Improve cable routing or joint reliability on the chassis</li>
-            <li><b>Electronics</b>Build a clean wiring map and bring-up checklist for future cohorts</li>
-            <li><b>Simulation</b>Improve how well the MuJoCo model matches the real hardware</li>
-            <li><b>Control</b>Create a stable keyframe motion: standing, squatting, or stepping</li>
-            <li><b>AI / RL</b>Modify a reward or observation in simulation and analyze the change</li>
-            <li><b>Documentation</b>Turn your engineering notebook into a student-friendly assembly guide</li>
-          </ul>
-        </div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================ OUTCOMES ================================ -->
-    <section class="section" id="outcomes" data-spy="curriculum" aria-labelledby="outcomes-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Student outcomes</span>
-          <h2 class="h2" id="outcomes-title">What will you actually build?</h2>
-          <p class="lede">Tangible engineering work, not a certificate of attendance. Here's what each team works toward in eight weeks, what you'll take away, and where to go next.</p>
-        </div>
-
-        <div class="outcomes">
-          <div class="oc reveal">
-            <span class="eyebrow">Core milestones</span>
-            <h3>Every team works toward</h3>
-            <p>Shared by your team of four.</p>
-            <ul>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>An assembled, wired humanoid</b>Passes the mechanical and wiring inspection.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Safe power-on &amp; calibration</b>Every joint recognized and zeroed.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Joint scripts &amp; logs</b>Commanded vs. actual motion, measured and explained.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>A verified motion</b>A scripted or keyframe motion running on the robot.</span></li>
-            </ul>
-          </div>
-          <div class="oc reveal">
-            <span class="eyebrow">What you take away</span>
-            <h3>Yours to keep</h3>
-            <p>Individual work and experience.</p>
-            <ul>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Engineering notebook</b>Your decisions, measurements, and failures.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>A first look at MuJoCo</b>The same motion in simulation and on hardware.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>A first RL experiment</b>Guided, using supplied training code.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span><b>Showcase demo &amp; presentation</b>Explaining what your team built and fixed.</span></li>
-            </ul>
-          </div>
-          <div class="oc ext reveal">
-            <span class="eyebrow">Going further</span>
-            <h3>Optional and next steps</h3>
-            <p>Stretch goals, not requirements.</p>
-            <ul>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span><b>Custom shell parts</b>Design non-structural pieces, like your robot's nameplate, within mentor-set limits.</span></li>
-              <li><svg class="icon" aria-hidden="true"><use href="#i-plus"/></svg><span><b>The 22-week track</b>Model matching, RL experiments, walking-policy attempts, and a technical write-up. <a class="text-link" href="#advanced-track">Learn more</a></span></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="reality reveal">
-          <h3>Eight weeks is a tight, real build.</h3>
-          <p>The goal for Cohort 03 is a calibrated robot running a verified motion. Walking with a learned policy isn't a goal of the 8-week cohort; that's the focus of the longer track. Real hardware means parts break and progress varies by team. Diagnosing why something failed, and documenting it, counts as engineering work.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================ CTA BAND ================================ -->
-    <section class="cta-band on-dark" aria-labelledby="cta-title">
-      <div class="container cta-inner reveal">
-        <div>
-          <h2 id="cta-title">Ready to build one?</h2>
-          <p>Applications for Cohort 03 are reviewed on a rolling basis. It takes about five minutes to express interest.</p>
-        </div>
-        <div class="btn-row">
-          <a href="#apply" class="btn btn-primary btn-lg">Apply to the Program <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-          <a href="#program" class="btn btn-secondary btn-lg">Is it right for me?</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================ PROGRAM DETAILS ================================ -->
-    <section class="section" id="program" aria-labelledby="program-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <span class="eyebrow">Program details</span>
-          <h2 class="h2" id="program-title">Is this program right for you?</h2>
-          <p class="lede">The essentials for students and parents. Anything not listed here, just ask: <a class="text-link" href="mailto:hello@genboo.com">hello@genboo.com</a>.</p>
-        </div>
-
-        <dl class="details-grid reveal">
-          <div><dt>Who it's for</dt><dd>Current high-school students, grades 9–12, who are curious about how robots and AI actually work.</dd></div>
-          <div><dt>Prior experience</dt><dd>No robotics experience required. Some programming exposure (Python or C++) helps in the software weeks, but isn't required. Curiosity and persistence matter more than credentials.</dd></div>
-          <div><dt>Length &amp; dates</dt><dd>8 weeks. Dates will be shared with applicants.</dd></div>
-          <div><dt>Weekly schedule</dt><dd>One 3-hour in-person session per week.</dd></div>
-          <div><dt>Location</dt><dd>In person in the San Francisco Bay Area, California.</dd></div>
-          <div><dt>Team size &amp; mentoring</dt><dd>Teams of four students build one ToddlerBot together, with a 1:4 mentor-to-student ratio.</dd></div>
-          <div><dt>Costs &amp; scholarships</dt><dd>Program fees, <a class="text-link" href="https://docs.google.com/spreadsheets/d/1LDB2Vf4umWNCfXxlohkn_7QmugMzibrw__6n9LiGWHE/edit?usp=sharing" target="_blank" rel="noopener noreferrer">hardware kit costs</a>, and scholarship eligibility are discussed with shortlisted applicants during the interview. Need-based scholarships are available for hardware kit costs.</dd></div>
-          <div><dt>After Cohort 03</dt><dd>Students who want to go deeper can ask about the <a class="text-link" href="#advanced-track">22-week track</a>.</dd></div>
-        </dl>
-
-        <ol class="steps reveal" aria-label="How to apply">
-          <li><b>Express interest</b><span>Fill out the short form below. It takes about five minutes.</span></li>
-          <li><b>We follow up</b><span>Within 5 business days, with next steps.</span></li>
-          <li><b>Interview</b><span>Shortlisted applicants talk with us about goals, fit, fees, and scholarships.</span></li>
-          <li><b>Admission</b><span>Applications are reviewed on a rolling basis; we encourage applying early.</span></li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ================================ FAQ ================================ -->
-    <section class="section tinted" id="faq" aria-labelledby="faq-title">
-      <div class="container faq-wrap">
-        <div class="section-head reveal">
-          <span class="eyebrow">FAQ</span>
-          <h2 class="h2" id="faq-title">Questions from students and parents.</h2>
-          <p class="muted">Don't see yours? Email <a class="text-link" href="mailto:hello@genboo.com">hello@genboo.com</a>.</p>
-        </div>
-        <div class="acc faq reveal">
-          <details><summary><span class="t" style="display:block"><span class="title">Do students need prior robotics experience?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>No. Week 1 starts from robot architecture and lab safety, and the build begins with a single limb before moving to the full robot.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">Do students need to know Python?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>It helps, but it isn't required to apply. The software sessions (weeks 6–8) start from working code, and mentors help students who are new to programming.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">Will students work with physical robots?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>Yes. Each team of four assembles, wires, calibrates, and programs a real ToddlerBot humanoid. Simulation is introduced near the end as a complement to the hardware, not a replacement.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">How is reinforcement learning introduced?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>As a preview in week 8, after students understand the robot's mechanics, electronics, and control. Students learn what policies, rewards, observations, and actions are, watch a supplied policy train in simulation, and change one reward to see what happens. Training and testing policies in depth is the focus of the 22-week track.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">Is the program individual or team-based?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>Team-based. Four students build and share one robot, rotating operating and checking roles. Each student also keeps their own engineering notebook.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">What is the time commitment?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>8 weeks, with one 3-hour in-person session per week.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">What happens if the robot doesn't work?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>That's part of the engineering. Students learn to work out whether a problem comes from the mechanics, the wiring, or the code, with mentor support. Every power-on follows a checklist, and diagnosing a failure counts as real progress.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">What will students have completed at the end?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>A team-built, calibrated humanoid running a verified motion, plus their own engineering notebook, a first look at MuJoCo and reinforcement learning, and a showcase demo. See <a class="text-link" href="#outcomes">What will you actually build?</a> Exact progress depends on hardware behavior and each team.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">Can students continue after the 8 weeks?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>Yes. Students who want to go deeper can ask about the <a class="text-link" href="#advanced-track">22-week track</a>, which covers simulation, control, and reinforcement learning in much more depth.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">How do students apply?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>Submit the <a class="text-link" href="#apply">interest form</a>. We follow up within 5 business days, and shortlisted applicants are invited to an interview. Applications are reviewed on a rolling basis.</p></div></details>
-          <details><summary><span class="t" style="display:block"><span class="title">Is financial assistance available?</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
-            <div class="body"><p>Yes. Need-based scholarships are available for hardware kit costs. Fees and scholarship eligibility are discussed with shortlisted applicants during the interview.</p></div></details>
-        </div>
       </div>
     </section>
 
     <!-- ================================ APPLY ================================ -->
-    <section class="section on-dark" id="apply" data-spy="none" aria-labelledby="apply-title">
+    <section class="section on-dark" id="apply" aria-labelledby="apply-title">
       <div class="container apply-grid">
         <div class="reveal">
           <span class="eyebrow">Apply · Cohort 03</span>
@@ -1432,7 +407,7 @@
           <ul class="apply-points">
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Open to current high-school students, grades 9–12</li>
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Rolling review; applying early is encouraged</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Need-based scholarships for hardware kit costs</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Need-based scholarships for <a class="text-link" href="https://docs.google.com/spreadsheets/d/1LDB2Vf4umWNCfXxlohkn_7QmugMzibrw__6n9LiGWHE/edit?usp=sharing" target="_blank" rel="noopener noreferrer">hardware kit costs</a>; fees are discussed during the interview</span></li>
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Parents are welcome to submit on a student's behalf</li>
           </ul>
         </div>
@@ -1525,14 +500,13 @@
             <span class="brand-name">Genboo · <span class="cjk" lang="zh">进步</span></span>
             <span class="brand-sub">Humanoid Cohort</span>
           </a>
-          <p class="muted" style="margin-top:1rem;font-size:.875rem;max-width:22rem">Hands-on humanoid robotics for high-school students. San Francisco Bay Area, CA.</p>
+          <p class="muted" style="margin-top:1rem;font-size:.875rem;max-width:22rem">Hands-on humanoid robotics for high-school students. Menlo Park, CA.</p>
         </div>
         <div>
           <h2>Program</h2>
           <ul>
-            <li><a href="#curriculum">Curriculum</a></li>
-            <li><a href="#outcomes">Student outcomes</a></li>
-            <li><a href="#program">Program details</a></li>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="research.html">Research</a></li>
             <li><a href="#apply">Apply</a></li>
           </ul>
         </div>
@@ -1548,179 +522,16 @@
           <h2>Contact</h2>
           <ul>
             <li><a href="mailto:hello@genboo.com">hello@genboo.com</a></li>
-            <li><a href="https://genboo.com" target="_blank" rel="noopener noreferrer">genboo.com</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-legal">
-        <p>Genboo is an independently operated education program. It is not affiliated with, sponsored by, or endorsed by Stanford University. ToddlerBot is an open-source project by its original authors (Shi et al., CoRL 2025); the platform demo video is theirs. Student photos come from a previous course, with faces blurred.</p>
+        <p>Genboo is independently operated and is not affiliated with Stanford University.</p>
         <p>© 2026 Genboo</p>
       </div>
     </div>
   </footer>
 
-  <script>
-    (function () {
-      'use strict';
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-      /* ---------- Header border on scroll ---------- */
-      var header = document.querySelector('.site-header');
-      var onScroll = function () { header.classList.toggle('scrolled', window.scrollY > 8); };
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-
-      /* ---------- Mobile menu ---------- */
-      var toggle = document.querySelector('.menu-toggle');
-      var menu = document.getElementById('mobile-menu');
-      var setMenu = function (open) {
-        toggle.setAttribute('aria-expanded', String(open));
-        menu.hidden = !open;
-        if (open) { var first = menu.querySelector('a'); if (first) first.focus(); }
-      };
-      toggle.addEventListener('click', function () { setMenu(toggle.getAttribute('aria-expanded') !== 'true'); });
-      menu.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
-      document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setMenu(false); toggle.focus(); }
-      });
-      window.matchMedia('(min-width: 960px)').addEventListener('change', function (mq) { if (mq.matches) setMenu(false); });
-
-      /* ---------- Scroll-spy (header nav + journey stepper) ---------- */
-      if ('IntersectionObserver' in window) {
-        // Sections without their own link can point at a parent link via data-spy="<id>" (or "none").
-        var spy = function (links, rootMargin, extra) {
-          var map = {};
-          links.forEach(function (l) { map[l.getAttribute('href').slice(1)] = l; });
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              links.forEach(function (l) { l.classList.remove('active'); l.removeAttribute('aria-current'); });
-              var l = map[e.target.getAttribute('data-spy') || e.target.id];
-              if (l) { l.classList.add('active'); l.setAttribute('aria-current', 'true'); }
-            });
-          }, { rootMargin: rootMargin, threshold: 0 });
-          Object.keys(map).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
-          (extra || []).forEach(function (s) { io.observe(s); });
-        };
-        spy(Array.prototype.slice.call(document.querySelectorAll('.nav a[data-nav]')), '-45% 0px -54% 0px', Array.prototype.slice.call(document.querySelectorAll('section[data-spy]')));
-        spy(Array.prototype.slice.call(document.querySelectorAll('.stepper a')), '-40% 0px -55% 0px');
-
-        /* ---------- Reveal on scroll ---------- */
-        var rio = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); rio.unobserve(e.target); } });
-        }, { rootMargin: '0px 0px -8% 0px' });
-        document.querySelectorAll('.reveal').forEach(function (el) { rio.observe(el); });
-      } else {
-        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
-      }
-
-      /* ---------- Muted looping videos: load + play only when visible; each has a pause control ---------- */
-      document.querySelectorAll('.video-frame').forEach(function (frame) {
-        var video = frame.querySelector('video');
-        var vbtn = frame.querySelector('.video-toggle');
-        if (!video || !vbtn) return;
-        var userPaused = reduceMotion.matches;
-        var setBtn = function () {
-          var playing = !video.paused;
-          vbtn.setAttribute('aria-pressed', String(playing));
-          vbtn.querySelector('span').textContent = playing ? 'Pause' : 'Play';
-          vbtn.querySelector('use').setAttribute('href', playing ? '#i-pause' : '#i-play');
-          vbtn.setAttribute('aria-label', playing ? 'Pause video' : 'Play video');
-        };
-        var play = function () { var p = video.play(); if (p && p.catch) p.catch(function () {}); };
-        vbtn.hidden = false;
-        setBtn();
-        video.addEventListener('play', setBtn);
-        video.addEventListener('pause', setBtn);
-        vbtn.addEventListener('click', function () {
-          if (video.paused) { userPaused = false; play(); } else { userPaused = true; video.pause(); }
-        });
-        video.addEventListener('error', function () { vbtn.hidden = true; }, true);
-        if ('IntersectionObserver' in window) {
-          new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting && !userPaused) play();
-              else if (!e.isIntersecting && !video.paused) video.pause();
-            });
-          }, { threshold: 0.35 }).observe(video);
-        }
-      });
-
-      /* ---------- Application form ---------- */
-      var form = document.getElementById('apply-form');
-      var success = document.getElementById('apply-success');
-      var statusEl = document.getElementById('apply-status');
-      var submitBtn = document.getElementById('apply-submit');
-      var submitLabel = document.getElementById('apply-submit-label');
-
-      var messages = {
-        name: { valueMissing: "Please enter the student's name." },
-        email: { valueMissing: 'Please enter an email address.', typeMismatch: 'Please enter a valid email, like name@example.com.' },
-        school: { valueMissing: 'Please enter the school name.' },
-        grade: { valueMissing: 'Please select a grade.' }
-      };
-      var validateField = function (el) {
-        if (!messages[el.name]) return true;
-        if (el.type !== 'email' && el.value && !el.value.trim()) el.value = '';
-        var errEl = document.getElementById('e-' + el.name);
-        var v = el.validity, msg = '';
-        if (v.valueMissing) msg = messages[el.name].valueMissing;
-        else if (v.typeMismatch) msg = messages[el.name].typeMismatch || 'Please check this field.';
-        el.setAttribute('aria-invalid', msg ? 'true' : 'false');
-        if (errEl) errEl.textContent = msg;
-        return !msg;
-      };
-      var fields = Array.prototype.slice.call(form.querySelectorAll('input[required], select[required]'));
-      fields.forEach(function (el) {
-        el.addEventListener('blur', function () { if (el.value || el.getAttribute('aria-invalid') === 'true') validateField(el); });
-        el.addEventListener('input', function () { if (el.getAttribute('aria-invalid') === 'true') validateField(el); });
-        el.addEventListener('change', function () { if (el.getAttribute('aria-invalid') === 'true') validateField(el); });
-      });
-
-      var sending = false;
-      var setSending = function (on) {
-        sending = on;
-        submitBtn.disabled = on;
-        submitBtn.classList.toggle('loading', on);
-        submitBtn.setAttribute('aria-busy', String(on));
-        submitLabel.textContent = on ? 'Sending…' : 'Submit application';
-      };
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (sending) return;
-        statusEl.textContent = ''; statusEl.className = 'form-status';
-        var firstBad = null;
-        fields.forEach(function (el) { if (!validateField(el) && !firstBad) firstBad = el; });
-        if (firstBad) {
-          statusEl.textContent = 'Please fix the highlighted fields.';
-          statusEl.className = 'form-status error';
-          firstBad.focus();
-          return;
-        }
-        setSending(true);
-        var data = new FormData(form);
-        var ctrl = 'AbortController' in window ? new AbortController() : null;
-        var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
-        fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' }, signal: ctrl ? ctrl.signal : undefined })
-          .then(function (res) {
-            if (!res.ok) throw new Error('Formspree responded ' + res.status);
-            var first = String(data.get('name') || '').trim().split(/\s+/)[0];
-            if (first) document.getElementById('apply-name').textContent = first;
-            form.hidden = true;
-            success.hidden = false;
-            document.getElementById('apply-success-title').focus();
-            if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'humanoid_apply' });
-          })
-          .catch(function (err) {
-            console.error(err);
-            statusEl.className = 'form-status error';
-            statusEl.innerHTML = 'Sorry, something went wrong and your application was not sent. Please try again, or email <a class="text-link" href="mailto:hello@genboo.com">hello@genboo.com</a>.';
-            setSending(false);
-          })
-          .then(function () { if (timer) clearTimeout(timer); });
-      });
-    })();
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

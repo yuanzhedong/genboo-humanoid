@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZVF6K9DJ5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-RZVF6K9DJ5');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Curriculum — Humanoid Cohort 03 | Genboo</title>
+  <meta name="description" content="Week-by-week syllabus for Genboo's 8-week humanoid robotics cohort: build, wire, calibrate, and program a real ToddlerBot, then preview simulation and reinforcement learning." />
+  <link rel="canonical" href="https://humanoid.genboo.com/curriculum.html" />
+  <meta name="theme-color" content="#fdfaf8" />
+
+  <!-- Open Graph / Facebook / iMessage / Slack -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Genboo · Humanoid Cohort" />
+  <meta property="og:url" content="https://humanoid.genboo.com/curriculum.html" />
+  <meta property="og:title" content="Build a Real Humanoid Robot. Learn to Make It Move." />
+  <meta property="og:description" content="Teams of four high-school students build and program a real ToddlerBot humanoid in 8 weekly sessions. Applications open for Cohort 03." />
+  <meta property="og:image" content="https://humanoid.genboo.com/og-image.jpg" />
+  <meta property="og:image:alt" content="Three ToddlerBot humanoid robots built in the Genboo lab, standing side by side" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Build a Real Humanoid Robot. Learn to Make It Move." />
+  <meta name="twitter:description" content="Teams of four high-school students build and program a real ToddlerBot humanoid in 8 weekly sessions. Applications open for Cohort 03." />
+  <meta name="twitter:image" content="https://humanoid.genboo.com/og-image.jpg" />
+  <meta name="twitter:image:alt" content="Three ToddlerBot humanoid robots built in the Genboo lab, standing side by side" />
+
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fonts load without blocking first paint; system fonts render until they arrive -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" /></noscript>
+
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="no-js">
+  <script>document.body.classList.remove('no-js');</script>
+
+  <!-- Inline icon sprite (replaces the Lucide CDN) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ================================ HEADER ================================ -->
+  <header class="site-header" id="top">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-name">Genboo · <span class="cjk" lang="zh">进步</span></span>
+        <span class="brand-sub">Humanoid Cohort</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html#projects">Student Projects</a>
+        <a href="curriculum.html" aria-current="page">Curriculum</a>
+        <a href="research.html">Research</a>
+        <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
+      </nav>
+      <a href="index.html#apply" class="btn btn-primary header-cta">Apply to the Program</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
+        <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="icon icon-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <nav aria-label="Mobile">
+      <a href="index.html#projects">Student Projects</a>
+      <a href="curriculum.html">Curriculum</a>
+      <a href="research.html">Research</a>
+      <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
+      <a href="index.html#apply" class="btn btn-primary btn-lg">Apply to the Program <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <!-- ================================ SYLLABUS ================================ -->
+    <section class="section page-top" id="syllabus" aria-labelledby="syllabus-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Cohort 03 syllabus</span>
+          <h1 class="h2" id="syllabus-title">Eight weeks, one robot, week by week.</h1>
+          <p class="lede">Each 3-hour session is lab-first: a short concept primer, hands-on time on the robot, then a debrief with your mentor.</p>
+        </div>
+
+        <ul class="format-strip reveal" aria-label="Cohort 03 format">
+          <li><b>8</b> weekly sessions</li>
+          <li><b>3 hours</b> each</li>
+          <li><b>4 students</b> per robot</li>
+          <li><b>In person</b> · Menlo Park, CA</li>
+          <li><b>Dates</b> shared with applicants</li>
+        </ul>
+
+        <div class="acc reveal">
+          <details>
+            <summary><span class="t"><span class="wk">Week 1</span><span class="title">Robot Architecture, Lab Safety &amp; Your First Limb</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Understand the robot as a system before you touch a screw: ToddlerBot architecture, degrees of freedom, the actuator/sensor/controller/battery loop, lab safety, and engineering notebooks. Then start one limb. It teaches joints, servo orientation, fasteners, and alignment.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 2</span><span class="title">Arms &amp; Legs</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Split into sub-teams to build the remaining limbs. Cable routing, bearings, torque limits, and checking that every joint moves freely before you move on.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 3</span><span class="title">Torso, Head &amp; Neck</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Integrate the limbs onto the torso, then install the head, neck, and stereo cameras. Finish with a mechanical inspection checklist.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 4</span><span class="title">Electronics &amp; Wiring Checks</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Power system, onboard computer, servo bus, IMU, connector labeling, and multimeter basics. Every connection is checked before power-on. Hard lesson: bad wiring beats good code every time.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 5</span><span class="title">Safe Power-On, Servo IDs &amp; Calibration <span class="tags"><span class="tag ms">Milestone</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Follow the power-on checklist, assign servo IDs, and zero-point calibrate every joint. <strong>Milestone:</strong> the robot powers on safely and every joint is recognized and calibrated.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 6</span><span class="title">Joint Scripts &amp; Logging</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Linux, the Python environment, and robot config files. Practical task: <em>“Move joint 3 by 10 degrees, log commanded vs. actual angle, and explain the difference.”</em> That's a real robotics lesson, not AI magic.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 7</span><span class="title">Keyframe Motion &amp; MuJoCo Intro</span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Open-loop vs. closed-loop control. Design a simple standing or keyframe motion and run it on the robot. Load the robot's model in MuJoCo and compare one motion in simulation and on hardware.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Week 8</span><span class="title">Reinforcement Learning Preview &amp; Showcase <span class="tags"><span class="tag ms">Milestone</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">What a policy, reward, observation, and action are. Watch a supplied policy train in simulation and change one reward. Then the showcase: <strong>milestone</strong> demo of your robot's verified motion and a short team presentation.</div>
+          </details>
+        </div>
+
+        <div class="followon reveal" id="advanced-track" aria-labelledby="followon-title">
+          <div class="followon-head">
+            <span class="eyebrow">After Cohort 03</span>
+            <h2 id="followon-title">Want to go further? The 22-week track.</h2>
+            <p>Our longer research track goes deeper on the same platform over a summer lab, a fall hybrid term, and a final output sprint: MuJoCo model matching, control, reinforcement-learning experiments, and a technical write-up. Ask us about availability.</p>
+          </div>
+        <div class="schedule" id="program-phases">
+          <div class="sched reveal" id="phase-01">
+            <div class="top"><span class="wk">Phase 01 · 8 weeks</span><span>Jun–Aug</span></div>
+            <h3>Summer Intensive</h3>
+            <p class="sub">Reproduce ToddlerBot</p>
+            <p>In-person lab, about 6 hours per week, weekend-weighted. Teams build side by side with mentors: assembly, wiring, and bring-up.</p>
+            <div class="bar" aria-hidden="true"><i style="left:0;width:36.4%"></i></div><span class="bar-label">Weeks 1–8 of 22</span>
+          </div>
+          <div class="sched reveal" id="phase-02">
+            <div class="top"><span class="wk">Phase 02 · 12 weeks</span><span>Sep–Dec</span></div>
+            <h3>Fall Academy</h3>
+            <p class="sub">Simulate, control &amp; improve</p>
+            <p>Hybrid: weeknight virtual seminars and code reviews, plus in-person lab integration days for sim-to-real testing on the robot you built in summer.</p>
+            <div class="bar" aria-hidden="true"><i style="left:36.4%;width:54.5%"></i></div><span class="bar-label">Weeks 9–20 of 22</span>
+          </div>
+          <div class="sched reveal" id="phase-03">
+            <div class="top"><span class="wk">Phase 03 · 2 weeks</span><span>Dec–Jan</span></div>
+            <h3>Output Sprint</h3>
+            <p class="sub">Final project &amp; showcase</p>
+            <p>Daily virtual writing and review sessions, plus one in-person showcase day for talks and demos.</p>
+            <div class="bar" aria-hidden="true"><i style="left:90.9%;width:9.1%"></i></div><span class="bar-label">Weeks 21–22 of 22</span>
+          </div>
+        </div>
+
+          <details class="more">
+            <summary>See the full 22-week syllabus <svg class="icon" aria-hidden="true"><use href="#i-chev"/></svg></summary>
+            <div class="more-body">
+        <div class="acc">
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 1–2</span><span class="title">Foundations &amp; Robot Architecture <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Understand the robot as a system before you touch a single screw. ToddlerBot architecture, degrees of freedom, the actuator/sensor/controller/battery loop, lab safety, GitHub and engineering notebooks, and how to read CAD and assembly drawings.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 3–4</span><span class="title">Mechanical Build: One Limb First, Then Lower Body <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Start with a single leg or arm module before tackling the full robot. One limb teaches almost everything: joints, servo orientation, fasteners, bearings, cable routing, alignment, torque limits, and debugging. Once one limb works cleanly, the rest is repetition. Then assemble the full lower body.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 5–6</span><span class="title">Electronics, Wiring &amp; Joint Calibration <span class="tags"><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Power system, Jetson, servo bus, IMU, connector labeling, multimeter basics, and a safe power-on sequence. Each joint gets its servo ID assigned and zero-point calibrated. Hard lesson: bad wiring beats good code every time.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 7–8</span><span class="title">Software Bring-Up &amp; Reproduction Demo <span class="tags"><span class="tag ms">Milestone</span><span class="tag">Summer</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Linux basics, Python environment, robot config files, and simple joint test scripts. <strong>Phase 1 success demo:</strong> the robot powers on safely, every joint is recognized and calibrated, and it can run a simple verified motion sequence. The goal isn't “the robot walks” yet.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 9–11</span><span class="title">Software Infrastructure &amp; Joint Control <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Git workflow, robot config files, joint IDs, logging, teleoperation scripts, and basic sensor reading. Practical milestone: <em>“Move joint 3 by 10 degrees, log commanded vs. actual angle, and explain the difference.”</em> That is a real robotics lesson, not AI magic.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 12–14</span><span class="title">Simulation in MuJoCo <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Why simulation matters. MuJoCo model and XML structure: joints, bodies, actuators, contact, and gravity. The difference between simulation and the real robot. Match sim joint limits to your hardware. Simulation is a controlled approximation of reality, not a video game.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 15–16</span><span class="title">Control Before AI <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Open-loop vs. closed-loop. Position control and PD control. Balance intuition. Gait as a sequence. Failure modes: slipping, tipping, delay, and weak torque. Students create a simple standing, rocking, stepping, or keyframe motion. The lesson: AI sits on top of mechanics, electronics, and control, not in place of them.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 17–20</span><span class="title">AI / RL / Sim-to-Real Experiments &amp; Capstone Iteration <span class="tags"><span class="tag">Fall</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Reinforcement learning fundamentals: policy, reward, observation, and action. Domain randomization, the sim-to-real gap, and what can go wrong when deploying to hardware. Practical deliverable: run or modify a baseline policy or motion experiment, change one parameter, and analyze the behavior. Then iterate toward your final-project track.</div>
+          </details>
+          <details>
+            <summary><span class="t"><span class="wk">Weeks 21–22</span><span class="title">Final Project &amp; Cohort Showcase <span class="tags"><span class="tag ms">Milestone</span><span class="tag">Output</span></span></span></span><span class="chev" aria-hidden="true"><svg class="icon"><use href="#i-chev"/></svg></span></summary>
+            <div class="body">Pick a track (Mechanical, Electronics, Simulation, Control, AI, or Documentation) and produce a portfolio-quality deliverable: demo video, technical write-up in research-paper format, GitHub documentation, a short showcase talk, and a written reflection on <em>what failed, what changed, and what you learned.</em></div>
+          </details>
+        </div>
+
+        <div class="tracks-pick">
+          <h4>Final project: pick your track</h4>
+          <p>Everyone learns the basics across the whole stack. The final deliverable goes deep in one direction:</p>
+          <ul class="pick-grid">
+            <li><b>Mechanical</b>Improve cable routing or joint reliability on the chassis</li>
+            <li><b>Electronics</b>Build a clean wiring map and bring-up checklist for future cohorts</li>
+            <li><b>Simulation</b>Improve how well the MuJoCo model matches the real hardware</li>
+            <li><b>Control</b>Create a stable keyframe motion: standing, squatting, or stepping</li>
+            <li><b>AI / RL</b>Modify a reward or observation in simulation and analyze the change</li>
+            <li><b>Documentation</b>Turn your engineering notebook into a student-friendly assembly guide</li>
+          </ul>
+        </div>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ CTA BAND ================================ -->
+    <section class="cta-band on-dark" aria-labelledby="cta-title">
+      <div class="container cta-inner reveal">
+        <div>
+          <h2 id="cta-title">Ready to build one?</h2>
+          <p>Applications for Cohort 03 are reviewed on a rolling basis. It takes about five minutes to express interest.</p>
+        </div>
+        <div class="btn-row">
+          <a href="index.html#apply" class="btn btn-primary btn-lg">Apply to the Program <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a href="research.html" class="btn btn-secondary btn-lg">Our research</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================================ FOOTER ================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="index.html" class="brand">
+            <span class="brand-name">Genboo · <span class="cjk" lang="zh">进步</span></span>
+            <span class="brand-sub">Humanoid Cohort</span>
+          </a>
+          <p class="muted" style="margin-top:1rem;font-size:.875rem;max-width:22rem">Hands-on humanoid robotics for high-school students. Menlo Park, CA.</p>
+        </div>
+        <div>
+          <h2>Program</h2>
+          <ul>
+            <li><a href="curriculum.html">Curriculum</a></li>
+            <li><a href="research.html">Research</a></li>
+            <li><a href="index.html#apply">Apply</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Sources</h2>
+          <ul>
+            <li><a href="https://arxiv.org/abs/2609.25674" target="_blank" rel="noopener noreferrer">TALE 2026 paper (arXiv)</a></li>
+            <li><a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Stanford Online story</a></li>
+            <li><a href="https://toddlerbot.github.io/" target="_blank" rel="noopener noreferrer">ToddlerBot project</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Contact</h2>
+          <ul>
+            <li><a href="mailto:hello@genboo.com">hello@genboo.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <p>Genboo is independently operated and is not affiliated with Stanford University.</p>
+        <p>© 2026 Genboo</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
