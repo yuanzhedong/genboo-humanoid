@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RZVF6K9DJ5"></script>
   <script>
@@ -9,32 +11,23 @@
     gtag('js', new Date());
     gtag('config', 'G-RZVF6K9DJ5');
   </script>
-
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Humanoid Cohort 03 — Build a Real Humanoid Robot | Genboo</title>
-  <meta name="description" content="An 8-week hands-on humanoid robotics program for high-school students: teams of four build, wire, calibrate, and program a real ToddlerBot humanoid, with a first look at simulation and reinforcement learning." />
-  <link rel="canonical" href="https://humanoid.genboo.com/" />
-  <meta name="theme-color" content="#fdfaf8" />
-
-  <!-- Open Graph / Facebook / iMessage / Slack -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Genboo · Humanoid Cohort" />
-  <meta property="og:url" content="https://humanoid.genboo.com/" />
-  <meta property="og:title" content="Build a Real Humanoid Robot. Learn to Make It Move." />
-  <meta property="og:description" content="Teams of four high-school students build and program a real ToddlerBot humanoid in 8 weekly sessions. Applications open for Cohort 03." />
-  <meta property="og:image" content="https://humanoid.genboo.com/og-image.jpg" />
-  <meta property="og:image:alt" content="Three ToddlerBot humanoid robots built in the Genboo lab, standing side by side" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-
-  <!-- Twitter / X -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Build a Real Humanoid Robot. Learn to Make It Move." />
-  <meta name="twitter:description" content="Teams of four high-school students build and program a real ToddlerBot humanoid in 8 weekly sessions. Applications open for Cohort 03." />
-  <meta name="twitter:image" content="https://humanoid.genboo.com/og-image.jpg" />
-  <meta name="twitter:image:alt" content="Three ToddlerBot humanoid robots built in the Genboo lab, standing side by side" />
-
+<meta name="theme-color" content="#f1efe9">
+<link rel="canonical" href="https://humanoid.genboo.com/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Genboo · Humanoid Cohort">
+<meta property="og:url" content="https://humanoid.genboo.com/">
+<meta property="og:title" content="Let’s build a humanoid robot from scratch.">
+<meta property="og:description" content="An 8-week, hands-on program in Menlo Park: teams of four high-school students build a real humanoid robot from scratch and learn mechanics, electronics, code, and AI.">
+<meta property="og:image" content="https://humanoid.genboo.com/og-image.jpg">
+<meta property="og:image:alt" content="Three ToddlerBot humanoid robots built in the Genboo lab, standing side by side">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Let’s build a humanoid robot from scratch.">
+<meta name="twitter:description" content="An 8-week, hands-on program in Menlo Park: teams of four high-school students build a real humanoid robot from scratch and learn mechanics, electronics, code, and AI.">
+<meta name="twitter:image" content="https://humanoid.genboo.com/og-image.jpg">
   <!-- Structured data: course offering -->
   <script type="application/ld+json">
   {
@@ -55,383 +48,690 @@
     }
   }
   </script>
+<title>Build a Humanoid Robot from Scratch | Genboo Humanoid Cohort 03</title>
+<meta name="description" content="An 8-week, hands-on program in Menlo Park: teams of four high-school students build a real humanoid robot from scratch and learn mechanics, electronics, code, and AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f1efe9;
+  --bg-2: #e7e3da;
+  --ink: #1f1f1f;
+  --ink-2: #5f5c56;
+  --ink-3: #67635c;
+  --pill: #e2ddd2;
+  /* Taken from the student-built ToddlerBots: orange heads, slate-blue bodies,
+     sage-green leg brackets, rust feet, charcoal servos, a tan nameplate. */
+  --amber: #e2a764;
+  --blue: #4d6fae;
+  --rust: #a5573a;
+  --green: #6f8f5a;
+  --orange: #e8742a;
+  --charcoal: #2a2a2d;
+  --blue-ink: #34558f;
+  --green-ink: #4c6b3b;
+  --rust-ink: #8c4429;
+  --orange-ink: #c4561a;
+  --font: "Outfit", "Google Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #161614; --bg-2: #22211e; --ink: #f1efe9; --ink-2: #b9b5ac; --ink-3: #97938a; --pill: #2c2b27;
+    --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #161614; --bg-2: #22211e; --ink: #f1efe9; --ink-2: #b9b5ac; --ink-3: #97938a; --pill: #2c2b27;
+  --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a;
+}
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  <link rel="apple-touch-icon" href="favicon.svg" />
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 18px; line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--blue-ink); outline-offset: 3px; border-radius: 6px; }
+h1, h2, h3 { font-weight: 400; letter-spacing: -0.03em; line-height: 1.02; margin: 0; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px); }
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!-- Fonts load without blocking first paint; system fonts render until they arrive -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" media="print" onload="this.media='all'" />
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap" /></noscript>
+/* ---------- nav ---------- */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; height: 68px; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(16px, 3vw, 32px); transition: background .3s, color .3s; }
+.nav.solid { background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 500; font-size: 1.15rem; letter-spacing: -0.01em; }
+.logo svg { width: 26px; height: 26px; }
+.nav-links { display: flex; align-items: center; gap: 6px; }
+.nav-links a { text-decoration: none; font-size: .95rem; padding: 8px 14px; border-radius: 999px; }
+.nav-links a:not(.pill-btn):hover { background: var(--pill); }
+@media (max-width: 720px) { .nav-links a:not(.pill-btn) { display: none; } }
 
-  <link rel="preload" as="image" type="image/webp"
-    imagesrcset="assets/img/robots-three-800.webp 800w, assets/img/robots-three-1400.webp 1400w, assets/img/robots-three-2000.webp 2000w"
-    imagesizes="(min-width: 1180px) 50vw, 92vw" fetchpriority="high" />
+.pill-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font: 500 1rem/1 var(--font); padding: 14px 24px; border-radius: 999px; border: 0; cursor: pointer; transition: transform .2s, background .2s; }
+.pill-btn:hover { transform: translateY(-2px); }
+.pill-dark { background: var(--ink); color: var(--bg); }
+.pill-soft { background: var(--pill); color: var(--ink); }
+.pill-white { background: #fff; color: #1f1f1f; }
+.nav .pill-btn { padding: 10px 18px; font-size: .92rem; }
 
-  <link rel="stylesheet" href="styles.css?v=202610112249" />
+/* ---------- HERO: parts assemble into a robot ---------- */
+.hero { height: 190vh; position: relative; }
+.stage { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.part { position: absolute; left: 50%; top: 50%; will-change: transform; }
+.part > i { display: block; width: 100%; height: 100%; transform: scale(0); transition: transform .9s cubic-bezier(.3,1.4,.5,1); }
+.loaded .part > i { transform: scale(1); }
+.part svg { display: block; overflow: visible; filter: drop-shadow(0 6px 10px rgba(40, 30, 20, .12)); }
+/* Once assembled, the camera "irises" glow on and off, like the robot is looking around. */
+.alive .iris { animation: iris 3.2s ease-in-out infinite; }
+@keyframes iris { 0%, 100% { fill: #26324a; } 50% { fill: #5d86c9; } }
+
+.hero-copy { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px 40px; pointer-events: none; z-index: 2; }
+.hero-copy > * { pointer-events: auto; }
+.tag { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--pill); border-radius: 999px; padding: 7px 14px; font-size: .9rem; }
+.tag b { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 35%, transparent); }
+.hero h1 { font-size: clamp(2.8rem, 7vw, 6.4rem); margin: 24px 0 22px; max-width: 12em; }
+.hero h1 .grad { background: linear-gradient(90deg, var(--orange-ink), var(--rust-ink) 55%, var(--blue-ink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lede { font-size: clamp(1.1rem, 1.8vw, 1.45rem); color: var(--ink-2); max-width: 30em; font-weight: 300; }
+.hero .lede strong { color: var(--ink); font-weight: 500; }
+.hero .ctas { display: flex; gap: 10px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
+.scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); font-size: .82rem; color: var(--ink-3); display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 2; }
+.scroll-hint i { width: 22px; height: 34px; border: 1.5px solid var(--ink-3); border-radius: 12px; position: relative; }
+.scroll-hint i::after { content: ""; position: absolute; left: 50%; top: 7px; width: 3px; height: 7px; margin-left: -1.5px; border-radius: 2px; background: var(--ink-3); animation: wheel 1.6s infinite; }
+@keyframes wheel { to { transform: translateY(10px); opacity: 0; } }
+
+.hero-mid { position: absolute; left: 50%; top: 50%; z-index: 2; opacity: 0; font-size: clamp(2rem, 5vw, 4.2rem); letter-spacing: -0.03em; white-space: nowrap; background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 6px 22px; border-radius: 999px; }
+@media (max-width: 520px) { .hero-mid { white-space: normal; text-align: center; width: 86vw; border-radius: 28px; } }
+.hero-after { position: absolute; left: 0; right: 0; bottom: 5vh; text-align: center; z-index: 2; opacity: 0; padding: 0 20px; }
+.hero-after h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); }
+.hero-after p { color: var(--ink-2); margin-top: 8px; font-size: clamp(1rem, 1.4vw, 1.2rem); }
+.labels { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.labels span { position: absolute; left: 50%; top: 50%; font-size: .85rem; background: var(--bg); border: 1px solid var(--pill); padding: 6px 12px; border-radius: 999px; white-space: nowrap; opacity: 0; transition: opacity .4s; }
+.labels.on span { opacity: 1; }
+@media (max-width: 720px) { .labels { display: none; } }
+
+/* ---------- WHAT IS IT: scroll-lit statement ---------- */
+.what { padding: clamp(100px, 16vw, 200px) 0 clamp(80px, 12vw, 160px); position: relative; }
+.chips { position: relative; height: 80px; max-width: 520px; margin: 0 auto 30px; }
+.chips span { position: absolute; background: var(--pill); padding: 10px 20px; border-radius: 999px; font-size: 1rem; }
+.kicker { text-align: center; font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 22px; font-weight: 500; }
+.statement { font-size: clamp(1.9rem, 4.4vw, 3.6rem); line-height: 1.16; letter-spacing: -0.02em; text-align: center; max-width: 1080px; margin: 0 auto; font-weight: 400; }
+.statement .w { color: color-mix(in srgb, var(--ink) 18%, var(--bg)); transition: color .25s; }
+.statement .w.lit { color: var(--ink); }
+.statement .k1.lit { color: var(--blue-ink); }
+.statement .k2.lit { color: var(--green-ink); }
+.statement .k3.lit { color: var(--rust-ink); }
+.statement .k4.lit { color: var(--orange-ink); }
+.cites { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-top: clamp(32px, 4.5vw, 52px); }
+.cite { display: inline-flex; align-items: center; gap: 10px; padding: 16px 26px 16px 22px; border-radius: 999px; color: #fff; font-size: 1.08rem; font-weight: 500; text-decoration: none; box-shadow: 0 12px 28px -14px rgba(0,0,0,.5); transition: transform .2s, box-shadow .2s, filter .2s; }
+.cite svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.cite span { transition: transform .2s; }
+.cite:hover { transform: translateY(-3px); box-shadow: 0 18px 34px -14px rgba(0,0,0,.55); filter: brightness(1.08); }
+.cite:hover span { transform: translate(2px, -2px); }
+.cite-paper { background: #34558f; }
+.cite-story { background: #b84e14; }
+.blob { position: absolute; z-index: -1; pointer-events: none; }
+
+/* ---------- WHAT THEY DO: full-bleed carousel ---------- */
+.do-head { text-align: center; margin-bottom: 36px; }
+.do-head h2 { font-size: clamp(2.6rem, 6.5vw, 5.6rem); }
+.do-head p { color: var(--ink-2); margin-top: 14px; font-size: 1.15rem; }
+.carousel { position: relative; height: min(86vh, 820px); min-height: 520px; overflow: hidden; color: #fff; touch-action: pan-y; }
+.track { display: flex; gap: clamp(10px, 1.4vw, 18px); height: 100%; transition: transform .8s cubic-bezier(.3,.8,.2,1); will-change: transform; }
+.slide { position: relative; flex: 0 0 min(84%, 1240px); height: 100%; border-radius: 32px; overflow: hidden; background: #111; opacity: .45; transform: scale(.94); transition: opacity .8s ease, transform .8s cubic-bezier(.3,.8,.2,1); cursor: pointer; }
+.slide.on { opacity: 1; transform: none; cursor: default; }
+.slide .cap { transition: opacity .5s ease; }
+.slide:not(.on) .cap { opacity: 0; }
+@media (max-width: 720px) { .slide { flex-basis: 86%; border-radius: 24px; } }
+.slide img, .slide video { width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); transition: transform 6s ease-out; }
+.slide.on img, .slide.on video { transform: scale(1); }
+.slide::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.05) 35%, rgba(0,0,0,.6) 100%); }
+.slide .cap { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+.slide .wk { font-size: .82rem; letter-spacing: .14em; text-transform: uppercase; background: rgba(255,255,255,.18); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 7px 14px; border-radius: 999px; }
+.slide h3 { font-size: clamp(4rem, 13vw, 10rem); letter-spacing: -0.045em; margin: 16px 0 10px; text-shadow: 0 4px 40px rgba(0,0,0,.25); }
+.slide p { font-size: clamp(1.05rem, 1.8vw, 1.4rem); max-width: 30em; text-shadow: 0 2px 16px rgba(0,0,0,.4); }
+.car-ui { position: absolute; left: 0; right: 0; bottom: 26px; pointer-events: none; z-index: 3; display: flex; align-items: center; justify-content: center; gap: 14px; }
+.car-ui > * { pointer-events: auto; }
+.car-btn { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.6); background: rgba(0,0,0,.15); color: #fff; cursor: pointer; display: grid; place-items: center; font-size: 1.1rem; }
+.car-btn:hover { background: rgba(255,255,255,.2); }
+.car-side { position: absolute; top: 50%; z-index: 4; width: 68px; height: 68px; margin-top: -34px; border-radius: 50%; border: 0; background: rgba(255,255,255,.9); color: #1f1f1f; display: grid; place-items: center; cursor: pointer; box-shadow: 0 10px 30px -8px rgba(0,0,0,.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: transform .2s, background .2s; }
+.car-side svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.car-side:hover { background: #fff; transform: scale(1.08); }
+.car-side:active { transform: scale(.96); }
+#prev { left: calc(8% + clamp(16px, 3vw, 44px)); }
+#next { right: calc(8% + clamp(16px, 3vw, 44px)); }
+@media (max-width: 720px) {
+  .car-side { width: 48px; height: 48px; top: auto; bottom: 10px; margin-top: 0; }
+  .car-side svg { width: 22px; height: 22px; }
+  #prev { left: calc(7% + 10px); } #next { right: calc(7% + 10px); }
+}
+.dots { display: flex; gap: 6px; align-items: center; }
+.dots button { width: 8px; height: 8px; border-radius: 99px; border: 0; padding: 0; background: rgba(255,255,255,.55); cursor: pointer; transition: width .3s; position: relative; overflow: hidden; }
+.dots button.on { width: 56px; background: rgba(255,255,255,.35); }
+.dots button.on::after { content: ""; position: absolute; inset: 0; background: #fff; transform-origin: left; animation: fill var(--dur, 5.5s) linear forwards; }
+.carousel.paused .dots button.on::after { animation-play-state: paused; }
+@keyframes fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.steps-row { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 22px; }
+.steps-row button { font: 400 .95rem var(--font); background: var(--pill); color: var(--ink); border: 0; padding: 9px 16px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s; }
+.steps-row button.on { background: var(--ink); color: var(--bg); }
+
+/* ---------- WHAT THEY GAIN ---------- */
+.gain { padding: clamp(110px, 16vw, 200px) 0 clamp(80px, 10vw, 140px); position: relative; overflow: hidden; }
+.gain-bg { position: absolute; left: 50%; top: 32%; width: min(1400px, 140vw); height: 70%; transform: translateX(-50%); z-index: 0; pointer-events: none; }
+.gain .wrap { position: relative; z-index: 1; }
+.gain h2 { text-align: center; font-size: clamp(2.8rem, 7vw, 6rem); }
+.gain h2 .c1 { color: var(--blue-ink); } .gain h2 .c2 { color: var(--green-ink); }
+.gain .sub { text-align: center; color: var(--ink-2); margin: 16px auto 0; max-width: 32em; font-size: 1.15rem; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: clamp(48px, 7vw, 80px); }
+.card { background: var(--bg); border-radius: 28px; overflow: hidden; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 20px 50px -30px rgba(0,0,0,.35); display: flex; flex-direction: column; transition: transform .35s cubic-bezier(.3,1.3,.5,1); }
+.card:hover { transform: translateY(-8px) rotate(-.4deg); }
+.card .art { height: 200px; position: relative; overflow: hidden; }
+.card .art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card .body { padding: 24px 24px 30px; display: grid; gap: 12px; }
+.card .n { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3); font-weight: 500; }
+.card h3 { font-size: clamp(1.5rem, 2vw, 1.85rem); letter-spacing: -0.02em; }
+.card p { color: var(--ink-2); font-weight: 300; }
+.card .meta { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 6px; }
+.card .meta span { background: var(--pill); border-radius: 999px; padding: 5px 12px; font-size: .82rem; }
+@media (max-width: 1100px) { .cards { grid-template-columns: 1fr 1fr; max-width: 860px; margin-left: auto; margin-right: auto; } }
+@media (max-width: 640px) { .cards { grid-template-columns: 1fr; max-width: 520px; } }
+
+/* ---------- PROOF ---------- */
+.proof { padding: 0 0 clamp(80px, 12vw, 160px); }
+.proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.p-tile { border-radius: 24px; padding: 26px; min-height: 200px; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: #1f1f1f; transition: transform .3s; }
+a.p-tile:hover { transform: translateY(-4px); }
+.p-tile b { font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 400; letter-spacing: -0.04em; line-height: 1; }
+.p-tile span { font-size: 1rem; }
+.p-tile small { font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
+.p-tile strong { font-weight: 400; font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.01em; }
+.p-wide { grid-column: span 2; }
+@media (max-width: 900px) { .proof-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .p-wide { grid-column: span 2; } .p-tile { min-height: 160px; padding: 20px; } }
+
+/* ---------- FINAL CTA: shapes pile up ---------- */
+.final { position: relative; min-height: 92vh; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; padding: 120px 20px 240px; }
+.final h2 { font-size: clamp(2.6rem, 6.5vw, 5.4rem); position: relative; z-index: 2; }
+.final h2 .c1 { color: var(--orange-ink); } .final h2 .c2 { color: var(--blue-ink); }
+.final p { position: relative; z-index: 2; color: var(--ink-2); margin: 18px auto 0; max-width: 30em; font-size: 1.15rem; }
+.final .ctas { position: relative; z-index: 2; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+.pile { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.pile i { position: absolute; display: block; transform: translateY(-120vh) rotate(var(--r0)); transition: transform 1.2s cubic-bezier(.25,1.25,.45,1); transition-delay: var(--d); }
+.final.in .pile i { transform: translateY(0) rotate(var(--r)); }
+
+.foot { padding: 28px 0 36px; color: var(--ink-3); font-size: .9rem; }
+.foot .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--pill); padding-top: 24px; }
+.foot nav { display: flex; gap: 20px; flex-wrap: wrap; }
+.foot a { text-decoration: none; color: var(--ink-2); }
+.foot a:hover { color: var(--ink); }
+
+.rise { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+.rise.in { opacity: 1; transform: none; }
+
+/* phone menu */
+.menu-toggle { display: none; position: relative; width: 44px; height: 44px; margin-left: 6px; border-radius: 50%; border: 0; background: var(--pill); color: var(--ink); cursor: pointer; flex: none; }
+.menu-toggle span { position: absolute; left: 13px; right: 13px; height: 2px; border-radius: 2px; background: currentColor; transition: transform .25s; }
+.menu-toggle span:first-child { top: 17px; } .menu-toggle span:last-child { top: 25px; }
+.menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+.mmenu { position: fixed; top: 72px; left: 12px; right: 12px; z-index: 60; display: grid; gap: 2px; padding: 10px; border-radius: 24px; background: var(--bg); box-shadow: 0 24px 60px -20px rgba(0,0,0,.45); }
+.mmenu[hidden] { display: none; }
+.mmenu a { padding: 14px 16px; border-radius: 14px; text-decoration: none; font-size: 1.1rem; color: var(--ink); }
+.mmenu a:hover { background: var(--pill); }
+.mmenu .mm-apply { margin-top: 6px; text-align: center; background: var(--ink); color: var(--bg); }
+@media (max-width: 720px) { .menu-toggle { display: inline-block; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .part > i, .rise, .pile i, .track, .slide, .slide img, .slide video { transition: none !important; }
+  .rise { opacity: 1; transform: none; }
+  .alive .iris, .scroll-hint i::after, .dots button.on::after { animation: none; }
+}
+</style>
 </head>
+<body>
 
-<body class="no-js">
-  <script>document.body.classList.remove('no-js');</script>
+<header class="nav" id="nav">
+  <a class="logo" href="index.html" aria-label="Genboo Humanoid home">
+    <svg viewBox="0 0 26 26" aria-hidden="true"><rect x="1.5" y="5" width="23" height="16" rx="5.5" fill="var(--orange)"/><circle cx="8.5" cy="13" r="4" fill="#2a2a2d"/><circle cx="17.5" cy="13" r="4" fill="#2a2a2d"/><circle cx="7.6" cy="12" r="1" fill="#fff"/><circle cx="16.6" cy="12" r="1" fill="#fff"/></svg>
+    Genboo Humanoid
+  </a>
+  <nav class="nav-links">
+    <a href="#do" aria-current="page">What we build</a>
+    <a href="story.html">Our story</a>
+    <a href="program.html">Program</a>
+    <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener">Instructor ↗</a>
+    <a class="pill-btn pill-dark" href="apply.html">Apply</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mmenu" aria-label="Open menu"><span></span><span></span></button>
+  </nav>
+  <nav class="mmenu" id="mmenu" aria-label="Menu" hidden><a href="#do">What we build</a><a href="story.html">Our story</a><a href="program.html">Program</a><a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener">Instructor ↗</a><a class="mm-apply" href="apply.html">Apply for Cohort 03</a></nav>
+</header>
 
-  <!-- Inline icon sprite (replaces the Lucide CDN) -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-    <symbol id="i-arrow-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
-    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-    <symbol id="i-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
-    <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7z"/></symbol>
-    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  </svg>
+<main>
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Introduction">
+    <div class="stage" id="stage">
+      <div class="parts" id="parts" aria-hidden="true"></div>
+      <div class="labels" id="labels" aria-hidden="true">
+        <span data-for="head">Stereo cameras · vision</span>
+        <span data-for="torso">Computer · battery · IMU</span>
+        <span data-for="shL">Servo motors · torque</span>
+        <span data-for="shinR">Control · balance</span>
+      </div>
 
-  <a class="skip-link" href="#main">Skip to content</a>
+      <div class="hero-copy" id="heroCopy">
+        <span class="tag"><b></b>Cohort 03 · Now accepting applications</span>
+        <h1>Let’s build a <span class="grad">humanoid robot</span> from scratch.</h1>
+        <p class="lede">An 8-week program in Menlo Park. <strong>Four high-schoolers. One humanoid. From a box of parts</strong> to a robot that moves, and every subject it takes on the way.</p>
+        <div class="ctas">
+          <a class="pill-btn pill-dark" href="apply.html">Apply for Cohort 03</a>
+          <a class="pill-btn pill-soft" href="#do">See what we build</a>
+        </div>
+      </div>
 
-  <!-- ================================ HEADER ================================ -->
-  <header class="site-header" id="top">
-    <div class="container header-inner">
-      <a href="./" class="brand">
-        <span class="brand-name">Genboo · <span class="cjk" lang="zh">进步</span></span>
-        <span class="brand-sub">Humanoid Cohort</span>
-      </a>
-      <nav class="nav" aria-label="Primary">
-        <a href="#projects">Student Projects</a>
-        <a href="curriculum.html">Curriculum</a>
-        <a href="research.html">Research</a>
-        <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
-      </nav>
-      <a href="#apply" class="btn btn-primary header-cta">Apply to the Program</a>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Menu">
-        <svg class="icon icon-open" aria-hidden="true"><use href="#i-menu"/></svg>
-        <svg class="icon icon-close" aria-hidden="true"><use href="#i-x"/></svg>
-      </button>
+      <div class="hero-mid" id="heroMid" aria-hidden="true">It starts as a box of parts…</div>
+      <div class="hero-after" id="heroAfter">
+        <h2>This is what we will build together.</h2>
+        <p>Every part above is a different subject. Together, they make one robot.</p>
+      </div>
+      <div class="scroll-hint" id="hint"><i></i>Scroll to assemble</div>
     </div>
-  </header>
-  <div class="mobile-menu" id="mobile-menu" hidden>
-    <nav aria-label="Mobile">
-      <a href="#projects">Student Projects</a>
-      <a href="curriculum.html">Curriculum</a>
-      <a href="research.html">Research</a>
-      <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor</a>
-      <a href="#apply" class="btn btn-primary btn-lg">Apply to the Program <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </nav>
+  </section>
+
+  <!-- WHAT IS IT -->
+  <section class="what" id="what">
+    <div class="wrap">
+      <div class="chips rise" aria-hidden="true">
+        <span style="left:2%;top:30px;transform:rotate(-12deg)">Build</span>
+        <span style="left:24%;top:2px;transform:rotate(8deg);background:var(--amber);color:#1f1f1f">Wire</span>
+        <span style="left:44%;top:34px;transform:rotate(-4deg)">Code</span>
+        <span style="left:63%;top:4px;transform:rotate(14deg);background:var(--rust);color:#fff">AI</span>
+        <span style="left:80%;top:30px;transform:rotate(-8deg)">Team</span>
+      </div>
+      <p class="statement" id="statement"><span class="k1">Teams of four high-school students</span> build a <span class="k2">real humanoid robot</span> in eight weeks, and learn <span class="k3">mechanics, electronics, code, and AI</span>.</p>
+      <div class="cites rise"><a class="cite cite-paper" href="https://arxiv.org/abs/2609.25674" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>Curriculum Paper · IEEE TALE 2026 <span aria-hidden="true">↗</span></a><a class="cite cite-story" href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Instructor story <span aria-hidden="true">↗</span></a></div>
+    </div>
+  </section>
+
+  <!-- WHAT THEY DO -->
+  <section id="do" style="padding-bottom:clamp(40px,6vw,80px)">
+    <div class="wrap do-head rise">
+      <h2>Eight weeks.</h2>
+    </div>
+    <div class="carousel" id="carousel" aria-roledescription="carousel">
+      <div class="track" id="track">
+      <div class="slide on" data-label="Build">
+        <img src="assets/img/student-assembly-hands-1200.webp" alt="Hands assembling the torso and arm actuators of a humanoid robot">
+        <div class="cap"><span class="wk">Weeks 1–3</span><h3>Build</h3><p>Assemble a humanoid from 3D-printed parts and servo motors, one limb at a time.</p></div>
+      </div>
+      <div class="slide" data-label="Wire">
+        <img src="assets/img/student-soldering-1200.webp" alt="A student soldering wires at an electronics bench" loading="lazy">
+        <div class="cap"><span class="wk">Week 4</span><h3>Wire</h3><p>Power, an onboard computer, sensors. Every connection checked before the first power-on.</p></div>
+      </div>
+      <div class="slide" data-label="Code">
+        <img src="assets/img/students-testing-team-1200.webp" alt="Students running code on a laptop next to two robots" loading="lazy">
+        <div class="cap"><span class="wk">Weeks 5–6</span><h3>Code</h3><p>Calibrate every joint, then write the first program: move joint 3 by 10 degrees, and explain why it doesn’t land exactly there.</p></div>
+      </div>
+      <div class="slide" data-label="Simulate">
+        <img src="assets/img/sim-parallel-training-1880.webp" alt="Dozens of simulated robots training in parallel" loading="lazy">
+        <div class="cap"><span class="wk">Week 7</span><h3>Simulate</h3><p>Rebuild the robot in the MuJoCo physics simulator. Run the same motion in both worlds and compare.</p></div>
+      </div>
+      <div class="slide" data-label="Learn" data-dur="10000">
+        <video src="assets/videos/sim-walk.mp4" poster="assets/img/sim-walk-poster.webp" muted loop playsinline preload="none"></video>
+        <div class="cap"><span class="wk">Week 8</span><h3>Learn</h3><p>A first taste of reinforcement learning: change one reward, and watch the robot behave differently.</p></div>
+      </div>
+      <div class="slide" data-label="Show" data-dur="12000">
+        <video src="assets/videos/walking-trial-small.mp4" poster="assets/img/walking-trial-poster.webp" muted loop playsinline preload="none" aria-label="A student-built humanoid robot walking"></video>
+        <div class="cap"><span class="wk">Showcase</span><h3>Show</h3><p>Demo the robot as a team, and explain what worked, what didn’t, and why.</p></div>
+      </div>
+      </div>
+      <button class="car-side" id="prev" aria-label="Previous step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="car-side" id="next" aria-label="Next step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      <div class="car-ui">
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+    <div class="steps-row" id="stepsRow"></div>
+  </section>
+
+  <!-- WHAT THEY GAIN -->
+  <section class="gain" id="gain">
+    <svg class="gain-bg" viewBox="0 0 1400 600" preserveAspectRatio="none" aria-hidden="true">
+      <circle cx="140" cy="300" r="240" fill="var(--blue)" opacity=".85"/>
+      <rect x="980" y="40" width="460" height="460" rx="120" fill="var(--green)" opacity=".85" transform="rotate(12 1210 270)"/>
+    </svg>
+    <div class="wrap">
+      <h2 class="rise">What they <span class="c1">walk away</span> <span class="c2">with</span></h2>
+      <p class="sub rise">The robot is the vehicle. These four things are the point.</p>
+      <div class="cards">
+        <article class="card rise">
+          <div class="art" style="background:var(--amber)" aria-hidden="true">
+            <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
+              <rect x="40" y="120" width="90" height="70" rx="10" fill="#fff" opacity=".9"/><path d="M40 120 l18 -22 h90 l-18 22" fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M150 155 H220" stroke="#1f1f1f" stroke-width="3" stroke-dasharray="6 8" stroke-linecap="round"/><path d="M214 146 l10 9 -10 9" fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linecap="round"/>
+              <rect x="256" y="40" width="96" height="60" rx="18" fill="var(--orange)"/><circle cx="282" cy="71" r="14" fill="#2a2a2d"/><circle cx="326" cy="71" r="14" fill="#2a2a2d"/><circle cx="278" cy="67" r="3" fill="#fff"/><circle cx="322" cy="67" r="3" fill="#fff"/>
+              <rect x="266" y="106" width="76" height="62" rx="8" fill="var(--blue)"/><rect x="278" y="120" width="52" height="18" rx="2" fill="#2a2a2d"/><rect x="276" y="172" width="22" height="40" rx="5" fill="var(--green)"/><rect x="310" y="172" width="22" height="40" rx="5" fill="var(--green)"/><rect x="272" y="212" width="30" height="10" rx="5" fill="var(--rust)"/><rect x="306" y="212" width="30" height="10" rx="5" fill="var(--rust)"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="n">01 · Ownership</span>
+            <h3>A project of their own</h3>
+            <p>Students take a robot from a box of parts to working, and own every failure and fix along the way.</p>
+            <div class="meta"><span>Zero → one</span><span>Problem solving</span><span>Grit</span></div>
+          </div>
+        </article>
+        <article class="card rise">
+          <div class="art" style="background:var(--rust)" aria-hidden="true">
+            <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
+              <path d="M30 200 C 120 196, 170 170, 210 130 S 300 40, 380 30" fill="none" stroke="#1f1f1f" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="80" cy="196" r="20" fill="var(--orange)"/><circle cx="170" cy="168" r="22" fill="var(--amber)"/><circle cx="250" cy="96" r="24" fill="var(--blue)"/><circle cx="335" cy="44" r="26" fill="var(--green)"/>
+              <text x="80" y="201" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" fill="#1f1f1f">ME</text>
+              <text x="170" y="173" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" fill="#1f1f1f">EE</text>
+              <text x="250" y="101" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" fill="#1f1f1f">CS</text>
+              <text x="335" y="49" text-anchor="middle" font-family="Outfit, sans-serif" font-size="13" fill="#1f1f1f">AI</text>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="n">02 · Curiosity</span>
+            <h3>Interest that teaches itself</h3>
+            <p>Nobody has to assign the reading on torque when the robot’s knee keeps buckling. They go look it up.</p>
+            <div class="meta"><span>Mechanics</span><span>Electronics</span><span>Code</span><span>AI</span></div>
+          </div>
+        </article>
+        <article class="card rise">
+          <div class="art" style="background:var(--green)" aria-hidden="true">
+            <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
+              <rect x="152" y="83" width="96" height="60" rx="18" fill="var(--orange)"/><circle cx="178" cy="114" r="14" fill="#2a2a2d"/><circle cx="222" cy="114" r="14" fill="#2a2a2d"/><circle cx="174" cy="110" r="3" fill="#fff"/><circle cx="218" cy="110" r="3" fill="#fff"/>
+              <circle cx="80" cy="60" r="26" fill="var(--amber)"/><circle cx="320" cy="60" r="26" fill="var(--blue)"/><circle cx="80" cy="170" r="26" fill="var(--rust)"/><circle cx="320" cy="170" r="26" fill="var(--orange)"/>
+              <path d="M104 70 L158 96 M296 70 L242 96 M104 160 L158 132 M296 160 L242 132" stroke="#1f1f1f" stroke-width="3" stroke-dasharray="5 7" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="n">03 · Teamwork</span>
+            <h3>Four people, one robot</h3>
+            <p>Teams split the work, take turns, and debug together, like real engineering teams.</p>
+            <div class="meta"><span>Collaboration</span><span>Communication</span><span>Presenting</span></div>
+          </div>
+        </article>
+        <article class="card rise">
+          <div class="art" style="background:var(--blue)" aria-hidden="true">
+            <svg viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice">
+              <rect x="70" y="30" width="130" height="170" rx="10" fill="#fff" opacity=".92"/>
+              <rect x="88" y="52" width="80" height="8" rx="4" fill="#1f1f1f"/>
+              <rect x="88" y="72" width="94" height="5" rx="2.5" fill="#1f1f1f" opacity=".3"/><rect x="88" y="84" width="86" height="5" rx="2.5" fill="#1f1f1f" opacity=".3"/>
+              <path d="M90 170 L112 156 L128 160 L148 132 L162 138 L182 108" fill="none" stroke="var(--orange)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M88 178 H184 M88 178 V104" stroke="#1f1f1f" stroke-width="1.5" opacity=".4"/>
+              <rect x="236" y="70" width="96" height="60" rx="18" fill="var(--orange)"/><circle cx="262" cy="101" r="14" fill="#2a2a2d"/><circle cx="306" cy="101" r="14" fill="#2a2a2d"/><circle cx="258" cy="97" r="3" fill="#fff"/><circle cx="302" cy="97" r="3" fill="#fff"/>
+              <path d="M214 115 H230" stroke="#1f1f1f" stroke-width="3" stroke-dasharray="4 6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="n">04 · Further research</span>
+            <h3>A path into real research</h3>
+            <p>Students who want more can continue into our 22-week research track and finish with a technical write-up.</p>
+            <div class="meta"><span>Simulation</span><span>RL</span><span>Write-up</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="proof">
+    <div class="wrap proof-grid">
+      <div class="p-tile rise" style="background:var(--amber)"><small>Format</small><div><b>8</b><span> weeks · 3 hrs each</span></div></div>
+      <div class="p-tile rise" style="background:#8c4429;color:#fff"><small>Team</small><div><b>4</b><span> students per robot</span></div></div>
+      <div class="p-tile rise" style="background:#4c6b3b;color:#fff"><small>Mentors</small><div><b>1:4</b><span> one per team</span></div></div>
+      <div class="p-tile rise" style="background:#b84e14;color:#fff"><small>Prereqs</small><div><b>0</b><span> robotics experience</span></div></div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final" id="final">
+    <div class="pile" aria-hidden="true">
+      <i style="left:4%;bottom:-40px;width:220px;height:220px;border-radius:50%;background:var(--blue);--r0:-30deg;--r:0deg;--d:.05s"></i>
+      <i style="left:18%;bottom:-20px;width:170px;height:170px;border-radius:36px;background:var(--rust);--r0:40deg;--r:-8deg;--d:.25s"></i>
+      <i style="left:33%;bottom:-70px;width:200px;height:200px;border-radius:44px;background:var(--green);--r0:-50deg;--r:6deg;--d:.15s"></i>
+      <i style="left:52%;bottom:-30px;width:150px;height:240px;border-radius:999px;background:var(--amber);--r0:60deg;--r:-14deg;--d:.35s"></i>
+      <i style="left:66%;bottom:-50px;width:210px;height:210px;border-radius:50%;background:var(--orange);--r0:-20deg;--r:0deg;--d:.1s"></i>
+      <i style="left:82%;bottom:-10px;width:190px;height:150px;border-radius:40px;background:var(--blue);--r0:30deg;--r:10deg;--d:.3s"></i>
+    </div>
+    <div>
+      <h2 class="rise">Cohort 03 is <span class="c1">open.</span><br>Let them <span class="c2">build.</span></h2>
+      <p class="rise">Grades 9–12 · No experience needed · Parents can apply on a student’s behalf.</p>
+      <div class="ctas rise">
+        <a class="pill-btn pill-dark" href="apply.html">Apply for Cohort 03</a>
+        <a class="pill-btn pill-soft" href="program.html">See the full program</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Genboo · Menlo Park, California</span>
+    <nav><a href="story.html">Our story</a><a href="program.html">Program</a><a href="apply.html">Apply</a><a href="mailto:hello@genboo.com">hello@genboo.com</a></nav>
   </div>
+</footer>
 
-  <main id="main">
-    <!-- ================================ HERO ================================ -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="badges">
-              <a class="badge" href="#apply"><span class="badge-dot" aria-hidden="true"></span>Cohort 03 · Now reviewing applications</a>
-            </div>
-            <h1 id="hero-title">Build a real humanoid robot from scratch.</h1>
-            <p class="lede">An 8-week, hands-on program in Menlo Park. High-school students work in teams of four. No robotics experience needed.</p>
-            <div class="btn-row hero-cta">
-              <a href="#apply" class="btn btn-primary btn-lg">Apply for Cohort 03 <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-              <a href="#projects" class="hero-more">See what students build ↓</a>
-            </div>
-            <p class="cred-line">
-              <a href="https://arxiv.org/pdf/2609.25674" target="_blank" rel="noopener noreferrer">Curriculum paper accepted at IEEE TALE 2026 <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-              <a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Instructor Story <svg class="icon" aria-hidden="true"><use href="#i-arrow-ur"/></svg></a>
-            </p>
-          </div>
+<script>
+(function () {
+  var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var clamp = function (v, a, b) { return Math.max(a, Math.min(b, v)); };
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
+  var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
 
-          <div class="hero-media">
-            <figure class="main">
-              <img src="assets/img/robots-three-1400.webp"
-                   srcset="assets/img/robots-three-800.webp 800w, assets/img/robots-three-1400.webp 1400w, assets/img/robots-three-2000.webp 2000w"
-                   sizes="(min-width: 1180px) 50vw, 92vw" width="2000" height="1500" fetchpriority="high" decoding="async"
-                   alt="Three ToddlerBot humanoid robots standing side by side on a workbench, with chest nameplates reading 'Tidal Wave Unleashed II', 'Gilbert', and 'Alan'" />
-            </figure>
-          </div>
-        </div>
+  /* ---------- hero: scattered parts assemble into a ToddlerBot-style humanoid ----------
+     Each part is drawn as the real component it stands for (servo, bracket, camera…).
+     a = assembled position in robot units (centre-relative); s = scattered [x, y] as a fraction of the viewport, then rotation and scale.
+     Array order is paint order: later parts sit on top. */
+  var P = [
+    { id: "footL",  t: "foot",    w: 86,  h: 30,  a: [-46, 277, 0],  s: [-.40, -.24, 34, 1.9] },
+    { id: "footR",  t: "foot",    w: 86,  h: 30,  a: [46, 277, 0],   s: [.10, -.48, -18, 1.7] },
+    { id: "shinL",  t: "stack",   w: 50,  h: 88,  a: [-40, 216, 0],  s: [-.26, .44, 70, 1.7] },
+    { id: "shinR",  t: "stack",   w: 50,  h: 88,  a: [40, 216, 0],   s: [.48, -.20, -30, 1.7] },
+    { id: "kneeL",  t: "servo",   w: 54,  h: 42,  a: [-40, 152, 0],  s: [-.45, .14, 15, 1.6] },
+    { id: "kneeR",  t: "servo",   w: 54,  h: 42,  a: [40, 152, 0],   s: [.26, .48, 30, 1.6] },
+    { id: "thighL", t: "bracket", c: "var(--green)", w: 54, h: 92, a: [-40, 86, 0], s: [-.30, -.47, 60, 1.8] },
+    { id: "thighR", t: "bracket", c: "var(--green)", w: 54, h: 92, a: [40, 86, 0],  s: [.38, .20, -50, 1.7] },
+    { id: "hip",    t: "hip",     w: 140, h: 36,  a: [0, 26, 0],     s: [.02, .50, -8, 1.8] },
+    { id: "handL",  t: "paddle",  w: 58,  h: 80,  a: [-134, 72, 6],  s: [-.47, -.40, 30, 1.8] },
+    { id: "handR",  t: "paddle",  w: 58,  h: 80,  a: [134, 72, -6],  s: [.47, .38, -24, 1.8] },
+    { id: "elbowL", t: "servo",   w: 46,  h: 40,  a: [-126, 8, 0],   s: [-.14, .48, 10, 1.7] },
+    { id: "elbowR", t: "servo",   w: 46,  h: 40,  a: [126, 8, 0],    s: [.18, -.44, -20, 1.6] },
+    { id: "armL",   t: "bracket", c: "var(--blue)", w: 40, h: 84, a: [-124, -52, 0], s: [-.38, .46, -40, 1.8] },
+    { id: "armR",   t: "bracket", c: "var(--blue)", w: 40, h: 84, a: [124, -52, 0],  s: [.44, -.44, 30, 1.7] },
+    { id: "torso",  t: "torso",   w: 180, h: 150, a: [0, -70, 0],    s: [.48, .04, 16, 1.9] },
+    { id: "shL",    t: "servo",   w: 52,  h: 50,  a: [-116, -118, 0], s: [-.46, -.08, 20, 1.8] },
+    { id: "shR",    t: "servo",   w: 52,  h: 50,  a: [116, -118, 0],  s: [.32, .45, -15, 1.8] },
+    { id: "neck",   t: "servo",   w: 40,  h: 30,  a: [0, -158, 0],   s: [.08, -.46, 25, 2.0] },
+    { id: "head",   t: "head",    w: 200, h: 120, a: [0, -230, 0],   s: [-.22, -.42, -12, 2.0] },
+    { id: "lensL",  t: "lens",    w: 62,  h: 62,  a: [-46, -228, 0], s: [-.44, .36, 0, 1.6], eye: 1 },
+    { id: "lensR",  t: "lens",    w: 62,  h: 62,  a: [46, -228, 0],  s: [.38, -.30, 0, 1.6], eye: 1 }
+  ];
 
-        <dl class="facts" aria-label="Program at a glance">
-          <div class="fact"><dt>8 weeks</dt><dd>One 3-hour in-person session per week</dd></div>
-          <div class="fact"><dt>Team of 4</dt><dd>Four students build and program one robot together</dd></div>
-          <div class="fact"><dt>ME + EE + CS + AI</dt><dd>Mechanical, electrical, software, and AI work on one robot</dd></div>
-          <div class="fact"><dt>1 : 4</dt><dd>One mentor for every team of four</dd></div>
-        </dl>
-      </div>
-    </section>
+  // SVG for each component type, drawn in a w × h box.
+  function draw(q) {
+    var w = q.w, h = q.h, C = "#2a2a2d", C2 = "#3b3b40", M = "#5c5c63", S = "#77777f", o = "";
+    function screws(inset) {
+      return [[inset, inset], [w - inset, inset], [inset, h - inset], [w - inset, h - inset]]
+        .map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2" fill="' + S + '"/>'; }).join("");
+    }
+    function servo(y0, hh) {
+      var r = Math.min(w, hh) * 0.2;
+      return '<rect x="1" y="' + (y0 + 1) + '" width="' + (w - 2) + '" height="' + (hh - 2) + '" rx="6" fill="' + C + '"/>' +
+        '<rect x="4" y="' + (y0 + 4) + '" width="' + (w - 8) + '" height="' + (hh * 0.24) + '" rx="3" fill="' + C2 + '"/>' +
+        '<circle cx="' + w / 2 + '" cy="' + (y0 + hh * 0.6) + '" r="' + r + '" fill="' + M + '"/>' +
+        '<circle cx="' + w / 2 + '" cy="' + (y0 + hh * 0.6) + '" r="' + r * 0.42 + '" fill="' + C + '"/>';
+    }
+    switch (q.t) {
+      case "servo": o = servo(0, h) + screws(5); break;
+      case "stack": o = servo(0, h / 2) + servo(h / 2, h / 2) +
+        '<rect x="' + (w * .18) + '" y="' + (h * .44) + '" width="' + (w * .64) + '" height="' + (h * .12) + '" rx="2" fill="var(--green)"/>'; break;
+      case "hip": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="8" fill="' + C + '"/>' +
+        '<circle cx="' + w * .29 + '" cy="' + h / 2 + '" r="9" fill="' + M + '"/><circle cx="' + w * .71 + '" cy="' + h / 2 + '" r="9" fill="' + M + '"/>' +
+        '<circle cx="' + w * .29 + '" cy="' + h / 2 + '" r="4" fill="' + C + '"/><circle cx="' + w * .71 + '" cy="' + h / 2 + '" r="4" fill="' + C + '"/>' + screws(6); break;
+      case "bracket": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="8" fill="' + q.c + '"/>' +
+        '<rect x="' + w * .22 + '" y="' + h * .2 + '" width="' + w * .56 + '" height="' + h * .6 + '" rx="5" fill="#000" opacity=".22"/>' +
+        '<circle cx="' + w / 2 + '" cy="' + h * .1 + '" r="2.6" fill="#000" opacity=".35"/><circle cx="' + w / 2 + '" cy="' + h * .9 + '" r="2.6" fill="#000" opacity=".35"/>'; break;
+      case "paddle": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="6" fill="#1f1f22"/>' +
+        '<rect x="6" y="6" width="' + (w - 12) + '" height="' + (h - 12) + '" rx="3" fill="none" stroke="' + C2 + '" stroke-width="2"/>'; break;
+      case "foot": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="12" fill="var(--rust)"/>' +
+        '<rect x="6" y="' + (h - 9) + '" width="' + (w - 12) + '" height="5" rx="2.5" fill="#000" opacity=".25"/>'; break;
+      case "torso": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="14" fill="var(--blue)"/>' +
+        '<rect x="7" y="7" width="' + (w - 14) + '" height="' + (h - 14) + '" rx="9" fill="none" stroke="#000" stroke-opacity=".18" stroke-width="2"/>' +
+        '<rect x="22" y="38" width="' + (w - 44) + '" height="58" rx="4" fill="' + C + '"/>' +
+        '<rect x="' + (w / 2 - 14) + '" y="108" width="28" height="18" rx="3" fill="#000" opacity=".22"/>' + screws(14); break;
+      case "head": o = '<rect x="1" y="1" width="' + (w - 2) + '" height="' + (h - 2) + '" rx="34" fill="var(--orange)"/>' +
+        '<rect x="20" y="8" width="' + (w - 40) + '" height="10" rx="5" fill="#fff" opacity=".18"/>' +
+        '<circle cx="' + (w / 2 - 46) + '" cy="' + (h / 2 + 2) + '" r="36" fill="#000" opacity=".16"/>' +
+        '<circle cx="' + (w / 2 + 46) + '" cy="' + (h / 2 + 2) + '" r="36" fill="#000" opacity=".16"/>'; break;
+      case "lens": var r = w / 2; o =
+        '<circle cx="' + r + '" cy="' + r + '" r="' + (r - 1) + '" fill="' + C + '"/>' +
+        '<circle cx="' + r + '" cy="' + r + '" r="' + r * .74 + '" fill="none" stroke="' + M + '" stroke-width="3"/>' +
+        '<circle cx="' + r + '" cy="' + r + '" r="' + r * .52 + '" fill="#111114"/>' +
+        '<circle class="iris" cx="' + r + '" cy="' + r + '" r="' + r * .28 + '" fill="#26324a"/>' +
+        '<circle cx="' + r * .72 + '" cy="' + r * .7 + '" r="' + r * .12 + '" fill="#fff" opacity=".85"/>'; break;
+    }
+    return '<svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="100%" preserveAspectRatio="none">' + o + '</svg>';
+  }
+  var hero = document.getElementById("hero"), stage = document.getElementById("stage");
+  var holder = document.getElementById("parts"), copy = document.getElementById("heroCopy");
+  var after = document.getElementById("heroAfter"), hint = document.getElementById("hint");
+  var labels = document.getElementById("labels"), nav = document.getElementById("nav");
+  var els = {};
+  P.forEach(function (p, i) {
+    var d = document.createElement("div");
+    d.className = "part" + (p.eye ? " eye" : "");
+    var inner = document.createElement("i");
+    inner.innerHTML = draw(p);
+    inner.style.transitionDelay = (i * 0.035) + "s";
+    d.appendChild(inner); holder.appendChild(d); els[p.id] = d;
+  });
+  requestAnimationFrame(function () { stage.classList.add("loaded"); });
 
-    <!-- ================================ SHOWCASE ================================ -->
-    <section class="section tinted" id="projects" aria-labelledby="projects-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 class="h2" id="projects-title">From individual parts to a working humanoid.</h2>
-          <p class="lede">Students work as a team through the engineering process: mechanical assembly, wiring and actuator calibration, programming, and testing on real hardware.</p>
-        </div>
+  var labelMap = { head: [118, -10], torso: [180, 10], shL: [-38, 0], shinR: [44, 0] };
+  var mid = document.getElementById("heroMid");
+  function frame() {
+    var vw = innerWidth, vh = innerHeight;
+    var k = Math.min(vw / 400, vh / 760) * 0.8;
+    var span = hero.offsetHeight - vh;
+    var p = clamp(-hero.getBoundingClientRect().top / span, 0, 1);
+    var oy = -vh * 0.07;
+    var m = clamp(1 - Math.abs(p - 0.36) / 0.13, 0, 1);
+    mid.style.opacity = m;
+    mid.style.transform = "translate(-50%,-50%) scale(" + (0.94 + m * 0.06) + ")";
+    P.forEach(function (q, i) {
+      var t = ease(clamp((p - 0.06 - i * 0.008) / 0.5, 0, 1));
+      var x = lerp(q.s[0] * vw, q.a[0] * k, t);
+      var y = lerp(q.s[1] * vh, q.a[1] * k + oy, t);
+      var rot = lerp(q.s[2], q.a[2], t);
+      // Narrow screens: shrink the scattered parts so they frame the headline instead of covering it.
+      var sc = lerp(q.s[3] * clamp(vw / 1100, 0.5, 1), 1, t);
+      var el = els[q.id];
+      el.style.width = q.w * k + "px"; el.style.height = q.h * k + "px";
+      el.style.transform = "translate(-50%,-50%) translate(" + x + "px," + y + "px) rotate(" + rot + "deg) scale(" + sc + ")";
+    });
+    var c = clamp(p / 0.22, 0, 1);
+    copy.style.opacity = 1 - c;
+    copy.style.transform = "translateY(" + (-c * 80) + "px)";
+    copy.style.visibility = c >= 1 ? "hidden" : "visible";
+    hint.style.opacity = 1 - clamp(p / 0.05, 0, 1);
+    after.style.opacity = clamp((p - 0.7) / 0.14, 0, 1);
+    after.style.transform = "translateY(" + (1 - clamp((p - 0.7) / 0.14, 0, 1)) * 24 + "px)";
+    stage.classList.toggle("alive", p > 0.66);
+    labels.classList.toggle("on", p > 0.7 && p < 0.98);
+    labels.querySelectorAll("span").forEach(function (s) {
+      var a = P.filter(function (q) { return q.id === s.dataset.for; })[0], off = labelMap[s.dataset.for];
+      var x = (a.a[0] + off[0]) * k, y = (a.a[1] + off[1]) * k + oy;
+      s.style.transform = "translate(" + (off[0] < 0 ? "-100%" : "0") + ",-50%) translate(" + x + "px," + y + "px)";
+    });
+    nav.classList.toggle("solid", scrollY > hero.offsetHeight - vh * 1.1);
+    lightStatement();
+  }
 
-        <div class="mosaic">
-          <figure class="tile m-team reveal">
-            <img src="assets/img/team-of-four-800.webp"
-                   srcset="assets/img/team-of-four-480.webp 480w, assets/img/team-of-four-800.webp 800w, assets/img/team-of-four-1200.webp 1200w" sizes="(min-width: 760px) 42vw, 92vw" width="1500" height="1600" loading="lazy" decoding="async" style="object-position:50% 40%"
-                   alt="Four high-school students at a cluttered lab bench holding up the partly assembled upper body of their humanoid robot; faces blurred" />
-            <figcaption>A team of four</figcaption>
-          </figure>
-          <figure class="tile m-solder reveal">
-            <img src="assets/img/fleet-build-740.webp"
-                     srcset="assets/img/fleet-build-480.webp 480w, assets/img/fleet-build-740.webp 740w" sizes="(min-width: 760px) 40vw, 92vw" width="740" height="530" loading="lazy" decoding="async"
-                     alt="A row of partly built ToddlerBot humanoids in blue, brown, green, and black mounted on test stands in front of orange parts bins" />
-            <figcaption>Robots in progress</figcaption>
-          </figure>
-          <figure class="tile m-integ reveal">
-            <img src="assets/img/student-soldering-640.webp"
-                     srcset="assets/img/student-soldering-640.webp 640w, assets/img/student-soldering-1200.webp 1200w" sizes="(min-width: 760px) 20vw, 46vw" width="1400" height="788" loading="lazy" decoding="async"
-                     alt="Close-up of a student's hands soldering wires at an electronics bench" />
-            <figcaption>Electrical work</figcaption>
-          </figure>
-          <figure class="tile m-bench reveal">
-            <img src="assets/img/students-celebrate-640.webp"
-                   srcset="assets/img/students-celebrate-640.webp 640w, assets/img/students-celebrate-1200.webp 1200w" sizes="(min-width: 760px) 70vw, 92vw" width="1400" height="788" loading="lazy" decoding="async"
-                   alt="Students and their teacher high-fiving next to two humanoid robots after a successful test; faces blurred" />
-            <figcaption>Team celebration</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
+  /* ---------- statement lights up word by word ---------- */
+  var st = document.getElementById("statement"), words = [];
+  (function split(node) {
+    Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+      if (n.nodeType === 3) {
+        var frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(function (part) {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          var s = document.createElement("span");
+          s.className = "w" + (node !== st ? " " + node.className : "");
+          s.textContent = part; frag.appendChild(s); words.push(s);
+        });
+        node.replaceChild(frag, n);
+      } else if (n.nodeType === 1) split(n);
+    });
+  })(st);
+  function lightStatement() {
+    var r = st.getBoundingClientRect();
+    var t = clamp((innerHeight * 0.85 - r.top) / (r.height + innerHeight * 0.35), 0, 1);
+    var n = reduce ? words.length : Math.round(t * words.length * 1.1);
+    words.forEach(function (w, i) { w.classList.toggle("lit", i < n); });
+  }
 
-    <!-- ================================ JOURNEY ================================ -->
-    <section class="section" id="curriculum" aria-labelledby="curriculum-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 class="h2" id="curriculum-title">Build, control, simulate, learn, demonstrate.</h2>
-          <p class="lede">Eight weekly sessions, three hours each, with four students building one robot together.</p>
-        </div>
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { frame(); ticking = false; }); } }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  frame();
 
+  /* ---------- carousel ---------- */
+  var car = document.getElementById("carousel"), slides = car.querySelectorAll(".slide");
+  var dots = document.getElementById("dots"), row = document.getElementById("stepsRow");
+  var cur = 0, timer = null, DUR = 5500;
+  slides.forEach(function (s, i) {
+    var b = document.createElement("button"); b.setAttribute("aria-label", "Show " + s.dataset.label);
+    b.onclick = function () { go(i, true); }; dots.appendChild(b);
+    var c = document.createElement("button"); c.textContent = s.dataset.label;
+    c.onclick = function () { go(i, true); }; row.appendChild(c);
+  });
+  var track = document.getElementById("track");
+  function place() {
+    var s = slides[cur];
+    track.style.transform = "translateX(" + ((car.clientWidth - s.offsetWidth) / 2 - s.offsetLeft) + "px)";
+  }
+  slides.forEach(function (s, i) { s.addEventListener("click", function () { if (i !== cur) go(i, true); }); });
+  addEventListener("resize", function () { place(); });
+  var x0 = null;
+  car.addEventListener("pointerdown", function (e) { x0 = e.clientX; });
+  car.addEventListener("pointerup", function (e) {
+    if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
+    if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1), true);
+  });
+  function go(i, user) {
+    cur = (i + slides.length) % slides.length;
+    slides.forEach(function (s, j) {
+      s.classList.toggle("on", j === cur);
+      var v = s.querySelector("video");
+      if (v) { if (j === cur) { v.currentTime = 0; v.play().catch(function () {}); } else v.pause(); }
+    });
+    // Start buffering the next slide's video so it's ready when it comes up.
+    var nv = slides[(cur + 1) % slides.length].querySelector("video");
+    if (nv && nv.preload === "none") { nv.preload = "auto"; nv.load(); }
+    // Video slides stay up longer than photos.
+    var d = +slides[cur].dataset.dur || DUR;
+    dots.style.setProperty("--dur", d / 1000 + "s");
+    place();
+    [dots, row].forEach(function (g) { Array.prototype.forEach.call(g.children, function (b, j) { b.classList.toggle("on", j === cur); }); });
+    var on = dots.children[cur]; on.classList.remove("on"); void on.offsetWidth; on.classList.add("on");
+    clearTimeout(timer);
+    if (!reduce) timer = setTimeout(function () { go(cur + 1); }, d);
+  }
+  document.getElementById("prev").onclick = function () { go(cur - 1, true); };
+  document.getElementById("next").onclick = function () { go(cur + 1, true); };
+  car.addEventListener("mouseenter", function () { car.classList.add("paused"); clearTimeout(timer); });
+  car.addEventListener("mouseleave", function () { car.classList.remove("paused"); go(cur); });
+  go(0);
 
-        <div class="phases">
-          <article class="phase reveal" id="phase-build" aria-labelledby="ph1">
-            <div class="phase-media-wrap">
-              <div class="phase-media">
-                <img src="assets/img/student-assembly-hands-1200.webp"
-                     srcset="assets/img/student-assembly-hands-640.webp 640w, assets/img/student-assembly-hands-1200.webp 1200w"
-                     sizes="(min-width: 900px) 45vw, 92vw" width="1400" height="788" loading="lazy" decoding="async"
-                     alt="Several hands assembling the blue 3D-printed torso and arm actuators of a humanoid robot" />
-              </div>
-            </div>
-            <div>
-              <div class="phase-num"><span class="n">01</span><span class="when">Weeks 1–4</span></div>
-              <h3 id="ph1">Build</h3>
-              <p class="summary">Understand the robot as a system, then assemble it as a team. Start with one limb, because a single limb teaches almost everything.</p>
-            </div>
-          </article>
-
-          <article class="phase reveal" id="phase-control" aria-labelledby="ph2">
-            <div class="phase-media-wrap">
-              <div class="phase-media">
-                <img src="assets/img/students-testing-team-1200.webp"
-                     srcset="assets/img/students-testing-team-640.webp 640w, assets/img/students-testing-team-1200.webp 1200w"
-                     sizes="(min-width: 900px) 45vw, 92vw" width="1400" height="788" loading="lazy" decoding="async"
-                     alt="Students running code on a laptop next to two humanoid robots mounted on test stands" />
-              </div>
-            </div>
-            <div>
-              <div class="phase-num"><span class="n">02</span><span class="when">Weeks 5–6</span></div>
-              <h3 id="ph2">Control</h3>
-              <p class="summary">Make the robot do exactly what you tell it to, then measure how far reality differs from the command.</p>
-            </div>
-          </article>
-
-          <article class="phase reveal" id="phase-simulate" aria-labelledby="ph3">
-            <div class="phase-media-wrap">
-              <div class="phase-media video-frame">
-                <img class="video-fallback" src="assets/img/sim-walk-poster.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-                <video data-autoplay muted loop playsinline preload="none" poster="assets/img/sim-walk-poster.webp" width="960" height="540"
-                       aria-label="Simulated ToddlerBot walking forward in MuJoCo, shown from four camera angles">
-                  <source src="assets/videos/sim-walk.mp4" type="video/mp4" />
-                </video>
-                <button class="video-toggle" type="button" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
-              </div>
-            </div>
-            <div>
-              <div class="phase-num"><span class="n">03</span><span class="when">Week 7</span></div>
-              <h3 id="ph3">Simulate</h3>
-              <p class="summary">Simulation is a controlled approximation of reality. See your robot's model move, then compare it with the real thing.</p>
-            </div>
-          </article>
-
-          <article class="phase reveal" id="phase-learn" aria-labelledby="ph4">
-            <div class="phase-media-wrap">
-              <div class="phase-media">
-                <img src="assets/img/sim-parallel-training-1880.webp"
-                     srcset="assets/img/sim-parallel-training-640.webp 640w, assets/img/sim-parallel-training-1200.webp 1200w, assets/img/sim-parallel-training-1880.webp 1880w"
-                     sizes="(min-width: 900px) 45vw, 92vw" width="1880" height="940" loading="lazy" decoding="async"
-                     alt="Dozens of simulated ToddlerBot robots in different poses on a checkered floor, training in parallel" />
-              </div>
-            </div>
-            <div>
-              <div class="phase-num"><span class="n">04</span><span class="when">Week 8 · Preview</span></div>
-              <h3 id="ph4">Learn</h3>
-              <p class="summary">A first look at reinforcement learning, once you understand the mechanics, electronics, and control underneath it.</p>
-            </div>
-          </article>
-
-          <article class="phase reveal" id="phase-demonstrate" aria-labelledby="ph5">
-            <div class="phase-media-wrap">
-              <div class="phase-media video-frame">
-                <img class="video-fallback" src="assets/img/walking-trial-poster.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-                <video data-autoplay muted loop playsinline preload="none" poster="assets/img/walking-trial-poster.webp" width="960" height="540"
-                       aria-label="A ToddlerBot walking across a taped floor during a supervised trial, with a safety tether held by a mentor">
-                  <source src="assets/videos/walking-trial.mp4" type="video/mp4" />
-                </video>
-                <button class="video-toggle" type="button" aria-pressed="false" hidden><svg class="icon" aria-hidden="true"><use href="#i-play"/></svg><span>Play</span></button>
-              </div>
-            </div>
-            <div>
-              <div class="phase-num"><span class="n">05</span><span class="when">Week 8 · Showcase</span></div>
-              <h3 id="ph5">Demonstrate</h3>
-              <p class="summary">Show what your team built, including what didn't work and why.</p>
-            </div>
-          </article>        </div>
-
-        <a class="learn-more reveal" href="curriculum.html">See the week-by-week syllabus <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      </div>
-    </section>
-
-    <!-- ================================ APPLY ================================ -->
-    <section class="section on-dark" id="apply" aria-labelledby="apply-title">
-      <div class="container apply-grid">
-        <div class="reveal">
-          <span class="eyebrow">Apply · Cohort 03</span>
-          <h2 class="h2" id="apply-title" style="margin-top:1rem">Build real robots. Explore real AI. Experience real engineering.</h2>
-          <p class="lede" style="margin-top:1.25rem">Cohort 03 admits a small group. Hardware and lab space set the limit, so we read every application carefully and look for curious students who want to understand how things work.</p>
-          <ul class="apply-points">
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Open to current high-school students, grades 9–12</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Rolling review; applying early is encouraged</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg><span>Need-based scholarships available; fees are discussed during the interview</span></li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Parents are welcome to submit on a student's behalf</li>
-          </ul>
-        </div>
-
-        <div class="form-card reveal">
-          <form id="apply-form" action="https://formspree.io/f/xqabbeeb" method="POST" novalidate>
-            <h3>Start your application</h3>
-            <p class="intro">Fields marked optional can be skipped. Everything else is required.</p>
-
-            <div class="fields">
-              <fieldset class="seg field">
-                <legend>I'm filling this out as a</legend>
-                <div class="opts">
-                  <label class="opt-pill"><input type="radio" name="submitted_by" value="Student" checked /> Student</label>
-                  <label class="opt-pill"><input type="radio" name="submitted_by" value="Parent or guardian" /> Parent or guardian</label>
-                </div>
-              </fieldset>
-
-              <div class="field">
-                <label for="f-name">Student's full name</label>
-                <input class="input" id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name" />
-                <span class="err" id="e-name" aria-live="polite"></span>
-              </div>
-
-              <div class="field">
-                <label for="f-email">Contact email</label>
-                <input class="input" id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="h-email e-email" />
-                <span class="hint" id="h-email">We'll send next steps here.</span>
-                <span class="err" id="e-email" aria-live="polite"></span>
-              </div>
-
-              <div class="field-row">
-                <div class="field">
-                  <label for="f-school">School</label>
-                  <input class="input" id="f-school" name="school" type="text" autocomplete="organization" required aria-describedby="e-school" />
-                  <span class="err" id="e-school" aria-live="polite"></span>
-                </div>
-                <div class="field">
-                  <label for="f-grade">Current grade</label>
-                  <select class="input" id="f-grade" name="grade" required aria-describedby="e-grade">
-                    <option value="">Select…</option>
-                    <option>9</option><option>10</option><option>11</option><option>12</option>
-                    <option value="Other">Other (explain below)</option>
-                  </select>
-                  <span class="err" id="e-grade" aria-live="polite"></span>
-                </div>
-              </div>
-
-              <div class="field">
-                <label for="f-note">A project, repo, or build you're proud of <span class="opt">(optional)</span></label>
-                <textarea class="input" id="f-note" name="note" rows="4" maxlength="2000" aria-describedby="h-note"></textarea>
-                <span class="hint" id="h-note">Anything counts: a school project, code you wrote, something you took apart. A link is fine.</span>
-              </div>
-            </div>
-
-            <!-- Hidden routing fields -->
-            <input type="hidden" name="program" value="Humanoid Cohort 03" />
-            <input type="hidden" name="source" value="humanoid.genboo.com" />
-            <input type="hidden" name="_subject" value="Humanoid Cohort Application" />
-            <!-- Honeypot (spam protection) -->
-            <div class="hp" aria-hidden="true"><label for="f-gotcha">Leave this empty</label><input id="f-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></div>
-
-            <div class="form-actions">
-              <button id="apply-submit" class="btn btn-primary btn-lg" type="submit">
-                <span class="spinner" aria-hidden="true"></span>
-                <span id="apply-submit-label">Submit application</span>
-                <svg class="icon icon-arrow" aria-hidden="true"><use href="#i-arrow"/></svg>
-              </button>
-              <p id="apply-status" class="form-status" role="status" aria-live="polite"></p>
-              <p class="form-foot">We'll follow up within 5 business days with next steps.</p>
-            </div>
-          </form>
-
-          <div id="apply-success" class="success" hidden>
-            <div class="tick"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></div>
-            <h3 id="apply-success-title" tabindex="-1">Application received</h3>
-            <p>Thanks, <span id="apply-name">future roboticist</span>. We'll reach out within 5 business days.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ================================ FOOTER ================================ -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <a href="./" class="brand">
-            <span class="brand-name">Genboo · <span class="cjk" lang="zh">进步</span></span>
-            <span class="brand-sub">Humanoid Cohort</span>
-          </a>
-          <p class="muted" style="margin-top:1rem;font-size:.875rem;max-width:22rem">Hands-on humanoid robotics for high-school students. Menlo Park, CA.</p>
-        </div>
-        <div>
-          <h2>Program</h2>
-          <ul>
-            <li><a href="curriculum.html">Curriculum</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="#apply">Apply</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Sources</h2>
-          <ul>
-            <li><a href="https://arxiv.org/abs/2609.25674" target="_blank" rel="noopener noreferrer">TALE 2026 paper (arXiv)</a></li>
-            <li><a href="https://online.stanford.edu/learner-stories/sharing-his-passion-robotics-next-generation" target="_blank" rel="noopener noreferrer">Stanford Online story</a></li>
-            <li><a href="https://toddlerbot.github.io/" target="_blank" rel="noopener noreferrer">ToddlerBot project</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2>Contact</h2>
-          <ul>
-            <li><a href="mailto:hello@genboo.com">hello@genboo.com</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-legal">
-        <p>Genboo is independently operated and is not affiliated with Stanford University.</p>
-        <p>© 2026 Genboo</p>
-      </div>
-    </div>
-  </footer>
-
-  <script src="main.js?v=202610112249" defer></script>
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { rootMargin: "0px 0px -12% 0px" });
+  document.querySelectorAll(".rise, .final").forEach(function (el) { io.observe(el); });
+})();
+</script>
+<script src="assets/nav.js" defer></script>
 </body>
 </html>
