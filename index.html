@@ -73,17 +73,18 @@
   --green-ink: #4c6b3b;
   --rust-ink: #8c4429;
   --orange-ink: #c4561a;
+  --spec: #a8460f;
   --font: "Outfit", "Google Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #161614; --bg-2: #22211e; --ink: #f1efe9; --ink-2: #b9b5ac; --ink-3: #97938a; --pill: #2c2b27;
-    --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a;
+    --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a; --spec: #f5a26a;
   }
 }
 :root[data-theme="dark"] {
   --bg: #161614; --bg-2: #22211e; --ink: #f1efe9; --ink-2: #b9b5ac; --ink-3: #97938a; --pill: #2c2b27;
-  --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a;
+  --blue-ink: #93b0e6; --green-ink: #a6c38f; --rust-ink: #e09a7c; --orange-ink: #f5a26a; --spec: #f5a26a;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -144,7 +145,12 @@ p { margin: 0; text-wrap: pretty; }
 .hero-after h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); }
 .hero-after p { color: var(--ink-2); margin-top: 8px; font-size: clamp(1rem, 1.4vw, 1.2rem); }
 .labels { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.labels span { position: absolute; left: 50%; top: 50%; font-size: .85rem; background: var(--bg); border: 1px solid var(--pill); padding: 6px 12px; border-radius: 999px; white-space: nowrap; opacity: 0; transition: opacity .4s; }
+.labels span { position: absolute; left: 50%; top: 50%; display: flex; flex-direction: column; gap: 3px; font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace; font-size: .8rem; letter-spacing: .01em; color: var(--ink); background: var(--bg); border: 1px solid var(--ink-3); border-radius: 4px; padding: 7px 11px; white-space: nowrap; opacity: 0; transition: opacity .4s; }
+.labels span small { font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--spec); }
+.labels span::before { content: ""; position: absolute; top: 50%; right: 100%; width: var(--lead, 30px); border-top: 1px dashed var(--ink-3); }
+.labels span::after { content: ""; position: absolute; top: 50%; right: calc(100% + var(--lead, 30px) - 3px); width: 7px; height: 7px; margin-top: -3px; border-radius: 50%; background: var(--spec); }
+.labels span.l::before { right: auto; left: 100%; }
+.labels span.l::after { right: auto; left: calc(100% + var(--lead, 30px) - 3px); }
 .labels.on span { opacity: 1; }
 @media (max-width: 720px) { .labels { display: none; } }
 
@@ -310,10 +316,10 @@ a.p-tile:hover { transform: translateY(-4px); }
     <div class="stage" id="stage">
       <div class="parts" id="parts" aria-hidden="true"></div>
       <div class="labels" id="labels" aria-hidden="true">
-        <span data-for="head">Stereo cameras · vision</span>
-        <span data-for="torso">Computer · battery · IMU</span>
-        <span data-for="shL">Servo motors · torque</span>
-        <span data-for="shinR">Control · balance</span>
+        <span data-for="head"><small>Vision</small>Stereo cameras</span>
+        <span data-for="torso"><small>Compute</small>NVIDIA Jetson Orin + IMU</span>
+        <span data-for="shL"><small>Actuation</small>30 DoF · servo motors</span>
+        <span data-for="shinR"><small>Structure</small>3D-printed body</span>
       </div>
 
       <div class="hero-copy" id="heroCopy">
@@ -329,7 +335,6 @@ a.p-tile:hover { transform: translateY(-4px); }
       <div class="hero-mid" id="heroMid" aria-hidden="true">It starts as a box of parts…</div>
       <div class="hero-after" id="heroAfter">
         <h2>This is what we will build together.</h2>
-        <p>Every part above is a different subject. Together, they make one robot.</p>
       </div>
       <div class="scroll-hint" id="hint"><i></i>Scroll to assemble</div>
     </div>
@@ -607,7 +612,7 @@ a.p-tile:hover { transform: translateY(-4px); }
   });
   requestAnimationFrame(function () { stage.classList.add("loaded"); });
 
-  var labelMap = { head: [118, -10], torso: [180, 10], shL: [-38, 0], shinR: [44, 0] };
+  var labelMap = { head: [140, -10], torso: [170, 10, 72], shL: [-64, 0], shinR: [70, 0] };
   var mid = document.getElementById("heroMid");
   function frame() {
     var vw = innerWidth, vh = innerHeight;
@@ -641,6 +646,8 @@ a.p-tile:hover { transform: translateY(-4px); }
     labels.querySelectorAll("span").forEach(function (s) {
       var a = P.filter(function (q) { return q.id === s.dataset.for; })[0], off = labelMap[s.dataset.for];
       var x = (a.a[0] + off[0]) * k, y = (a.a[1] + off[1]) * k + oy;
+      s.classList.toggle("l", off[0] < 0);
+      if (off[2] != null) s.style.setProperty("--lead", Math.abs(off[0] - off[2]) * k + "px");
       s.style.transform = "translate(" + (off[0] < 0 ? "-100%" : "0") + ",-50%) translate(" + x + "px," + y + "px)";
     });
     nav.classList.toggle("solid", scrollY > hero.offsetHeight - vh * 1.1);
