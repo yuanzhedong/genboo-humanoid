@@ -382,8 +382,8 @@ a.p-tile:hover { transform: translateY(-4px); }
         <video src="assets/videos/sim-walk.mp4" poster="assets/img/sim-walk-poster.webp" muted loop playsinline preload="none"></video>
         <div class="cap"><span class="wk">Week 8</span><h3>Learn</h3><p>A first taste of reinforcement learning: change one reward, and watch the robot behave differently.</p></div>
       </div>
-      <div class="slide" data-label="Show" data-dur="12000">
-        <video src="assets/videos/walking-trial-small.mp4" poster="assets/img/walking-trial-poster.webp" muted loop playsinline preload="none" aria-label="A student-built humanoid robot walking"></video>
+      <div class="slide" data-label="Show" data-dur="15000">
+        <video poster="assets/img/show-alan-wide-poster.webp" data-poster-tall="assets/img/show-alan-tall-poster.webp" muted loop playsinline preload="none" aria-label="Student-built humanoid robots: Alan waves and starts walking forward, a second robot walks on the floor, and Alan walks sideways"><source src="assets/videos/show-alan-tall.mp4" type="video/mp4" media="(max-width: 720px)"><source src="assets/videos/show-alan-wide.mp4" type="video/mp4"></video>
         <div class="cap"><span class="wk">Showcase</span><h3>Show</h3><p>Demo the robot as a team, and explain what worked, what didn’t, and why.</p></div>
       </div>
       </div>
@@ -707,6 +707,8 @@ a.p-tile:hover { transform: translateY(-4px); }
     if (x0 === null) return; var dx = e.clientX - x0; x0 = null;
     if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1), true);
   });
+  // The Show clip has a stacked phone version; match its poster to the source the browser picks.
+  if (matchMedia("(max-width: 720px)").matches) Array.prototype.forEach.call(document.querySelectorAll("video[data-poster-tall]"), function (v) { v.poster = v.dataset.posterTall; });
   function go(i, user) {
     cur = (i + slides.length) % slides.length;
     slides.forEach(function (s, j) {
